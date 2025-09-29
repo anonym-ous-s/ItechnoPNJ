@@ -1,0 +1,142 @@
+:root {
+  --hero-blue: #0376b0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1100px;
+}
+
+/* hero */
+.hero {
+  background: var(--hero-blue);
+}
+
+.container {
+  padding-bottom: 10px;
+  justify-content: center;
+  margin: auto;
+}
+
+.container {
+  margin: auto;
+  justify-content: center;
+}
+
+.title {
+  color: #ffffff;
+  margin-top: 150px;
+}
+
+.btn {
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+.btn-outline {
+  background: white;
+  color: var(--hero-blue);
+}
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+.image-wrap {
+  width: 420px;
+  max-width: 60%;
+  display: flex;
+}
+
+.hero {
+  transform: scale(1.2);
+  position: relative;
+  margin-top: 70px;
+  margin-bottom: 55px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-card {
+  margin-top: 50px;
+}
+
+/* features */
+.card {
+  background: #ebf8ff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+.icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+/* trophies */
+.trophy {
+  padding: 1rem 1.2rem;
+  border-radius: 0.75rem;
+  color: white;
+}
+.trophy.first {
+  background: #f59e0b;
+}
+.trophy.second {
+  background: #9ca3af;
+}
+.trophy.third {
+  background: #b45309;
+}
+
+/* testimonials */
+.testimonial {
+  background: #eff6ff;
+  padding: 1.25rem;
+  border-radius: 1rem;
+}
+.stars {
+  color: #fbbf24;
+  margin-bottom: 8px;
+}
+
+/* small responsive tweaks */
+@media (max-width: 768px) {
+  .image-wrap {
+    max-width: 80%;
+  }
+  .title {
+    font-size: 28px;
+  }
+}
+
+/* small fade-in helper */
+.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.p-4 {
+  padding: 1rem;
+  margin-left: 50px;
+  display: flex;
+}
+
+.float-right a {
+  float: right;
+  align-items: right;
+}
