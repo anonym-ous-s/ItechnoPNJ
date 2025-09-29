@@ -1,224 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Achievements</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
-
-    body {
-      display: flex;
-      height: 100vh;
-    }
-
-  
-    .sidebar {
-      width: 240px;
-      background: #0A73B7;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-
-    .logo img {
-      width: 120px;
-    }
-
-    .email {
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .menu {
-      list-style: none;
-      flex-grow: 1;
-    }
-
-    .menu li {
-      margin: 8px 0;
-    }
-
-    .menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: white;
-      font-size: 15px;
-      transition: 0.3s;
-    }
-
-    .menu a:hover,
-    .menu a.active {
-      background: #1e90ff;
-    }
-
-    .features {
-      background: #004c7c;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 15px;
-      margin-top: 20px;
-    }
-
-    .features span {
-      background: red;
-      color: white;
-      font-size: 12px;
-      padding: 2px 6px;
-      border-radius: 6px;
-      margin-left: 6px;
-    }
-
-
-    .content {
-      flex-grow: 1;
-      background: #f9fbfd;
-      padding: 30px;
-    }
-
-    .content h1 {
-      color: #0A73B7;
-      font-size: 28px;
-      margin-bottom: 50px;
-    }
-
-    .achievements {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 40px;
-    }
-
-    .card {
-      padding: 20px;
-      border-radius: 14px;
-      text-align: center;
-      width: 220px;
-      color: white;
-      position: relative;
-    }
-
-    .profile {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 10px;
-    }
-
-    .profile img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      border: 4px solid white;
-    }
-
-    .crown {
-      width: 45px;
-      position: absolute;
-      top: -28px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .card h2 {
-      font-size: 18px;
-      margin: 8px 0;
-    }
-
-    .card p {
-      font-size: 14px;
-      margin: 3px 0;
-    }
-
-
-    .first {
-      background: #2563eb;
-      transform: scale(1.1);
-    }
-
-    .second {
-      background: #06b6d4;
-    }
-
-    .third {
-      background: #7dd3fc;
-    }
-  </style>
-</head>
-<body>
-  
-  <div class="sidebar">
-    <div class="logo">
-      <img src="banban.jpg"BANBAN Logo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Achievements</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="achivement.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo"><img src="logo.png" alt="logo"></div>
+      <p class="email">BanBan@gmail.com</p>
+      <ul class="menu">
+        <li>
+          <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+        </li>
+        <li>
+          <a href="Timer.html"><i class="fa fa-clock"></i> Podomoro Timer</a>
+        </li>
+        <li>
+          <a href="studygroup.html"><i class="fa fa-users"></i> Study Groups</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-book"></i> Materials</a>
+        </li>
+        <li>
+          <a href="Achivement.html"><i class="fa fa-trophy"></i> Achievement</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-cog"></i> Settings and profile</a>
+        </li>
+      </ul>
+      <div class="features">Features <span>NEW</span></div>
     </div>
-    <p class="email">BanBan@gmail.com</p>
-    <ul class="menu">
-      <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
-      <li><a href="#"><i class="fa fa-clock"></i> Podomoro Timer</a></li>
-      <li><a href="#"><i class="fa fa-users"></i> Study Groups</a></li>
-      <li><a href="#"><i class="fa fa-book"></i> Materials</a></li>
-      <li><a href="#"><i class="fa fa-trophy"></i> Achievement</a></li>
-      <li><a href="#"><i class="fa fa-cog"></i> Settings and profile</a></li>
-    </ul>
-    <div class="features">
-      Features <span>NEW</span>
-    </div>
-  </div>
 
- 
-  <div class="content">
-    <h1>Achievements</h1>
-    <div class="achievements">
-  
-      <div class="card second">
-        <div class="profile">
-          <img src="https://via.placeholder.com/90" alt="Kaila">
-          <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" class="crown" alt="crown">
+    <div class="content">
+      <h1>Achievements</h1>
+      <div class="achievements">
+        <div class="card second">
+          <div class="profile">
+            <img src="https://via.placeholder.com/90" alt="Kaila" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
+              class="crown"
+              alt="crown"
+            />
+          </div>
+          <h2>Kaila Fahranas</h2>
+          <p>Level 28</p>
+          <p>1,150 XP</p>
         </div>
-        <h2>Kaila Fahranas</h2>
-        <p>Level 28</p>
-        <p>1,150 XP</p>
-      </div>
-     
-      <div class="card first">
-        <div class="profile">
-          <img src="https://via.placeholder.com/90" alt="Sintia">
-          <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" class="crown" alt="crown">
-        </div>
-        <h2>Sintia Nur Nia</h2>
-        <p>Level 28</p>
-        <p>1,250 XP</p>
-      </div>
 
-      <div class="card third">
-        <div class="profile">
-          <img src="https://via.placeholder.com/90" alt="Warrahma">
-          <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" class="crown" alt="crown">
+        <div class="card first">
+          <div class="profile">
+            <img src="https://via.placeholder.com/90" alt="Sintia" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
+              class="crown"
+              alt="crown"
+            />
+          </div>
+          <h2>Sintia Nur Nia</h2>
+          <p>Level 28</p>
+          <p>1,250 XP</p>
         </div>
-        <h2>Warrahma S.I</h2>
-        <p>Level 10</p>
-        <p>1,000 XP</p>
+
+        <div class="card third">
+          <div class="profile">
+            <img src="https://via.placeholder.com/90" alt="Warrahma" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
+              class="crown"
+              alt="crown"
+            />
+          </div>
+          <h2>Warrahma S.I</h2>
+          <p>Level 10</p>
+          <p>1,000 XP</p>
+        </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
