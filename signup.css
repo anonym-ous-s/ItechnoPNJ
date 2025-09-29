@@ -217,7 +217,7 @@
     }
 
     .signup-right {
-      background: url('/assets/stdbook.png') no-repeat center center;
+      background: url('stdbook.png') no-repeat center center;
       background-size: cover;
       padding: 40px;
       display: flex;
