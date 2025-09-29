@@ -1,108 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BANBAN Sign Up</title>
-    <link rel="stylesheet" href="signup.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="signup-left">
-        <div class="logo">
-          <div class="logo-icon">
-            <img src="logo.png" alt="Logo BanBan" />
-          </div>
-        </div>
-
-        <div class="signup-header">
-          <h1>Create Account</h1>
-          <p>To keep connected with us please login with your personal info</p>
-        </div>
-
-        <form id="signupForm">
-          <div class="form-group">
-            <input
-              type="email"
-              class="form-control"
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Username"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <button type="submit" class="btn">SIGN UP</button>
-        </form>
-
-        <div class="divider">
-          <div class="divider-line"></div>
-          <div class="divider-text">Atau Lanjutkan Dengan</div>
-          <div class="divider-line"></div>
-        </div>
-
-        <div class="social-login">
-          <button class="social-btn">f</button>
-          <button class="social-btn">G</button>
-        </div>
-
-        <div class="signup-footer">
-          <p>Sudah Punya Akun? <a href="login.html">Login</a></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BANBAN Sign Up</title>
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="signup-left">
+      <div class="logo">
+        <div class="logo-container">
+<img src="/assets/logo.png" alt="">
         </div>
       </div>
 
-      <div class="signup-right"></div>
+      <div class="signup-header">
+        <h1>Create Account</h1>
+        <p>To keep connected with us please login with your personal info </p>  
+      </div>
+
+      <form id="signupForm">
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">SIGN UP</button>
+      </form>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-text">Atau Lanjutkan Dengan</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="social-login">
+        <button class="social-btn">f</button>
+        <button class="social-btn">G</button>
+      </div>
+
+      <div class="signup-footer">
+        <p>Sudah Punya Akun? <a href="login.html">Login</a></p>
+      </div>
     </div>
 
-    <script>
-      document
-        .getElementById("signupForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+    <div class="signup-right"></div>
+  </div>
 
-          const email = this.querySelector('input[type="email"]').value;
-          const username = this.querySelector('input[type="text"]').value;
-          const password = this.querySelector('input[type="password"]').value;
+  <script>
+    document
+      .getElementById("signupForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
 
-          if (email && username && password) {
-            alert(
-              "Account created successfully!\nEmail: " +
-                email +
-                "\nUsername: " +
-                username
-            );
-            this.reset();
-          } else {
-            alert("Please fill in all fields");
-          }
-        });
+        const email = this.querySelector('input[type="email"]').value;
+        const username = this.querySelector('input[type="text"]').value;
+        const password = this.querySelector('input[type="password"]').value;
 
-      // Add hover effects to social buttons
-      document.querySelectorAll(".social-btn").forEach((btn) => {
-        btn.addEventListener("mouseenter", function () {
-          this.style.transform = "scale(1.1)";
-        });
-
-        btn.addEventListener("mouseleave", function () {
-          this.style.transform = "scale(1)";
-        });
+        if (email && username && password) {
+          alert(
+            "Account created successfully!\nEmail: " +
+              email +
+              "\nUsername: " +
+              username
+          );
+          this.reset();
+        } else {
+          alert("Please fill in all fields");
+        }
       });
-    </script>
-  </body>
+
+    document.querySelectorAll(".social-btn").forEach((btn) => {
+      btn.addEventListener("mouseenter", function () {
+        this.style.transform = "scale(1.1)";
+        this.style.transition = "all 0.3s ease";
+      });
+
+      btn.addEventListener("mouseleave", function () {
+        this.style.transform = "scale(1)";
+      });
+    });
+  </script>
+</body>
 </html>
-
-
-
