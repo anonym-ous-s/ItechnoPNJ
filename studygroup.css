@@ -9,58 +9,76 @@
     display: flex;
     min-height: 100vh;
   }
-  
   .sidebar {
-    background: #0f4d92;
+    width: 240px;
+    background: #0a73b7;
     color: white;
-    width: 230px;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
   }
-  
-  .sidebar .brand {
-    font-weight: bold;
-    font-size: 20px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 10px;
   }
-  
-  .sidebar .email {
-    font-size: 14px;
-    margin-bottom: 20px;
+
+  .logo img {
+    width: 120px;
   }
-  
-  .sidebar nav ul {
+
+  .email {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .menu {
     list-style: none;
+    flex-grow: 1;
   }
-  
-  .sidebar nav ul li {
-    margin-bottom: 12px;
+
+  .menu li {
+    margin: 8px 0;
   }
-  
-  .sidebar nav ul li a {
-    color: white;
+
+  .menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
     text-decoration: none;
-    display: block;
-    padding: 8px;
-    border-radius: 6px;
+    color: white;
+    font-size: 15px;
+    transition: 0.3s;
   }
-  
-  .sidebar nav ul li a:hover {
-    background: #1a65b8;
+
+  .menu a:hover,
+  .menu a.active {
+    background: #1e90ff;
   }
-  
-  .sidebar .features {
-    margin-top: 30px;
-    font-size: 14px;
+
+  .features {
+    background: #004c7c;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 20px;
   }
-  
-  .sidebar .new {
+
+  .features span {
     background: red;
     color: white;
+    font-size: 12px;
     padding: 2px 6px;
-    font-size: 10px;
-    border-radius: 4px;
+    border-radius: 6px;
+    margin-left: 6px;
   }
-  
+
   .main {
     flex: 1;
     padding: 20px;
