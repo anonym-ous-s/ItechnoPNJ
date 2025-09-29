@@ -81,69 +81,7 @@ body {
   font-size: 28px;
   margin-bottom: 8px;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
 
-body {
-  background: #fff;
-}
-
-.container {
-  display: flex;
-
-}
-
-/* Bagian Kiri */
-.left {
-  flex: 1;
-  background: orange;
-  color: white;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.left h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.left p {
-  font-size: 18px;
-  line-height: 1.4;
-}
-
-.pencil {
-  margin-top: 40px;
-  height: 100px;
-  background: url('pencil.png') no-repeat center;
-  background-size: contain;
-}
-
-/* Bagian Kanan */
-.right {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 40px;
-  align-content: center;
-}
-
-.card {
-  background: #007bff;
-  color: white;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 18px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-}
 /* trophies */
 .trophy {
   padding: 1rem 1.2rem;
