@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BANBAN Login</title>
+    <!-- Link ke file CSS eksternal -->
     <link rel="stylesheet" href="login.css" />
   </head>
   <body>
@@ -11,8 +13,9 @@
       <div class="login-left">
         <div class="logo">
           <div class="logo-container">
-            <img src="logo.png" alt="" />
+            <img src="logo.png" alt="BANBAN logo" />
           </div>
+          <div class="logo-text">BANBAN</div>
         </div>
 
         <div class="login-header">
@@ -47,8 +50,8 @@
         </div>
 
         <div class="social-login">
-          <button class="social-btn">f</button>
-          <button class="social-btn">G</button>
+          <button class="social-btn" aria-label="login with facebook">f</button>
+          <button class="social-btn" aria-label="login with google">G</button>
         </div>
 
         <div class="login-footer">
@@ -56,7 +59,14 @@
         </div>
       </div>
 
-      <div class="login-right"></div>
+      <div class="login-right">
+        <div class="hero-overlay">
+          <div>
+            <h2>Welcome to BANBAN</h2>
+            <p>Find events, join communities, and grow together.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -76,18 +86,12 @@
           }
         });
 
-      document.querySelectorAll(".social-btn").forEach((btn) => {
-        btn.addEventListener("mouseenter", function () {
-          this.style.transform = "scale(1.1)";
-          this.style.transition = "all 0.3s ease";
-        });
-
-        btn.addEventListener("mouseleave", function () {
-          this.style.transform = "scale(1)";
+      // Hilangkan transform langsung via JS — gunakan CSS hover.
+      document.querySelectorAll('.social-btn').forEach(btn=>{
+        btn.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' ') btn.click();
         });
       });
     </script>
   </body>
 </html>
-
-
