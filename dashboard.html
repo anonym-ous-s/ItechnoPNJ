@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BANBAN Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.396.0/lucide.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .sidebar {
+      width: 256px;
+    }
+    .chart-container {
+      position: relative;
+      height: 200px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <div class="fixed top-0 left-0 h-full sidebar bg-blue-700 text-white flex flex-col">
+      <div class="p-4 border-b border-blue-600">
+        <div class="flex items-center space-x-2">
+          <div class="bg-white text-blue-700 rounded p-1 font-bold text-xl">B</div>
+          <h1 class="font-bold text-xl">BANBAN</h1>
+        </div>
+        <p class="text-sm mt-2">BanBan@gmail.com</p>
+      </div>
+      
+      <nav class="flex-1 p-4 space-y-2">
+        <a href="#" class="flex items-center space-x-2 p-2 rounded bg-blue-800">
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-800">
+          <i data-lucide="clock" class="w-5 h-5"></i>
+          <span>Podomoro Timer</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-800">
+          <i data-lucide="users" class="w-5 h-5"></i>
+          <span>Study Groups</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-800">
+          <i data-lucide="book" class="w-5 h-5"></i>
+          <span>Materials</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-800">
+          <i data-lucide="award" class="w-5 h-5"></i>
+          <span>Achievement</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-800">
+          <i data-lucide="settings" class="w-5 h-5"></i>
+          <span>Settings and profile</span>
+        </a>
+      </nav>
+      
+      <div class="p-4 border-t border-blue-600">
+        <button class="flex items-center space-x-2 bg-blue-800 px-4 py-2 rounded">
+          <span>Features</span>
+          <span class="bg-blue-600 text-xs px-2 py-0.5 rounded">NEW</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 p-6 flex-1 overflow-y-auto">
+      <!-- Header -->
+      <header class="flex justify-between items-center mb-8">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Hello, BanBan</h1>
+          <p class="text-gray-500">Welcome back to your dashboard</p>
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <input type="text" placeholder="Search..." class="bg-gray-100 rounded-full py-2 px-4 pl-10 focus:outline-none">
+            <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-gray-500"></i>
+          </div>
+          <button class="p-2 rounded-full bg-gray-100">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+          </button>
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-full bg-gray-300"></div>
+            <span class="font-medium">BanBan</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4 border border-gray-100">
+          <div class="p-3 rounded-lg bg-blue-100 text-blue-600">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold">80%</h3>
+            <p class="text-gray-500">Attendance</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4 border border-gray-100">
+          <div class="p-3 rounded-lg bg-purple-100 text-purple-600">
+            <i data-lucide="check-circle" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold">258+</h3>
+            <p class="text-gray-500">Task Completed</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4 border border-gray-100">
+          <div class="p-3 rounded-lg bg-amber-100 text-amber-600">
+            <i data-lucide="clock" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold">64%</h3>
+            <p class="text-gray-500">Task in Progress</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4 border border-gray-100">
+          <div class="p-3 rounded-lg bg-pink-100 text-pink-600">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold">245</h3>
+            <p class="text-gray-500">Reward Points</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Column -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Attendance Chart -->
+          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-semibold">Attendance</h2>
+              <div class="flex space-x-2">
+                <button class="p-1 rounded hover:bg-gray-100">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <button class="p-1 rounded hover:bg-gray-100">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="attendanceChart"></canvas>
+            </div>
+          </div>
+
+          <!-- To-Do List -->
+          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <h2 class="text-lg font-semibold mb-4">To-Do List</h2>
+            <div class="space-y-4">
+              <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                <div class="p-2 rounded-lg bg-yellow-100 text-yellow-600 mr-3">
+                  <i data-lucide="bell" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="font-medium">Today</h3>
+                  <p class="text-sm text-gray-500">Before 12:00 PM</p>
+                </div>
+              </div>
+              <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                <div class="p-2 rounded-lg bg-blue-100 text-blue-600 mr-3">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="font-medium">Tomorrow</h3>
+                  <p class="text-sm text-gray-500">After 08:00 AM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-6">
+          <!-- Resources -->
+          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <h2 class="text-lg font-semibold mb-4">Resources</h2>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="flex flex-col items-center p-4 rounded-lg bg-blue-50">
+                <div class="p-3 rounded-lg bg-blue-100 text-blue-600 mb-2">
+                  <i data-lucide="book" class="w-5 h-5"></i>
+                </div>
+                <span class="text-sm font-medium">Books</span>
+              </div>
+              <div class="flex flex-col items-center p-4 rounded-lg bg-green-50">
+                <div class="p-3 rounded-lg bg-green-100 text-green-600 mb-2">
+                  <i data-lucide="video" class="w-5 h-5"></i>
+                </div>
+                <span class="text-sm font-medium">Videos</span>
+              </div>
+              <div class="flex flex-col items-center p-4 rounded-lg bg-purple-50">
+                <div class="p-3 rounded-lg bg-purple-100 text-purple-600 mb-2">
+                  <i data-lucide="file-text" class="w-5 h-5"></i>
+                </div>
+                <span class="text-sm font-medium">Papers</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Test Score -->
+          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <h2 class="text-lg font-semibold mb-4">Test Score</h2>
+            <div class="chart-container">
+              <canvas id="testScoreChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section -->
+      <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Grade Chart -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h2 class="text-lg font-semibold mb-4">Grade</h2>
+          <div class="chart-container">
+            <canvas id="gradeChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold">Calendar</h2>
+            <div class="flex space-x-2">
+              <button class="p-1 rounded hover:bg-gray-100">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              </button>
+              <button class="p-1 rounded hover:bg-gray-100">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="grid grid-cols-7 gap-1 text-center text-sm font-medium text-gray-500">
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+              <div>Sun</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-7 gap-1">
+            <div class="h-10 border border-transparent"></div>
+            <div class="h-10 border border-transparent"></div>
+            <div class="h-10 border border-transparent"></div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">1</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">2</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">3</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">4</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">5</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">6</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">7</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">8</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">9</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">10</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">11</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">12</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">13</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">14</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">15</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">16</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">17</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">18</div>
+            <div class="h-10 border border-blue-300 bg-blue-100 rounded flex items-center justify-center font-medium">19</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">20</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">21</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">22</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">23</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">24</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">25</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">26</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">27</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">28</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">29</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">30</div>
+            <div class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center">31</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Attendance Chart
+    const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+    new Chart(attendanceCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Present', 'Absent'],
+        datasets: [{
+          data: [80, 20],
+          backgroundColor: ['#1D4ED8', '#6B7280'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '70%',
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+    
+    // Test Score Chart
+    const testScoreCtx = document.getElementById('testScoreChart').getContext('2d');
+    new Chart(testScoreCtx, {
+      type: 'line',
+      data: {
+        labels: ['Apr 10', 'Apr 11', 'Apr 12', 'Apr 13', 'Apr 14', 'Apr 15', 'Apr 16'],
+        datasets: [{
+          label: 'Score',
+          data: [60, 45, 70, 55, 75, 50, 85],
+          borderColor: '#1D4ED8',
+          backgroundColor: 'rgba(29, 78, 216, 0.1)',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+    
+    // Grade Chart
+    const gradeCtx = document.getElementById('gradeChart').getContext('2d');
+    new Chart(gradeCtx, {
+      type: 'bar',
+      data: {
+        labels: ['English', 'Tamil', 'Math', 'Chemistry', 'Physics', 'Biology', 'History', 'Geography', 'Computer Science'],
+        datasets: [{
+          label: 'Grade',
+          data: [85, 75, 90, 70, 80, 75, 65, 85, 95],
+          backgroundColor: '#1D4ED8'
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  </script>
+</body>
+</html>
