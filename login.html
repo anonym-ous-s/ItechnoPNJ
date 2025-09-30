@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -15,7 +14,6 @@
           <div class="logo-container">
             <img src="logo.png" alt="BANBAN logo" />
           </div>
-        
         </div>
 
         <div class="login-header">
@@ -40,7 +38,9 @@
               required
             />
           </div>
-          <button type="submit" class="btn"><a href="dashboard.html">Sign In</a></button>
+          <button type="submit" class="btn">
+            <a href="dashboard.html">Sign In</a>
+          </button>
         </form>
 
         <div class="divider">
@@ -61,10 +61,7 @@
 
       <div class="login-right">
         <div class="hero-overlay">
-          <div>
-
-
-          </div>
+          <div></div>
         </div>
       </div>
     </div>
@@ -87,14 +84,11 @@
         });
 
       // Hilangkan transform langsung via JS — gunakan CSS hover.
-      document.querySelectorAll('.social-btn').forEach(btn=>{
-        btn.addEventListener('keydown', (e)=>{
-          if(e.key === 'Enter' || e.key === ' ') btn.click();
+      document.querySelectorAll(".social-btn").forEach((btn) => {
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") btn.click();
         });
       });
     </script>
   </body>
 </html>
-
-
-

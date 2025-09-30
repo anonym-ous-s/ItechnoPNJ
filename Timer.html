@@ -1,101 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Focus Timer</title>
-  <link rel="stylesheet" href="timer.css" />
-</head>
-<body>
-  <div class="container">
-    <!-- SIDE BAR: TIDAK DIUBAH (sama persis seperti yang kamu minta) -->
-    <div class="sidebar">
-      <div class="logo"><img src="logo.png" alt="logo"></div>
-      <p class="email">BanBan@gmail.com</p>
-      <ul class="menu">
-        <li>
-          <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
-        </li>
-        <li>
-          <a href="Timer.html"><i class="fa fa-clock"></i> Podomoro Timer</a>
-        </li>
-        <li>
-          <a href="studygroup.html"><i class="fa fa-users"></i> Study Groups</a>
-        </li>
-        <li>
-          <a href="#"><i class="fa fa-book"></i> Materials</a>
-        </li>
-        <li>
-          <a href="Achivement.html"><i class="fa fa-trophy"></i> Achievement</a>
-        </li>
-        <li>
-          <a href="#"><i class="fa fa-cog"></i> Settings and profile</a>
-        </li>
-      </ul>
-      <div class="features">Features <span>NEW</span></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Timer</title>
+    <link rel="stylesheet" href="timer.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- SIDE BAR: TIDAK DIUBAH (sama persis seperti yang kamu minta) -->
+      <div class="sidebar">
+        <div class="logo"><img src="logo.png" alt="logo" /></div>
+        <p class="email">BanBan@gmail.com</p>
+        <ul class="menu">
+          <li>
+            <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="Timer.html"><i class="fa fa-clock"></i> Podomoro Timer</a>
+          </li>
+          <li>
+            <a href="studygroup.html"
+              ><i class="fa fa-users"></i> Study Groups</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-book"></i> Materials</a>
+          </li>
+          <li>
+            <a href="Achivement.html"
+              ><i class="fa fa-trophy"></i> Achievement</a
+            >
+          </li>
+          <li>
+            <a href="Prfile.html"
+              ><i class="fa fa-cog"></i> Settings and profile</a
+            >
+          </li>
+        </ul>
+        <div class="features">Features <span>NEW</span></div>
+      </div>
+
+      <!-- MAIN CONTENT (DIUBAH: fokus ke Focus Timer) -->
+      <main class="main">
+        <header class="page-top">
+          <h1 class="page-title">Focus Timer</h1>
+          <div class="toggle-group">
+            <button class="pill active" data-mode="podomoro">Podomoro</button>
+            <button class="pill" data-mode="deadlines">Deadlines</button>
+          </div>
+        </header>
+
+        <section class="timer-area">
+          <!-- Left: Timer Card -->
+          <div class="timer-card">
+            <div class="timer-card-inner">
+              <h2 class="timer-title">Focus Time</h2>
+              <p class="cycle-text" id="cycleText">Cycle 1 of 4</p>
+
+              <div class="time-display" id="timeDisplay">25 : 00</div>
+
+              <div class="progress-wrap">
+                <div class="progress-bar" id="progressBar"></div>
+              </div>
+
+              <div class="controls">
+                <button id="playPauseBtn" class="control-btn">▶</button>
+                <button id="resetBtn" class="control-btn">⟲</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Settings -->
+          <aside class="settings-card">
+            <div class="settings-inner">
+              <h3>Settings</h3>
+
+              <label
+                >Work Time (minutes)
+                <input type="number" id="workInput" min="1" value="25" />
+              </label>
+
+              <label
+                >Short Break (minutes)
+                <input type="number" id="shortInput" min="1" value="5" />
+              </label>
+
+              <label
+                >Long Break (minutes)
+                <input type="number" id="longInput" min="1" value="15" />
+              </label>
+
+              <label
+                >Cycles Until Long Break
+                <input type="number" id="cyclesInput" min="1" value="4" />
+              </label>
+
+              <div class="settings-actions">
+                <button id="applyBtn" class="apply-btn">Apply</button>
+                <button id="restoreBtn" class="restore-btn">
+                  Restore Defaults
+                </button>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
     </div>
 
-    <!-- MAIN CONTENT (DIUBAH: fokus ke Focus Timer) -->
-    <main class="main">
-      <header class="page-top">
-        <h1 class="page-title">Focus Timer</h1>
-        <div class="toggle-group">
-          <button class="pill active" data-mode="podomoro">Podomoro</button>
-          <button class="pill" data-mode="deadlines">Deadlines</button>
-        </div>
-      </header>
-
-      <section class="timer-area">
-        <!-- Left: Timer Card -->
-        <div class="timer-card">
-          <div class="timer-card-inner">
-            <h2 class="timer-title">Focus Time</h2>
-            <p class="cycle-text" id="cycleText">Cycle 1 of 4</p>
-
-            <div class="time-display" id="timeDisplay">25 : 00</div>
-
-            <div class="progress-wrap">
-              <div class="progress-bar" id="progressBar"></div>
-            </div>
-
-            <div class="controls">
-              <button id="playPauseBtn" class="control-btn">▶</button>
-              <button id="resetBtn" class="control-btn">⟲</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Settings -->
-        <aside class="settings-card">
-          <div class="settings-inner">
-            <h3>Settings</h3>
-
-            <label>Work Time (minutes)
-              <input type="number" id="workInput" min="1" value="25">
-            </label>
-
-            <label>Short Break (minutes)
-              <input type="number" id="shortInput" min="1" value="5">
-            </label>
-
-            <label>Long Break (minutes)
-              <input type="number" id="longInput" min="1" value="15">
-            </label>
-
-            <label>Cycles Until Long Break
-              <input type="number" id="cyclesInput" min="1" value="4">
-            </label>
-
-            <div class="settings-actions">
-              <button id="applyBtn" class="apply-btn">Apply</button>
-              <button id="restoreBtn" class="restore-btn">Restore Defaults</button>
-            </div>
-          </div>
-        </aside>
-      </section>
-    </main>
-  </div>
-
-  <script src="timer.js"></script>
-</body>
+    <script src="timer.js"></script>
+  </body>
 </html>

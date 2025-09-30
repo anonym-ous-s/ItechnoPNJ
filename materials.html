@@ -3,21 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Materials — BANBAN (Upgraded)</title>
-    <link rel="preconnect" href="https://images.unsplash.com" />
+    <title>Materials — BANBAN (Final)</title>
     <style>
       :root {
         --sidebar-w: 260px;
         --blue-600: #0a73b7;
-        --nav: #0a5ea0;
-        --accent: #0f4d92;
         --accent-2: #1d4ed8;
         --muted: #6b7280;
-        --bg: #f6f9fc;
         --card: #fff;
         --radius: 14px;
         --shadow: 0 18px 40px rgba(12, 44, 80, 0.06);
-        --glass: rgba(255, 255, 255, 0.95);
       }
       * {
         box-sizing: border-box;
@@ -34,7 +29,7 @@
         color: #071433;
       }
 
-      /* APP LAYOUT */
+      /* Layout */
       .app {
         display: flex;
         min-height: 100vh;
@@ -92,7 +87,7 @@
         background: #1e90ff;
       }
 
-      /* Features large at bottom */
+      /* Features button moved bottom and made larger */
       .features-block {
         margin-top: auto;
         display: flex;
@@ -107,7 +102,6 @@
         border: 2px solid rgba(255, 255, 255, 0.06);
         color: white;
         font-weight: 800;
-        letter-spacing: 0.4px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -119,11 +113,11 @@
         color: white;
         padding: 6px 8px;
         border-radius: 8px;
-        font-weight: 800;
         font-size: 12px;
+        font-weight: 800;
       }
 
-      /* MAIN */
+      /* Main */
       .main {
         flex: 1;
         padding: 26px;
@@ -133,8 +127,8 @@
       .topbar {
         display: flex;
         justify-content: space-between;
-        align-items: center;
         gap: 12px;
+        align-items: center;
         margin-bottom: 16px;
       }
       .left {
@@ -210,7 +204,7 @@
         box-shadow: 0 10px 26px rgba(29, 78, 216, 0.12);
       }
 
-      /* top metrics row */
+      /* Top metrics */
       .metrics {
         display: flex;
         gap: 12px;
@@ -226,7 +220,7 @@
         display: flex;
         gap: 12px;
         align-items: center;
-        min-width: 160px;
+        min-width: 150px;
       }
       .metric .num {
         font-weight: 800;
@@ -237,7 +231,7 @@
         font-size: 13px;
       }
 
-      /* LAYOUT: left content + right sidebar blocks */
+      /* Layout columns */
       .layout {
         display: grid;
         grid-template-columns: 1fr 360px;
@@ -245,7 +239,7 @@
         align-items: start;
       }
 
-      /* Left column: categories + scrollable materials list */
+      /* Left column */
       .left-col {
         display: flex;
         flex-direction: column;
@@ -259,7 +253,7 @@
         border: 1px solid rgba(15, 77, 146, 0.03);
       }
 
-      /* category tabs row */
+      /* category tabs */
       .cat-tabs {
         display: flex;
         gap: 8px;
@@ -280,13 +274,13 @@
         color: var(--accent-2);
       }
 
-      /* materials area: vertical scroll, many options */
+      /* big scrollable materials area */
       .materials-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         gap: 20px;
         padding: 8px;
-        max-height: 560px;
+        max-height: 640px;
         overflow: auto;
         scroll-behavior: smooth;
       }
@@ -346,19 +340,12 @@
         font-weight: 700;
       }
 
-      /* controls area in each card */
+      /* actions & progress */
       .card-actions {
         display: flex;
         gap: 8px;
         align-items: center;
         margin-top: 6px;
-      }
-      .action {
-        padding: 8px 10px;
-        border-radius: 8px;
-        border: 0;
-        font-weight: 700;
-        cursor: pointer;
       }
       .favorite {
         background: linear-gradient(90deg, #ff7a7a, #ffb1b1);
@@ -368,6 +355,7 @@
         display: flex;
         gap: 6px;
         align-items: center;
+        font-weight: 800;
       }
       .progress-row {
         display: flex;
@@ -394,7 +382,7 @@
         font-weight: 800;
       }
 
-      /* right side: favorites grouped + progress summary */
+      /* Right column panels */
       .right-col {
         display: flex;
         flex-direction: column;
@@ -417,7 +405,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        max-height: 240px;
+        max-height: 260px;
         overflow: auto;
         padding-right: 6px;
       }
@@ -442,19 +430,8 @@
         height: 100%;
         object-fit: cover;
       }
-      .progress-summary {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .summary-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-      }
 
-      /* bottom helper */
+      /* footer note */
       .footer-note {
         text-align: center;
         color: var(--muted);
@@ -473,11 +450,36 @@
         z-index: 90;
       }
       .modal {
-        width: min(720px, 94%);
+        width: min(760px, 94%);
         background: var(--card);
         border-radius: 12px;
         padding: 18px;
         box-shadow: 0 28px 60px rgba(3, 6, 23, 0.3);
+      }
+
+      /* confetti */
+      .confetti-wrap {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 120;
+      }
+      .confetti {
+        position: absolute;
+        font-size: 22px;
+        transform: translateY(-40px) rotate(10deg);
+        animation: fall 1600ms linear forwards;
+      }
+      @keyframes fall {
+        0% {
+          transform: translateY(-20vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0.02;
+        }
       }
 
       /* responsive */
@@ -486,7 +488,7 @@
           grid-template-columns: 1fr;
         }
         .materials-list {
-          max-height: 420px;
+          max-height: 520px;
         }
         .search {
           width: 320px;
@@ -520,83 +522,42 @@
         .title {
           font-size: 26px;
         }
-        .subtitle {
-          max-width: 100%;
-        }
       }
-
-      /* focus states */
       button:focus,
       .material-card:focus,
       .tab:focus {
         outline: 3px solid rgba(29, 78, 216, 0.12);
         outline-offset: 3px;
-        border-radius: 10px;
       }
     </style>
   </head>
   <body>
     <div class="app">
-      <!-- Sidebar (content kept consistent with other pages) -->
+      <!-- Sidebar (unchanged content) -->
       <aside class="sidebar" id="sidebar">
         <div class="logo">
           <img
             src="logo.png"
             alt="BANBAN logo"
-            onerror="this.style.opacity=.5"
+            onerror="this.style.opacity=.6"
           />
         </div>
         <div class="email">BanBan@gmail.com</div>
 
         <ul class="menu" role="navigation">
-          <li>
-            <a href="dashboard.html"
-              ><svg width="16" height="16">
-                <rect width="16" height="16" fill="transparent" />
-              </svg>
-              Dashboard</a
-            >
-          </li>
-          <li>
-            <a href="Timer.html"
-              ><svg width="16" height="16"></svg> Podomoro Timer</a
-            >
-          </li>
-          <li>
-            <a href="studygroup.html"
-              ><svg width="16" height="16"></svg> Study Groups</a
-            >
-          </li>
-          <li>
-            <a class="active" href="#"
-              ><svg width="16" height="16"></svg> Materials</a
-            >
-          </li>
-          <li>
-            <a href="Achivement.html"
-              ><svg width="16" height="16"></svg> Achievement</a
-            >
-          </li>
-          <li>
-            <a href="#"
-              ><svg width="16" height="16"></svg> Settings and profile</a
-            >
-          </li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="Timer.html">Podomoro Timer</a></li>
+          <li><a href="studygroup.html">Study Groups</a></li>
+          <li><a class="active" href="#">Materials</a></li>
+          <li><a href="Achivement.html">Achievement</a></li>
+          <li><a href="Prfile.html">Settings and profile</a></li>
         </ul>
 
-        <!-- Features button moved to bottom and enlarged -->
+        <!-- FEATURES button placed at bottom and larger -->
         <div class="features-block">
           <button class="features-btn" id="featuresBtn" title="Features">
             <span style="display: flex; align-items: center; gap: 10px"
-              ><svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M3 12h18"
-                  stroke="white"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-              </svg>
-              Features <span class="new">NEW</span></span
+              >Features <span class="new">NEW</span></span
             >
           </button>
         </div>
@@ -607,19 +568,12 @@
         <div class="topbar">
           <div class="left">
             <button class="burger" id="btnBurger" aria-label="Toggle sidebar">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M4 6h16M4 12h16M4 18h16"
-                  stroke="#071433"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-              </svg>
+              ☰
             </button>
             <div>
               <h1 class="title">Materials</h1>
               <div class="subtitle">
-                Explore subjects, follow lessons, mark favorites & track
+                Explore subjects, mark favorites, follow lessons & track
                 progress.
               </div>
             </div>
@@ -646,14 +600,40 @@
               <input
                 id="searchBox"
                 type="search"
-                placeholder="Search materials, topics, anything..."
+                placeholder="Search materials, topics..."
                 aria-label="Search materials"
               />
             </div>
-            <button class="btn ghost" id="viewFavBtn" title="View Favorites">
+
+            <!-- Persist toggle: OFF by default so progress cleared on refresh -->
+            <label
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-weight: 700;
+              "
+            >
+              <input
+                id="persistToggle"
+                type="checkbox"
+                title="Persist progress across refresh"
+              />
+              <span style="font-size: 13px; color: var(--muted)"
+                >Persist Progress</span
+              >
+            </label>
+
+            <button id="viewFavBtn" class="btn ghost" title="View Favorites">
               Favorites
             </button>
-            <button class="btn primary" id="exportBtn">Export CSV</button>
+            <button
+              id="logoutBtn"
+              class="btn ghost"
+              title="Logout (clears data)"
+            >
+              Logout
+            </button>
           </div>
         </div>
 
@@ -678,32 +658,31 @@
           </div>
         </div>
 
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+          "
+        >
+          <div class="muted">Results: <strong id="resultCount">0</strong></div>
+          <div style="margin-left: auto; display: flex; gap: 8px">
+            <button id="sortBtn" class="btn ghost">Sort: A→Z</button>
+            <button
+              id="resetProgress"
+              class="btn ghost"
+              title="Reset all progress"
+            >
+              Reset Progress
+            </button>
+          </div>
+        </div>
+
         <div class="layout">
-          <!-- LEFT -->
           <div class="left-col">
             <div class="section">
-              <div
-                class="cat-tabs"
-                id="categoryTabs"
-                role="tablist"
-                aria-label="Subject categories"
-              ></div>
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  margin-top: 8px;
-                "
-              >
-                <div class="muted">
-                  Results: <strong id="resultCount">0</strong>
-                </div>
-                <div style="display: flex; gap: 8px">
-                  <button id="sortBtn" class="btn ghost">Sort: A→Z</button>
-                  <button id="showAllBtn" class="btn ghost">Show All</button>
-                </div>
-              </div>
+              <div id="categoryTabs" class="cat-tabs" role="tablist"></div>
 
               <div
                 class="materials-list"
@@ -711,27 +690,21 @@
                 tabindex="0"
                 aria-label="Materials list"
               >
-                <!-- material cards appended here -->
+                <!-- cards injected by JS -->
               </div>
             </div>
 
-            <div class="section" style="margin-top: 12px">
+            <div class="section">
               <h4 style="margin: 0 0 8px 0">Progress by Category</h4>
-              <div
-                id="categoryProgress"
-                style="display: flex; flex-direction: column; gap: 10px"
-              ></div>
+              <div id="categoryProgress"></div>
             </div>
           </div>
 
-          <!-- RIGHT -->
           <aside class="right-col">
             <div class="side-panel">
               <h4>Favorites (grouped)</h4>
-              <div class="fav-list" id="favList">
-                <!-- favorites -->
-              </div>
-              <div style="margin-top: 10px; display: flex; gap: 8px">
+              <div class="fav-list" id="favList"></div>
+              <div style="display: flex; gap: 8px; margin-top: 10px">
                 <button id="clearFavs" class="btn ghost">
                   Clear Favorites
                 </button>
@@ -743,16 +716,16 @@
 
             <div class="side-panel">
               <h4>Quick Insights</h4>
-              <div class="progress-summary">
-                <div class="summary-row">
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <div style="display: flex; justify-content: space-between">
                   <div class="muted">Total categories</div>
                   <div id="catCount" style="font-weight: 800">0</div>
                 </div>
-                <div class="summary-row">
+                <div style="display: flex; justify-content: space-between">
                   <div class="muted">Materials followed</div>
                   <div id="followedCount" style="font-weight: 800">0</div>
                 </div>
-                <div class="summary-row">
+                <div style="display: flex; justify-content: space-between">
                   <div class="muted">Avg completion</div>
                   <div id="avgComp" style="font-weight: 800">0%</div>
                 </div>
@@ -766,7 +739,7 @@
                   Mark all followed as Done
                 </button>
                 <button id="exportFavs" class="btn ghost">
-                  Export Favorites
+                  Export Favorites (disabled)
                 </button>
               </div>
             </div>
@@ -774,21 +747,15 @@
         </div>
 
         <div class="footer-note">
-          Tip: tekan "/" untuk fokus ke search, klik judul materi untuk detail &
-          atur progress.
+          Tip: tekan "/" untuk fokus ke pencarian. Toggle "Persist Progress" ke
+          ON jika ingin menyimpan progress walau refresh.
         </div>
       </main>
     </div>
 
     <!-- Modal -->
     <div class="modal-backdrop" id="modal" aria-hidden="true">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modalTitle"
-        tabindex="-1"
-      >
+      <div class="modal" role="dialog" aria-modal="true" tabindex="-1">
         <div
           style="
             display: flex;
@@ -830,14 +797,7 @@
             <div id="modalCat" class="muted" style="margin-top: 6px"></div>
             <p id="modalDesc" style="color: var(--muted); margin-top: 10px"></p>
 
-            <div
-              style="
-                display: flex;
-                gap: 8px;
-                margin-top: 12px;
-                align-items: center;
-              "
-            >
+            <div style="display: flex; gap: 8px; margin-top: 12px">
               <button id="modalFav" class="btn ghost">Favorite</button>
               <button id="modalFollow" class="btn primary">
                 Follow / Start
@@ -858,117 +818,104 @@
             <div style="margin-top: 12px; display: flex; gap: 8px">
               <button id="incProgress" class="btn ghost">+10%</button>
               <button id="setDone" class="btn primary">Set 100%</button>
+              <button id="downloadCert" class="btn ghost" style="display: none">
+                Download Certificate
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- confetti container -->
+    <div class="confetti-wrap" id="confettiWrap" aria-hidden="true"></div>
+
     <script>
-      /* ---------- Demo dataset: many materials with topics ---------- */
+      /* ---------------- DATA ---------------- */
       const materials = [
-        // Mathematics topics
+        // core set + many extras to allow scroll
         {
-          id: "mat-alg-1",
+          id: "mat-alg",
           title: "Algebra I — Linear Equations",
           category: "Mathematics",
           topics: ["Equations", "Inequalities"],
-          img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
-          desc: "Basics of linear equations and problem solving.",
+          img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop",
+          desc: "Basics of linear equations & problem solving.",
         },
         {
-          id: "mat-geo-1",
+          id: "mat-geo",
           title: "Geometry — Triangles & Proofs",
           category: "Mathematics",
           topics: ["Triangles", "Proofs", "Angles"],
-          img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop",
+          img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=900&auto=format&fit=crop",
           desc: "Constructive geometry and proofs.",
         },
         {
-          id: "mat-calc-1",
+          id: "mat-calc",
           title: "Calculus — Limits & Derivatives",
           category: "Mathematics",
-          topics: ["Limits", "Derivatives", "Applications"],
-          img: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?q=80&w=800&auto=format&fit=crop",
+          topics: ["Limits", "Derivatives"],
+          img: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?q=80&w=900&auto=format&fit=crop",
           desc: "Intro to limits and derivative rules.",
         },
         {
-          id: "mat-stat-1",
-          title: "Statistics — Probability Basics",
-          category: "Mathematics",
-          topics: ["Probability", "Distributions"],
-          img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop",
-          desc: "Basic probability and statistics overview.",
-        },
-        // English topics
-        {
-          id: "eng-gram-1",
+          id: "eng-gram",
           title: "English — Grammar Essentials",
           category: "English",
           topics: ["Tenses", "Parts of Speech"],
-          img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop",
+          img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=900&auto=format&fit=crop",
           desc: "Core grammar for writing.",
         },
         {
-          id: "eng-lit-1",
+          id: "eng-lit",
           title: "English — Literature Anthology",
           category: "English",
           topics: ["Poetry", "Short Stories"],
-          img: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?q=80&w=800&auto=format&fit=crop",
+          img: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?q=80&w=900&auto=format&fit=crop",
           desc: "Selected works and analysis.",
         },
         {
-          id: "eng-list-1",
-          title: "English — Listening Practice",
-          category: "English",
-          topics: ["Listening", "Comprehension"],
-          img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
-          desc: "Listening exercises and transcripts.",
-        },
-        // Science
-        {
-          id: "sci-phy-1",
+          id: "sci-phy",
           title: "Physics — Mechanics",
           category: "Science",
           topics: ["Forces", "Motion"],
-          img: "https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=800&auto=format&fit=crop",
-          desc: "Newton mechanics fundamentals.",
+          img: "https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=900&auto=format&fit=crop",
+          desc: "Newton mechanics.",
         },
         {
-          id: "sci-chem-1",
+          id: "sci-chem",
           title: "Chemistry — Atom to Molecules",
           category: "Science",
           topics: ["Atoms", "Bonding"],
-          img: "https://images.unsplash.com/photo-1581090700227-05592b4f2b4d?q=80&w=800&auto=format&fit=crop",
-          desc: "Atomic structure and bonds.",
+          img: "https://images.unsplash.com/photo-1581090700227-05592b4f2b4d?q=80&w=900&auto=format&fit=crop",
+          desc: "Atomic structure & bonds.",
         },
         {
-          id: "sci-bio-1",
+          id: "bio-cell",
           title: "Biology — Cell Biology",
           category: "Biology",
           topics: ["Cells", "Microscopy"],
-          img: "https://images.unsplash.com/photo-1559757175-5708c58c04a3?q=80&w=800&auto=format&fit=crop",
-          desc: "Cells, organelles, and microscopy.",
+          img: "https://images.unsplash.com/photo-1559757175-5708c58c04a3?q=80&w=900&auto=format&fit=crop",
+          desc: "Cells & organelles.",
         },
-        // Geography & History
         {
-          id: "geo-phys-1",
+          id: "geo-land",
           title: "Geography — Physical Landscapes",
           category: "Geography",
           topics: ["Landforms", "Rivers"],
-          img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop",
-          desc: "Study of physical features.",
+          img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=900&auto=format&fit=crop",
+          desc: "Physical geography & maps.",
         },
         {
-          id: "hist-world-1",
+          id: "hist-ww2",
           title: "History — World War II",
           category: "History",
           topics: ["20th Century", "Wars"],
-          img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=800&auto=format&fit=crop",
-          desc: "Events and analysis of WWII.",
+          img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=900&auto=format&fit=crop",
+          desc: "Events & analysis of WWII.",
         },
-        // More materials to allow scroll
-        ...Array.from({ length: 24 }).flatMap((_, i) => {
+        // many extras
+        ...Array.from({ length: 30 }).map((_, i) => {
           const cats = [
             "Mathematics",
             "English",
@@ -978,29 +925,37 @@
             "History",
           ];
           const cat = cats[i % cats.length];
-          return [
-            {
-              id: `more-${i}`,
-              title: `${cat} — Extra Resource ${i + 1}`,
-              category: cat,
-              topics: ["Lesson", "Exercise"],
-              img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop",
-              desc: `Additional ${cat} material ${i + 1}.`,
-            },
-          ];
+          return {
+            id: "more-" + i,
+            title: `${cat} — Extra Lesson ${i + 1}`,
+            category: cat,
+            topics: ["Lesson", "Exercise"],
+            img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=900&auto=format&fit=crop",
+            desc: `Extra ${cat} material ${i + 1}`,
+          };
         }),
       ];
 
-      /* ---------- state persistent storage ---------- */
+      /* ---------------- STORAGE KEYS ---------------- */
       const FAV_KEY = "banban_materials_favs_v1";
       const PROG_KEY = "banban_materials_prog_v1";
       const FOLLOW_KEY = "banban_materials_follow_v1";
+      const PERSIST_KEY = "banban_materials_persist_v1";
 
+      /* restore from storage */
       let favorites = JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
-      let progress = JSON.parse(localStorage.getItem(PROG_KEY) || "{}"); // {id: percent}
-      let followed = JSON.parse(localStorage.getItem(FOLLOW_KEY) || "[]"); // ids
+      let progress = JSON.parse(localStorage.getItem(PROG_KEY) || "{}");
+      let followed = JSON.parse(localStorage.getItem(FOLLOW_KEY) || "[]");
+      let persistProgress = localStorage.getItem(PERSIST_KEY) === "true"; // default false
 
-      /* ---------- elements ---------- */
+      /* if persistProgress is false, clear progress on load (per your request) */
+      if (!persistProgress) {
+        progress = {};
+        localStorage.removeItem(PROG_KEY);
+        // do not clear favorites/followed unless logout/explicit reset
+      }
+
+      /* ---------------- DOM refs ---------------- */
       const materialsList = document.getElementById("materialsList");
       const categoryTabs = document.getElementById("categoryTabs");
       const searchBox = document.getElementById("searchBox");
@@ -1014,6 +969,19 @@
       const followedCountEl = document.getElementById("followedCount");
       const avgCompEl = document.getElementById("avgComp");
 
+      const persistToggle = document.getElementById("persistToggle");
+      const resetProgressBtn = document.getElementById("resetProgress");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const sortBtn = document.getElementById("sortBtn");
+      const viewFavBtn = document.getElementById("viewFavBtn");
+      const clearFavsBtn = document.getElementById("clearFavs");
+      const openFavDetail = document.getElementById("openFavDetail");
+      const markAllDone = document.getElementById("markAllDone");
+      const exportFavs = document.getElementById("exportFavs"); // left as disabled per request
+      const featuresBtn = document.getElementById("featuresBtn");
+      const btnBurger = document.getElementById("btnBurger");
+      const sidebar = document.getElementById("sidebar");
+
       const modal = document.getElementById("modal");
       const modalTitle = document.getElementById("modalTitle");
       const modalImg = document.getElementById("modalImg");
@@ -1026,21 +994,11 @@
       const modalProgressNum = document.getElementById("modalProgressNum");
       const incProgress = document.getElementById("incProgress");
       const setDone = document.getElementById("setDone");
+      const downloadCert = document.getElementById("downloadCert");
       const modalClose = document.getElementById("modalClose");
+      const confettiWrap = document.getElementById("confettiWrap");
 
-      const sortBtn = document.getElementById("sortBtn");
-      const viewFavBtn = document.getElementById("viewFavBtn");
-      const exportBtn = document.getElementById("exportBtn");
-      const showAllBtn = document.getElementById("showAllBtn");
-      const btnBurger = document.getElementById("btnBurger");
-      const sidebar = document.getElementById("sidebar");
-      const featuresBtn = document.getElementById("featuresBtn");
-      const clearFavsBtn = document.getElementById("clearFavs");
-      const openFavDetail = document.getElementById("openFavDetail");
-      const markAllDone = document.getElementById("markAllDone");
-      const exportFavs = document.getElementById("exportFavs");
-
-      /* ---------- utilities ---------- */
+      /* ---------------- HELPERS ---------------- */
       function saveFavs() {
         localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
       }
@@ -1050,39 +1008,41 @@
       function saveFollow() {
         localStorage.setItem(FOLLOW_KEY, JSON.stringify(followed));
       }
-
+      function savePersist() {
+        localStorage.setItem(PERSIST_KEY, persistProgress ? "true" : "false");
+      }
       function isFav(id) {
         return favorites.includes(id);
-      }
-      function getProgress(id) {
-        return progress[id] || 0;
       }
       function isFollowed(id) {
         return followed.includes(id);
       }
-
+      function getProgress(id) {
+        return progress[id] || 0;
+      }
       function clamp(n) {
         return Math.max(0, Math.min(100, Math.round(n)));
       }
 
-      /* ---------- derive categories ---------- */
-      const categories = Array.from(new Set(materials.map((m) => m.category)));
-      categories.sort();
-
-      /* ---------- render category tabs ---------- */
+      /* ---------------- CATEGORIES / UI ---------------- */
+      const categories = Array.from(
+        new Set(materials.map((m) => m.category))
+      ).sort();
       let activeCategory = "All";
+      let sortAZ = true;
+      let currentList = materials.slice();
+
       function renderTabs() {
         categoryTabs.innerHTML = "";
-        const allTab = document.createElement("button");
-        allTab.className = "tab" + (activeCategory === "All" ? " active" : "");
-        allTab.textContent = "All";
-        allTab.onclick = () => {
+        const allBtn = document.createElement("button");
+        allBtn.className = "tab" + (activeCategory === "All" ? " active" : "");
+        allBtn.textContent = "All";
+        allBtn.onclick = () => {
           activeCategory = "All";
           renderTabs();
           applyFilters();
         };
-        categoryTabs.appendChild(allTab);
-
+        categoryTabs.appendChild(allBtn);
         categories.forEach((cat) => {
           const b = document.createElement("button");
           b.className = "tab" + (activeCategory === cat ? " active" : "");
@@ -1095,17 +1055,12 @@
           categoryTabs.appendChild(b);
         });
       }
-      renderTabs();
 
-      /* ---------- render material cards ---------- */
-      let currentList = materials.slice(); // filtered list
-
-      function createMaterialCard(item) {
+      /* ---------------- MATERIAL CARD ---------------- */
+      function createCard(item) {
         const card = document.createElement("div");
         card.className = "material-card";
         card.tabIndex = 0;
-
-        // thumb
         const thumb = document.createElement("div");
         thumb.className = "thumb";
         const img = document.createElement("img");
@@ -1118,7 +1073,6 @@
         };
         thumb.appendChild(img);
 
-        // title and cat
         const title = document.createElement("div");
         title.className = "title";
         title.textContent = item.title;
@@ -1126,7 +1080,6 @@
         cat.className = "cat";
         cat.textContent = item.category;
 
-        // topics tags
         const topicsWrap = document.createElement("div");
         topicsWrap.className = "topics";
         (item.topics || []).slice(0, 4).forEach((t) => {
@@ -1136,12 +1089,11 @@
           topicsWrap.appendChild(tk);
         });
 
-        // actions
         const actions = document.createElement("div");
         actions.className = "card-actions";
         const favBtn = document.createElement("button");
         favBtn.className = "favorite";
-        favBtn.innerHTML = isFav(item.id) ? "★ Favorite" : "☆ Favorite";
+        favBtn.textContent = isFav(item.id) ? "★ Favorite" : "☆ Favorite";
         favBtn.onclick = (ev) => {
           ev.stopPropagation();
           toggleFavorite(item.id);
@@ -1158,7 +1110,6 @@
         actions.appendChild(favBtn);
         actions.appendChild(detailBtn);
 
-        // progress
         const progRow = document.createElement("div");
         progRow.className = "progress-row";
         const progBar = document.createElement("div");
@@ -1173,14 +1124,12 @@
         progRow.appendChild(progBar);
         progRow.appendChild(progNum);
 
-        // follow indicator
         const followLine = document.createElement("div");
         followLine.style.marginTop = "6px";
         followLine.style.fontSize = "13px";
         followLine.style.color = "var(--muted)";
         followLine.textContent = isFollowed(item.id) ? "Following" : "";
 
-        // combine
         card.appendChild(thumb);
         card.appendChild(title);
         card.appendChild(cat);
@@ -1189,7 +1138,6 @@
         card.appendChild(progRow);
         card.appendChild(followLine);
 
-        // click open modal
         card.onclick = () => openModalFor(item.id);
         card.onkeydown = (e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -1201,8 +1149,21 @@
         return card;
       }
 
-      /* ---------- apply filters, search, sort ---------- */
-      let sortAZ = true;
+      /* ---------------- RENDER LIST ---------------- */
+      function renderList(list) {
+        materialsList.innerHTML = "";
+        if (!list.length) {
+          materialsList.innerHTML =
+            '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:20px">No materials found.</div>';
+          return;
+        }
+        const frag = document.createDocumentFragment();
+        list.forEach((i) => frag.appendChild(createCard(i)));
+        materialsList.appendChild(frag);
+        resultCount.textContent = list.length;
+      }
+
+      /* ---------------- FILTER / SEARCH / SORT ---------------- */
       function applyFilters() {
         const q = (searchBox.value || "").trim().toLowerCase();
         currentList = materials.filter((m) => {
@@ -1211,35 +1172,20 @@
           const byQ =
             !q ||
             m.title.toLowerCase().includes(q) ||
-            m.topics.join(" ").toLowerCase().includes(q) ||
+            (m.topics || []).join(" ").toLowerCase().includes(q) ||
             (m.desc || "").toLowerCase().includes(q);
           return byCat && byQ;
         });
-        // sort
         currentList.sort((a, b) =>
           sortAZ
             ? a.title.localeCompare(b.title)
             : b.title.localeCompare(a.title)
         );
-        renderMaterials(currentList);
+        renderList(currentList);
         updateCounts();
       }
 
-      /* ---------- render materials list ---------- */
-      function renderMaterials(list) {
-        materialsList.innerHTML = "";
-        if (!list.length) {
-          materialsList.innerHTML =
-            '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:20px">No materials found.</div>';
-          return;
-        }
-        const fragment = document.createDocumentFragment();
-        list.forEach((item) => fragment.appendChild(createMaterialCard(item)));
-        materialsList.appendChild(fragment);
-        resultCount.textContent = list.length;
-      }
-
-      /* ---------- favorites ---------- */
+      /* ---------------- FAVORITES / FOLLOW / PROGRESS ---------------- */
       function toggleFavorite(id) {
         if (favorites.includes(id))
           favorites = favorites.filter((x) => x !== id);
@@ -1247,8 +1193,6 @@
         saveFavs();
         updateUI();
       }
-
-      /* ---------- follow / progress ---------- */
       function followMaterial(id) {
         if (!followed.includes(id)) {
           followed.push(id);
@@ -1262,73 +1206,49 @@
         updateUI();
       }
       function incMaterialProgress(id, step = 10) {
-        const cur = getProgress(id);
-        progress[id] = clamp(cur + step);
-        saveProg();
+        progress[id] = clamp(getProgress(id) + step);
+        persistProgressSave();
         updateUI();
       }
       function setMaterialProgress(id, val) {
         progress[id] = clamp(val);
-        saveProg();
+        persistProgressSave();
         updateUI();
       }
 
-      /* ---------- modal logic ---------- */
-      let currentModalId = null;
-      function openModalFor(id) {
-        const item = materials.find((m) => m.id === id);
-        if (!item) return;
-        currentModalId = id;
-        modalTitle.textContent = item.title;
-        modalImg.src = item.img;
-        modalName.textContent = item.title;
-        modalCat.textContent = item.category;
-        modalDesc.textContent = item.desc || "";
-        modalFav.textContent = isFav(id) ? "Unfavorite" : "Favorite";
-        modalFollow.textContent = isFollowed(id)
-          ? "Unfollow"
-          : "Follow / Start";
-        modalProgress.style.width = getProgress(id) + "%";
-        modalProgressNum.textContent = getProgress(id) + "%";
-        modal.style.display = "flex";
-        modal.setAttribute("aria-hidden", "false");
-
-        modalFav.onclick = () => {
-          toggleFavorite(id);
-          modalFav.textContent = isFav(id) ? "Unfavorite" : "Favorite";
-        };
-        modalFollow.onclick = () => {
-          if (isFollowed(id)) {
-            unfollowMaterial(id);
-            modalFollow.textContent = "Follow / Start";
-          } else {
-            followMaterial(id);
-            modalFollow.textContent = "Unfollow";
-          }
-        };
-        incProgress.onclick = () => {
-          incMaterialProgress(id, 10);
-          modalProgress.style.width = getProgress(id) + "%";
-          modalProgressNum.textContent = getProgress(id) + "%";
-        };
-        setDone.onclick = () => {
-          setMaterialProgress(id, 100);
-          modalProgress.style.width = "100%";
-          modalProgressNum.textContent = "100%";
-        };
-      }
-      modalClose.addEventListener("click", () => {
-        modal.style.display = "none";
-        modal.setAttribute("aria-hidden", "true");
-      });
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          modal.style.display = "none";
-          modal.setAttribute("aria-hidden", "true");
+      /* persist/save depending on toggle */
+      function persistProgressSave() {
+        if (persistProgress) saveProg();
+        else {
+          /* don't save to storage */
         }
-      });
+      }
 
-      /* ---------- favorites panel grouped ---------- */
+      /* Reset progress (keeps favorites/followed) */
+      function resetAllProgress() {
+        progress = {};
+        if (persistProgress) saveProg();
+        updateUI();
+      }
+
+      /* Logout: clears everything */
+      function logoutAll() {
+        favorites = [];
+        followed = [];
+        progress = {};
+        persistProgress = false;
+        localStorage.removeItem(FAV_KEY);
+        localStorage.removeItem(FOLLOW_KEY);
+        localStorage.removeItem(PROG_KEY);
+        localStorage.removeItem(PERSIST_KEY);
+        // reflect toggle UI
+        persistToggle.checked = false;
+        updateUI();
+        // reload to give fresh state
+        location.reload();
+      }
+
+      /* Render grouped favorites in right panel */
       function renderFavorites() {
         favList.innerHTML = "";
         if (!favorites.length) {
@@ -1336,7 +1256,6 @@
             '<div style="color:var(--muted)">No favorites yet — click Favorite on a material.</div>';
           return;
         }
-        // group by category
         const groups = {};
         favorites.forEach((id) => {
           const m = materials.find((x) => x.id === id);
@@ -1355,10 +1274,11 @@
             row.className = "fav-item";
             const mini = document.createElement("div");
             mini.className = "mini";
-            const img = document.createElement("img");
-            img.src = item.img;
-            img.alt = item.title;
-            mini.appendChild(img);
+            const im = document.createElement("img");
+            im.src = item.img;
+            im.alt = item.title;
+            im.loading = "lazy";
+            mini.appendChild(im);
             const info = document.createElement("div");
             info.style.flex = "1";
             const t = document.createElement("div");
@@ -1381,7 +1301,7 @@
         }
       }
 
-      /* ---------- category progress ---------- */
+      /* Render category progress */
       function renderCategoryProgress() {
         categoryProgress.innerHTML = "";
         categories.forEach((cat) => {
@@ -1394,155 +1314,33 @@
           const avg = total ? Math.round(sum / total) : 0;
           const wrapper = document.createElement("div");
           wrapper.className = "summary-row";
-          wrapper.innerHTML = `<div class="muted">${cat} (${total})</div><div style="display:flex;align-items:center;gap:12px"><div style="width:160px;background:#eef6ff;border-radius:999px;overflow:hidden"><div style="height:8px;background:linear-gradient(90deg,#1d4ed8,#60a5fa);width:${avg}%"></div></div><div style="font-weight:800">${avg}%</div></div>`;
+          wrapper.innerHTML = `<div style="font-weight:700">${cat} (${total})</div><div style="display:flex;align-items:center;gap:12px"><div style="width:160px;background:#eef6ff;border-radius:999px;overflow:hidden"><div style="height:8px;background:linear-gradient(90deg,#1d4ed8,#60a5fa);width:${avg}%"></div></div><div style="font-weight:800">${avg}%</div></div>`;
           categoryProgress.appendChild(wrapper);
         });
       }
 
-      /* ---------- counts & summary ---------- */
+      /* Update top counts */
       function updateCounts() {
         totalMaterials.textContent = materials.length;
         favCount.textContent = favorites.length;
-        // overall progress = average of progress over followed items OR all items if none followed
-        const keys = Object.keys(progress);
-        const baseList = followed.length
-          ? followed
-          : materials.map((m) => m.id);
-        const avg = baseList.length
+        // overall progress: if some followed exist average them, else average all
+        const base = followed.length ? followed : materials.map((m) => m.id);
+        const avg = base.length
           ? Math.round(
-              baseList.reduce((s, id) => s + (getProgress(id) || 0), 0) /
-                baseList.length
+              base.reduce((s, id) => s + (getProgress(id) || 0), 0) /
+                base.length
             )
           : 0;
         overallProgress.textContent = avg + "%";
         catCountEl.textContent = categories.length;
         followedCountEl.textContent = followed.length;
         avgCompEl.textContent = avg + "%";
-      }
-
-      /* ---------- update UI (re-render partials) ---------- */
-      function updateUI() {
-        applyFilters();
         renderFavorites();
         renderCategoryProgress();
-        updateCounts();
       }
 
-      /* ---------- event handlers ---------- */
-      searchBox.addEventListener("input", () => applyFilters());
-      sortBtn.addEventListener("click", () => {
-        sortAZ = !sortAZ;
-        sortBtn.textContent = sortAZ ? "Sort: A→Z" : "Sort: Z→A";
-        applyFilters();
-      });
-      exportBtn.addEventListener("click", () => {
-        const rows = [
-          ["Title", "Category", "Topics", "Progress", "Followed", "Fav"],
-        ];
-        materials.forEach((m) => {
-          rows.push([
-            m.title,
-            m.category,
-            m.topics.join("|"),
-            getProgress(m.id) + "%",
-            isFollowed(m.id) ? "Yes" : "No",
-            isFav(m.id) ? "Yes" : "No",
-          ]);
-        });
-        const csv = rows
-          .map((r) =>
-            r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")
-          )
-          .join("\\n");
-        const blob = new Blob([csv], { type: "text/csv" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "materials_export.csv";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      });
-      viewFavBtn.addEventListener("click", () => {
-        // show favorites grouped in the right panel (scroll into view)
-        favList.scrollIntoView({ behavior: "smooth", block: "center" });
-      });
-      showAllBtn.addEventListener("click", () => {
-        activeCategory = "All";
-        renderTabs();
-        applyFilters();
-      });
-
-      btnBurger &&
-        btnBurger.addEventListener("click", () =>
-          sidebar.classList.toggle("open")
-        );
-
-      // features button action (sample)
-      featuresBtn.addEventListener("click", () => {
-        alert("Features panel — coming soon!");
-      });
-
-      clearFavsBtn &&
-        clearFavsBtn.addEventListener("click", () => {
-          favorites = [];
-          saveFavs();
-          updateUI();
-        });
-      openFavDetail &&
-        openFavDetail.addEventListener("click", () => {
-          if (favorites.length) favList.querySelector("button")?.focus();
-          else alert("No favorites yet.");
-        });
-
-      markAllDone &&
-        markAllDone.addEventListener("click", () => {
-          followed.forEach((id) => (progress[id] = 100));
-          saveProg();
-          updateUI();
-        });
-      exportFavs &&
-        exportFavs.addEventListener("click", () => {
-          const favItems = materials.filter((m) => favorites.includes(m.id));
-          const rows = [["Title", "Category", "Progress"]];
-          favItems.forEach((m) =>
-            rows.push([m.title, m.category, getProgress(m.id) + "%"])
-          );
-          const csv = rows
-            .map((r) =>
-              r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")
-            )
-            .join("\\n");
-          const blob = new Blob([csv], { type: "text/csv" });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "favorites.csv";
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(url);
-        });
-
-      /* keyboard shortcut */
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "/") {
-          e.preventDefault();
-          searchBox.focus();
-        }
-        if (e.key === "f" && (e.ctrlKey || e.metaKey)) {
-          e.preventDefault();
-          viewFavBtn.click();
-        }
-      });
-
-      /* open material modal helper (also update modal progress/labels) */
-      function openMaterialModal(id) {
-        openModalFor(id);
-      }
-
-      /* reuse existing openModalFor (defined earlier) - but we implement here */
+      /* ---------------- MODAL ---------------- */
+      let currentModalId = null;
       function openModalFor(id) {
         const item = materials.find((m) => m.id === id);
         if (!item) return;
@@ -1558,13 +1356,15 @@
           : "Follow / Start";
         modalProgress.style.width = getProgress(id) + "%";
         modalProgressNum.textContent = getProgress(id) + "%";
+        downloadCert.style.display =
+          getProgress(id) === 100 ? "inline-flex" : "none";
         modal.style.display = "flex";
         modal.setAttribute("aria-hidden", "false");
 
         modalFav.onclick = () => {
           toggleFavorite(id);
           modalFav.textContent = isFav(id) ? "Unfavorite" : "Favorite";
-          updateUI();
+          updateCounts();
         };
         modalFollow.onclick = () => {
           if (isFollowed(id)) {
@@ -1574,44 +1374,268 @@
             followMaterial(id);
             modalFollow.textContent = "Unfollow";
           }
-          updateUI();
+          updateCounts();
         };
         incProgress.onclick = () => {
           incMaterialProgress(id, 10);
           modalProgress.style.width = getProgress(id) + "%";
           modalProgressNum.textContent = getProgress(id) + "%";
+          if (getProgress(id) === 100) {
+            spawnConfetti(22);
+            downloadCert.style.display = "inline-flex";
+          }
         };
         setDone.onclick = () => {
           setMaterialProgress(id, 100);
           modalProgress.style.width = "100%";
           modalProgressNum.textContent = "100%";
+          spawnConfetti(28);
+          downloadCert.style.display = "inline-flex";
+        };
+        downloadCert.onclick = () => {
+          downloadCertificate(materials.find((m) => m.id === id));
         };
       }
       modalClose.addEventListener("click", () => {
         modal.style.display = "none";
         modal.setAttribute("aria-hidden", "true");
       });
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.style.display = "none";
+          modal.setAttribute("aria-hidden", "true");
+        }
+      });
 
-      /* ---------- Initialization: restore stored progress/favs/follows and render ---------- */
-      (function init() {
-        // ensure progress has keys for all materials default 0 (not necessary but convenient)
-        materials.forEach((m) => {
-          if (!(m.id in progress)) progress[m.id] = progress[m.id] || 0;
-        });
+      /* ---------------- CONFETTI ---------------- */
+      function spawnConfetti(amount = 16) {
+        const emojis = ["🎉", "✨", "🏆", "🎈", "🥳"];
+        for (let i = 0; i < amount; i++) {
+          const node = document.createElement("div");
+          node.className = "confetti";
+          node.style.left = Math.random() * 100 + "vw";
+          node.style.top = -10 - Math.random() * 20 + "vh";
+          node.style.fontSize = 12 + Math.random() * 32 + "px";
+          node.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          confettiWrap.appendChild(node);
+          setTimeout(() => node.remove(), 1800 + Math.random() * 800);
+        }
+      }
 
-        // initial render
-        renderTabs();
+      /* ---------------- CERTIFICATE (simple PNG) ---------------- */
+      function downloadCertificate(user) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1000;
+        canvas.height = 700;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#071433";
+        ctx.font = "bold 36px Inter, Arial";
+        ctx.fillText("Certificate of Completion", 60, 120);
+        ctx.font = "600 20px Inter, Arial";
+        ctx.fillStyle = "#374151";
+        ctx.fillText("This certifies that", 60, 180);
+        ctx.font = "800 40px Inter, Arial";
+        ctx.fillStyle = "#0b67b2";
+        ctx.fillText(user.title || user.name || "Participant", 60, 240);
+        ctx.font = "600 18px";
+        ctx.fillStyle = "#6b7280";
+        ctx.fillText(
+          `has completed the material "${user.title || ""}"`,
+          60,
+          290
+        );
+        // logo attempt
+        const logo = new Image();
+        logo.crossOrigin = "anonymous";
+        logo.onload = () => {
+          ctx.drawImage(logo, canvas.width - 260, 40, 200, 80);
+          const a = document.createElement("a");
+          a.href = canvas.toDataURL("image/png");
+          a.download = `${(user.title || "certificate").replaceAll(
+            /\s+/g,
+            "_"
+          )}.png`;
+          a.click();
+        };
+        logo.onerror = () => {
+          const a = document.createElement("a");
+          a.href = canvas.toDataURL("image/png");
+          a.download = `${(user.title || "certificate").replaceAll(
+            /\s+/g,
+            "_"
+          )}.png`;
+          a.click();
+        };
+        logo.src = "logo.png";
+      }
+
+      /* ---------------- UI wiring ---------------- */
+      const categoriesList = Array.from(
+        new Set(materials.map((m) => m.category))
+      ).sort();
+      renderTabs();
+      applyFilters(); // initial render
+      updateCounts();
+
+      /* persist toggle UI state */
+      persistToggle.checked = persistProgress;
+      persistToggle.addEventListener("change", () => {
+        persistProgress = persistToggle.checked;
+        savePersist();
+        if (!persistProgress) {
+          // if user turned persistence off, clear server-saved progress right away to match behavior
+          localStorage.removeItem(PROG_KEY);
+        } else {
+          // if user turns on, save current progress
+          saveProg();
+        }
+      });
+
+      /* search */
+      searchBox.addEventListener("input", () => applyFilters());
+
+      /* sort */
+      sortBtn.addEventListener("click", () => {
+        sortAZ = !sortAZ;
+        sortBtn.textContent = sortAZ ? "Sort: A→Z" : "Sort: Z→A";
+        applyFilters();
+      });
+
+      /* Reset progress button */
+      resetProgressBtn.addEventListener("click", () => {
+        if (
+          !confirm(
+            "Reset all progress? This will set progress to 0% for all materials."
+          )
+        )
+          return;
+        resetAllProgress();
+        // if persist ON, remove saved storage
+        if (persistProgress) {
+          saveProg();
+        }
+      });
+
+      /* Logout button clears everything & reload */
+      logoutBtn.addEventListener("click", () => {
+        if (
+          !confirm(
+            "Logout will clear favorites, follows, and progress. Continue?"
+          )
+        )
+          return;
+        logoutAll();
+      });
+
+      /* view favorites */
+      viewFavBtn.addEventListener("click", () => {
+        favList.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
+      /* clear favorites */
+      clearFavsBtn.addEventListener("click", () => {
+        if (!confirm("Clear all favorites?")) return;
+        favorites = [];
+        saveFavs();
+        updateCounts();
+      });
+
+      /* open first favorite detail if any */
+      openFavDetail.addEventListener("click", () => {
+        if (favorites.length) openModalFor(favorites[0]);
+        else alert("No favorites to open.");
+      });
+
+      /* mark all followed as done */
+      markAllDone.addEventListener("click", () => {
+        if (!followed.length) {
+          alert("No followed materials to mark as done.");
+          return;
+        }
+        if (!confirm("Mark all followed materials as 100% done?")) return;
+        followed.forEach((id) => (progress[id] = 100));
+        if (persistProgress) saveProg();
+        spawnConfetti(36);
+        updateCounts();
+      });
+
+      /* exportFavs is intentionally left disabled per request */
+      exportFavs.addEventListener("click", () => {
+        alert("Export disabled per request.");
+      });
+
+      /* features button */
+      featuresBtn.addEventListener("click", () => {
+        alert("Features area — coming soon.");
+      });
+
+      /* burger toggle for mobile */
+      btnBurger &&
+        btnBurger.addEventListener("click", () =>
+          sidebar.classList.toggle("open")
+        );
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "/") {
+          e.preventDefault();
+          searchBox.focus();
+        }
+      });
+
+      /* helpers: follow, unfollow, update UI wrapper */
+      function followMaterial(id) {
+        if (!followed.includes(id)) {
+          followed.push(id);
+          saveFollow();
+          updateCounts();
+        }
+      }
+      function unfollowMaterial(id) {
+        followed = followed.filter((x) => x !== id);
+        saveFollow();
+        updateCounts();
+      }
+
+      function updateUI() {
         applyFilters();
         renderFavorites();
         renderCategoryProgress();
         updateCounts();
+        // save progress if persist
+        if (persistProgress) saveProg();
+      }
 
-        // progressively render many items (smoother on first paint)
-        // (already rendered by applyFilters)
-      })();
+      /* applyFilters function implemented earlier but ensure renderList is called */
+      function applyFilters() {
+        const q = (searchBox.value || "").trim().toLowerCase();
+        currentList = materials.filter((m) => {
+          const byCat =
+            activeCategory === "All" || m.category === activeCategory;
+          const byQ =
+            !q ||
+            m.title.toLowerCase().includes(q) ||
+            (m.topics || []).join(" ").toLowerCase().includes(q) ||
+            (m.desc || "").toLowerCase().includes(q);
+          return byCat && byQ;
+        });
+        currentList.sort((a, b) =>
+          sortAZ
+            ? a.title.localeCompare(b.title)
+            : b.title.localeCompare(a.title)
+        );
+        renderList(currentList);
+        updateCounts();
+      }
 
-      /* Expose some utilities for debugging in console */
-      window.__materials_state = {
+      /* finished initialization */
+      renderTabs();
+      applyFilters();
+      updateCounts();
+
+      /* Expose for debugging if needed */
+      window.__materials_final = {
         materials,
         favorites,
         progress,

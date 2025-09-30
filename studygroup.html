@@ -1,101 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Groups</title>
-  <link rel="stylesheet" href="studygroup.css">
-</head>
-<body>
-  <div class="container">
-    <!-- ituan samping nya -->
-    <div class="sidebar">
-      <div class="logo"><img src="logo.png" alt="logo"></div>
-      <p class="email">BanBan@gmail.com</p>
-      <ul class="menu">
-        <li>
-          <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
-        </li>
-        <li>
-          <a href="Timer.html"><i class="fa fa-clock"></i> Podomoro Timer</a>
-        </li>
-        <li>
-          <a href="studygroup.html"><i class="fa fa-users"></i> Study Groups</a>
-        </li>
-        <li>
-          <a href="materials.html"><i class="fa fa-book"></i> Materials</a>
-        </li>
-        <li>
-          <a href="Achivement.html"><i class="fa fa-trophy"></i> Achievement</a>
-        </li>
-        <li>
-          <a href="#"><i class="fa fa-cog"></i> Settings and profile</a>
-        </li>
-      </ul>
-      <div class="features">Features <span>NEW</span></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Groups</title>
+    <link rel="stylesheet" href="studygroup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- ituan samping nya -->
+      <div class="sidebar">
+        <div class="logo"><img src="logo.png" alt="logo" /></div>
+        <p class="email">BanBan@gmail.com</p>
+        <ul class="menu">
+          <li>
+            <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="Timer.html"><i class="fa fa-clock"></i> Podomoro Timer</a>
+          </li>
+          <li>
+            <a href="studygroup.html"
+              ><i class="fa fa-users"></i> Study Groups</a
+            >
+          </li>
+          <li>
+            <a href="materials.html"><i class="fa fa-book"></i> Materials</a>
+          </li>
+          <li>
+            <a href="Achivement.html"
+              ><i class="fa fa-trophy"></i> Achievement</a
+            >
+          </li>
+          <li>
+            <a href="Prfile.html"
+              ><i class="fa fa-cog"></i> Settings and profile</a
+            >
+          </li>
+        </ul>
+        <div class="features">Features <span>NEW</span></div>
+      </div>
+
+      <!-- Main Content -->
+      <main class="main">
+        <header class="header">
+          <h1>Study Groups</h1>
+          <div class="links">
+            <a href="#">My Groups</a>
+            <a href="#">Discover</a>
+            <a href="#">Create Group</a>
+          </div>
+        </header>
+
+        <div class="search-box">
+          <input type="text" id="search" placeholder="Find Your Groups" />
+        </div>
+
+        <div class="groups" id="groups">
+          <!-- Group Card -->
+          <div class="group-card">
+            <div class="card-header">
+              <img src="" alt="group logo" />
+              <h2>Python Programming</h2>
+            </div>
+            <p>Learning about coding with python</p>
+            <p class="members">Programming 9/12 members</p>
+            <button class="join-btn">Join</button>
+          </div>
+
+          <div class="group-card">
+            <div class="card-header">
+              <img src="" alt="group logo" />
+              <h2>Python Programming</h2>
+            </div>
+            <p>Learning about coding with python</p>
+            <p class="members">Programming 9/12 members</p>
+            <button class="join-btn">Join</button>
+          </div>
+
+          <div class="group-card">
+            <div class="card-header">
+              <img src="" alt="group logo" />
+              <h2>Kotlin Programming</h2>
+            </div>
+            <p>Learning about coding with kotlin</p>
+            <p class="members">Programming 9/12 members</p>
+            <button class="join-btn">Join</button>
+          </div>
+
+          <div class="group-card">
+            <div class="card-header">
+              <img src="" alt="group logo" />
+              <h2>Python Programming</h2>
+            </div>
+            <p>Learning about coding with python</p>
+            <p class="members">Programming 9/12 members</p>
+            <button class="join-btn">Join</button>
+          </div>
+        </div>
+      </main>
     </div>
 
-
-    <!-- Main Content -->
-    <main class="main">
-      <header class="header">
-        <h1>Study Groups</h1>
-        <div class="links">
-          <a href="#">My Groups</a>
-          <a href="#">Discover</a>
-          <a href="#">Create Group</a>
-        </div>
-      </header>
-
-      <div class="search-box">
-        <input type="text" id="search" placeholder="Find Your Groups">
-      </div>
-
-      <div class="groups" id="groups">
-        <!-- Group Card -->
-        <div class="group-card">
-          <div class="card-header">
-            <img src="" alt="group logo">
-            <h2>Python Programming</h2>
-          </div>
-          <p>Learning about coding with python</p>
-          <p class="members">Programming 9/12 members</p>
-          <button class="join-btn">Join</button>
-        </div>
-
-        <div class="group-card">
-          <div class="card-header">
-            <img src="" alt="group logo">
-            <h2>Python Programming</h2>
-          </div>
-          <p>Learning about coding with python</p>
-          <p class="members">Programming 9/12 members</p>
-          <button class="join-btn">Join</button>
-        </div>
-
-        <div class="group-card">
-          <div class="card-header">
-            <img src="" alt="group logo">
-            <h2>Kotlin Programming</h2>
-          </div>
-          <p>Learning about coding with kotlin</p>
-          <p class="members">Programming 9/12 members</p>
-          <button class="join-btn">Join</button>
-        </div>
-
-        <div class="group-card">
-          <div class="card-header">
-            <img src="" alt="group logo">
-            <h2>Python Programming</h2>
-          </div>
-          <p>Learning about coding with python</p>
-          <p class="members">Programming 9/12 members</p>
-          <button class="join-btn">Join</button>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <script src="studygroup.js"></script>
-</body>
+    <script src="studygroup.js"></script>
+  </body>
 </html>
