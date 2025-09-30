@@ -3,69 +3,79 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>BANBAN Dashboard — Fixed</title>
+    <title>BANBAN Dashboard — Polished</title>
 
     <!-- Font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Chart.js (CDN) -->
+    <!-- Chart.js & Lucide icons -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <!-- Lucide icons -->
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.396.0/dist/lucide.min.js"></script>
 
     <style>
       :root {
-        --sidebar-w: 240px;
-        --blue-600: #0a73b7;
-        --accent: #1d4ed8;
+        --sidebar-w: 260px;
+        --blue: #0b79b0; /* sidebar main */
+        --nav-blue: #0a73b7;
+        --accent: #0f6fb2; /* headings */
+        --accent-2: #1d4ed8; /* primary */
         --muted: #6b7280;
-        --bg: #f6f8fb;
+        --bg: #f4f7fb;
         --card: #ffffff;
-        --radius-lg: 14px;
-        --shadow-1: 0 8px 24px rgba(16, 24, 40, 0.06);
+        --radius: 16px;
+        --card-shadow: 0 18px 40px rgba(12, 44, 80, 0.06);
+        --glass: rgba(255, 255, 255, 0.7);
       }
+
       * {
         box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
       }
       body {
         margin: 0;
         font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial;
-        background: linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);
-        color: #0f1724;
+        background: linear-gradient(180deg, #f8fbfe 0%, var(--bg) 100%);
+        color: #071433;
+        -webkit-font-smoothing: antialiased;
       }
+
       .app {
         display: flex;
         min-height: 100vh;
         align-items: stretch;
       }
 
-      /* SIDEBAR (TIDAK DIUBAH) */
+      /* ---------------- SIDEBAR (content preserved) ---------------- */
       .sidebar {
         width: var(--sidebar-w);
-        background: var(--blue-600);
+        background: var(--nav-blue);
         color: white;
         display: flex;
         flex-direction: column;
-        padding: 20px;
+        padding: 22px;
         flex-shrink: 0;
+        transition: transform 0.28s ease;
       }
-      .logo {
+      .sidebar .logo {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
-      .logo img {
+      .sidebar .logo img {
         width: 120px;
       }
-      .email {
-        font-size: 14px;
+      .sidebar .email {
+        font-size: 13px;
         text-align: center;
         margin-bottom: 18px;
-        color: rgba(255, 255, 255, 0.95);
+        opacity: 0.95;
       }
       .menu {
         list-style: none;
@@ -85,189 +95,208 @@
         text-decoration: none;
         color: white;
         font-size: 15px;
-        transition: 0.18s;
+        transition: background 0.18s;
       }
       .menu a:hover,
       .menu a.active {
-        background: #1e90ff;
+        background: #167ad9;
       }
       .features {
-        background: #004c7c;
-        padding: 12px;
+        background: #044b6a;
+        padding: 10px;
         border-radius: 10px;
         text-align: center;
-        font-size: 15px;
+        font-size: 14px;
         margin-top: 20px;
       }
       .features span {
-        background: red;
-        color: white;
-        font-size: 12px;
-        padding: 2px 6px;
+        background: #ff4d4f;
+        color: #fff;
+        padding: 4px 6px;
         border-radius: 6px;
-        margin-left: 6px;
+        margin-left: 8px;
+        font-size: 12px;
       }
 
-      /* MAIN */
+      /* ---------------- MAIN ---------------- */
       .main {
         flex: 1;
-        padding: 28px 34px;
+        padding: 24px;
         min-width: 0;
         overflow: auto;
       }
 
+      /* Top bar */
       .topbar {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 18px;
-        margin-bottom: 20px;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .top-left {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .burger {
+        display: none;
+        background: transparent;
+        border: 0;
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
       }
       .welcome h1 {
         font-size: 26px;
-        margin: 0 0 8px 0;
-        color: #071433;
-        font-weight: 700;
+        margin: 0;
+        color: var(--accent);
+        font-weight: 800;
       }
       .welcome p {
-        margin: 0;
+        margin: 8px 0 0 0;
         color: var(--muted);
-        font-size: 14px;
+        max-width: 66%;
         line-height: 1.5;
-        max-width: 70%;
       }
 
       .top-actions {
         display: flex;
+        gap: 10px;
         align-items: center;
-        gap: 12px;
-        margin-left: auto;
       }
       .search {
         position: relative;
-        min-width: 260px;
-        width: 320px;
+        width: 360px;
+        max-width: 48vw;
       }
       .search input {
         width: 100%;
-        padding: 10px 14px 10px 40px;
+        padding: 12px 14px 12px 44px;
         border-radius: 999px;
         border: 1px solid rgba(15, 77, 146, 0.06);
-        background: white;
-        outline: none;
-        font-size: 14px;
-        box-shadow: var(--shadow-1);
+        background: #fff;
+        box-shadow: 0 6px 20px rgba(12, 44, 80, 0.04);
       }
       .search svg {
         position: absolute;
-        left: 12px;
-        top: 10px;
-        opacity: 0.6;
+        left: 14px;
+        top: 12px;
         color: var(--muted);
+        opacity: 0.8;
       }
 
-      .action-btn {
-        background: white;
+      .icon-btn {
+        background: #fff;
+        border-radius: 12px;
         padding: 8px;
-        border-radius: 10px;
         border: 0;
-        box-shadow: var(--shadow-1);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        box-shadow: 0 6px 20px rgba(12, 44, 80, 0.04);
         cursor: pointer;
       }
 
+      /* stats row */
       .stats {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        margin: 18px 0 22px;
+        gap: 18px;
+        margin: 18px 0;
       }
-      .stat {
+      .stat-card {
         background: var(--card);
         border-radius: 12px;
         padding: 16px;
+        box-shadow: var(--card-shadow);
+        border: 1px solid rgba(15, 77, 146, 0.04);
         display: flex;
-        gap: 14px;
         align-items: center;
-        box-shadow: var(--shadow-1);
-        border: 1px solid rgba(15, 77, 146, 0.03);
+        gap: 14px;
       }
-      .stat .icon {
+      .stat-icon {
         width: 46px;
         height: 46px;
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 18px;
       }
-      .stat h3 {
-        margin: 0;
+      .stat-value {
         font-size: 20px;
-        font-weight: 700;
+        font-weight: 800;
       }
-      .stat p {
-        margin: 0;
+      .stat-label {
         color: var(--muted);
         font-size: 13px;
       }
 
-      .content-grid {
+      /* main grid */
+      .grid {
         display: grid;
         grid-template-columns: 1fr 360px;
-        gap: 20px;
+        gap: 22px;
         align-items: start;
       }
 
       .panel {
         background: var(--card);
-        border-radius: var(--radius-lg);
+        border-radius: var(--radius);
         padding: 18px;
-        box-shadow: var(--shadow-1);
+        box-shadow: var(--card-shadow);
         border: 1px solid rgba(15, 77, 146, 0.03);
       }
-      .panel h3 {
-        margin: 0 0 10px 0;
-        font-size: 16px;
-      }
 
-      .donut-wrap {
-        width: 180px;
-        height: 180px;
-        position: relative;
+      /* Attendance area */
+      .attendance-area {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        align-items: flex-start;
       }
-      .donut-center {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+      .attendance-left {
+        width: 220px;
       }
-      .donut-value {
-        font-weight: 800;
-        font-size: 20px;
-        color: var(--accent);
+      .attendance-left .box {
+        text-align: center;
+        background: linear-gradient(180deg, #ffffff, #fbfdff);
+        border-radius: 14px;
+        padding: 22px;
+        box-shadow: 0 10px 30px rgba(12, 44, 80, 0.04);
+        border: 1px solid rgba(15, 77, 146, 0.03);
       }
-      .donut-sub {
+      .attendance-left .box .num {
+        font-size: 28px;
+        font-weight: 900;
+        color: var(--accent-2);
+      }
+      .attendance-left .box .muted {
         color: var(--muted);
-        font-size: 13px;
+        margin-top: 6px;
       }
 
+      /* todo & resources */
+      .todo-res {
+        flex: 1;
+        min-width: 320px;
+      }
+      .todo-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
       .mini-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 12px;
+        align-items: start;
       }
       .todo-list {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        margin-bottom: 8px;
+        max-height: 220px;
+        overflow: auto;
+        padding-right: 6px;
       }
       .todo-item {
         display: flex;
@@ -275,36 +304,62 @@
         gap: 12px;
         padding: 10px;
         border-radius: 10px;
-        background: #fbfdff;
+        background: #fff;
         border: 1px solid rgba(15, 77, 146, 0.03);
       }
-      .resources {
+      .todo-item .txt {
+        flex: 1;
+      }
+      .todo-actions {
         display: flex;
-        gap: 10px;
+        gap: 8px;
+        margin-top: 8px;
       }
 
-      .chart-lg {
-        height: 220px;
+      .resources {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .resource {
+        width: 120px;
+        padding: 12px;
+        border-radius: 10px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid rgba(15, 77, 146, 0.03);
+        transition: transform 0.14s ease;
+        cursor: pointer;
+      }
+      .resource:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(12, 44, 80, 0.06);
+      }
+
+      /* charts */
+      .chart-large {
+        height: 240px;
         width: 100%;
       }
-      .chart-sm {
+      .chart-small {
         height: 140px;
         width: 100%;
       }
 
-      .grade-row {
+      /* right column grade rows & calendar */
+      .grade-rows {
         display: flex;
         flex-direction: column;
         gap: 10px;
+        margin-top: 8px;
       }
-      .grade-item {
+      .grade-row {
         display: flex;
         align-items: center;
         gap: 12px;
       }
-      .grade-item .label {
+      .grade-label {
         width: 120px;
-        font-size: 13px;
         color: var(--muted);
       }
       .grade-bar {
@@ -313,54 +368,43 @@
         background: #f1f5f9;
         border-radius: 999px;
         overflow: hidden;
-        position: relative;
       }
+      .grade-fill {
+        height: 100%;
+      }
+
       .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 6px;
-        font-size: 13px;
-        text-align: center;
-        margin-top: 10px;
+        gap: 8px;
+        margin-top: 12px;
       }
       .cal-day {
         background: #fff;
-        padding: 10px 6px;
+        padding: 8px;
         border-radius: 8px;
         border: 1px solid rgba(15, 77, 146, 0.03);
+        text-align: center;
+        cursor: pointer;
       }
       .cal-day.today {
-        background: linear-gradient(90deg, #f0f6ff, #e6f0ff);
+        background: linear-gradient(90deg, #eef6ff, #e6f0ff);
         border-color: #bde0ff;
-        color: var(--accent);
+        color: var(--accent-2);
         font-weight: 700;
       }
 
-      .btn {
-        padding: 8px 12px;
-        border-radius: 10px;
-        border: 0;
-        cursor: pointer;
-        font-weight: 600;
-      }
-      .btn.primary {
-        background: var(--accent);
-        color: #fff;
-        box-shadow: 0 8px 18px rgba(29, 78, 216, 0.12);
-      }
-      .btn.ghost {
-        background: transparent;
-        border: 1px solid rgba(15, 77, 146, 0.06);
-        color: var(--accent);
+      /* bottom */
+      .bottom-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 18px;
       }
 
-      .muted {
-        color: var(--muted);
-        font-size: 13px;
-      }
-
+      /* responsive */
       @media (max-width: 1100px) {
-        .content-grid {
+        .grid {
           grid-template-columns: 1fr;
         }
         .stats {
@@ -372,6 +416,20 @@
         .search {
           width: 100%;
         }
+        .burger {
+          display: inline-flex;
+        }
+        .sidebar {
+          position: fixed;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 40;
+          transform: translateX(-110%);
+        }
+        .sidebar.active {
+          transform: translateX(0);
+        }
       }
       @media (max-width: 640px) {
         .stats {
@@ -379,19 +437,47 @@
         }
         .topbar {
           flex-direction: column;
-          gap: 12px;
           align-items: flex-start;
         }
+        .search {
+          min-width: 0;
+          width: 100%;
+        }
+        .attendance-left {
+          width: 100%;
+        }
+      }
+
+      /* tiny helpers */
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .btn {
+        padding: 8px 12px;
+        border-radius: 10px;
+        border: 0;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .btn.primary {
+        background: var(--accent-2);
+        color: white;
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(15, 77, 146, 0.06);
+        color: var(--accent-2);
       }
     </style>
   </head>
   <body>
     <div class="app">
-      <!-- Sidebar (unchanged) -->
-      <aside class="sidebar">
-        <div class="logo"><img src="logo.png" alt="logo" /></div>
+      <!-- SIDEBAR (jangan ubah isinya) -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo"><img src="logo.png" alt="BANBAN logo" /></div>
         <p class="email">BanBan@gmail.com</p>
-        <ul class="menu">
+        <ul class="menu" role="navigation">
           <li>
             <a href="dashboard.html"><i data-lucide="home"></i> Dashboard</a>
           </li>
@@ -420,19 +506,25 @@
         <div class="features">Features <span>NEW</span></div>
       </aside>
 
-      <!-- Main -->
-      <main class="main">
+      <!-- MAIN -->
+      <main class="main" id="main">
         <div class="topbar">
-          <div class="welcome">
-            <h1>Hey Snappe.</h1>
-            <p>
-              Welcome back! We're here to support you on your learning journey.
-              Dive into your classes and keep progressing towards your goals.
-            </p>
+          <div class="top-left">
+            <button class="burger" id="btnBurger" aria-label="Toggle sidebar">
+              <svg data-lucide="menu" width="18" height="18"></svg>
+            </button>
+            <div class="welcome">
+              <h1>Hey Snappe.</h1>
+              <p>
+                Welcome back! We're here to support you on your learning
+                journey. Dive into your classes and keep progressing towards
+                your goals.
+              </p>
+            </div>
           </div>
 
-          <div class="top-actions">
-            <div class="search" title="Search">
+          <div class="top-actions" role="toolbar" aria-label="top actions">
+            <div class="search">
               <svg
                 width="18"
                 height="18"
@@ -440,8 +532,8 @@
                 fill="none"
                 style="
                   position: absolute;
-                  left: 12px;
-                  top: 10px;
+                  left: 14px;
+                  top: 12px;
                   color: var(--muted);
                 "
               >
@@ -460,76 +552,85 @@
                   stroke-width="2"
                 />
               </svg>
-              <input id="globalSearch" type="text" placeholder="Search..." />
+              <input
+                id="globalSearch"
+                type="search"
+                placeholder="Search..."
+                aria-label="Search"
+              />
             </div>
 
-            <button class="action-btn" title="Notifications">
+            <button class="icon-btn" id="btnNotif" title="Notifications">
               <svg data-lucide="bell" width="18" height="18"></svg>
             </button>
-            <button class="action-btn" title="Messages">
-              <svg data-lucide="message-square" width="18" height="18"></svg>
+            <button class="icon-btn" id="btnTheme" title="Toggle theme">
+              <svg data-lucide="sun" width="18" height="18"></svg>
             </button>
-            <div style="display: flex; align-items: center; gap: 8px">
+
+            <div style="display: flex; align-items: center; gap: 12px">
               <div
                 style="
                   width: 40px;
                   height: 40px;
                   border-radius: 50%;
-                  background: #cfe7ff;
+                  background: #e6f5ff;
                 "
               ></div>
-              <div style="font-weight: 600">BanBan</div>
+              <div style="font-weight: 700">BanBan</div>
             </div>
           </div>
         </div>
 
         <!-- Stats -->
-        <section class="stats" aria-label="Quick statistics">
-          <div class="stat">
-            <div class="icon" style="background: #e6f0ff; color: #1d4ed8">
-              <svg data-lucide="users" width="20" height="20"></svg>
+        <section class="stats" aria-label="Quick stats">
+          <div class="stat-card">
+            <div
+              class="stat-icon"
+              style="background: #e6f0ff; color: var(--accent-2)"
+            >
+              <svg data-lucide="users" width="18" height="18"></svg>
             </div>
             <div>
-              <h3><span id="attendanceCounter">80</span>%</h3>
-              <p>Attendance</p>
+              <div class="stat-value" id="attendanceCounter">80%</div>
+              <div class="stat-label">Attendance</div>
             </div>
           </div>
 
-          <div class="stat">
-            <div class="icon" style="background: #f5e9ff; color: #7c3aed">
-              <svg data-lucide="check-circle" width="20" height="20"></svg>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #f6eefd; color: #7c3aed">
+              <svg data-lucide="check-circle" width="18" height="18"></svg>
             </div>
             <div>
-              <h3 id="taskCounter">258+</h3>
-              <p>Task Completed</p>
+              <div class="stat-value" id="taskCounter">258+</div>
+              <div class="stat-label">Task Completed</div>
             </div>
           </div>
 
-          <div class="stat">
-            <div class="icon" style="background: #fff7ed; color: #d97706">
-              <svg data-lucide="clock" width="20" height="20"></svg>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #fff7ed; color: #d97706">
+              <svg data-lucide="clock" width="18" height="18"></svg>
             </div>
             <div>
-              <h3><span id="progressCounter">64</span>%</h3>
-              <p>Task in Progress</p>
+              <div class="stat-value" id="progressCounter">64%</div>
+              <div class="stat-label">Task in Progress</div>
             </div>
           </div>
 
-          <div class="stat">
-            <div class="icon" style="background: #fff0f6; color: #db2777">
-              <svg data-lucide="award" width="20" height="20"></svg>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #fff0f6; color: #db2777">
+              <svg data-lucide="award" width="18" height="18"></svg>
             </div>
             <div>
-              <h3 id="pointsCounter">245</h3>
-              <p>Reward Points</p>
+              <div class="stat-value" id="pointsCounter">245</div>
+              <div class="stat-label">Reward Points</div>
             </div>
           </div>
         </section>
 
-        <!-- Content grid -->
-        <section class="content-grid">
-          <!-- Left wide column -->
-          <div style="display: flex; flex-direction: column; gap: 14px">
+        <!-- Main content -->
+        <section class="grid">
+          <!-- LEFT WIDE -->
+          <div>
             <div class="panel">
               <div
                 style="
@@ -540,18 +641,19 @@
                 "
               >
                 <div>
-                  <h3>Attendance</h3>
-                  <p class="muted" style="margin: 6px 0 0 0">
+                  <h3 style="margin: 0">Attendance</h3>
+                  <div class="muted" style="margin-top: 6px">
                     Overview of presence across the selected month
-                  </p>
+                  </div>
                 </div>
                 <div style="display: flex; gap: 8px; align-items: center">
                   <button class="btn ghost" id="prevMonthBtn">Prev</button>
                   <select
                     id="monthSelect"
+                    aria-label="Select month"
                     style="
                       padding: 8px;
-                      border-radius: 10px;
+                      border-radius: 8px;
                       border: 1px solid rgba(15, 77, 146, 0.06);
                     "
                   >
@@ -562,68 +664,61 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  display: flex;
-                  gap: 20px;
-                  margin-top: 14px;
-                  flex-wrap: wrap;
-                "
-              >
-                <div style="width: 180px">
-                  <div
-                    style="
-                      background: #fff;
-                      border-radius: 12px;
-                      padding: 18px;
-                      text-align: center;
-                      border: 1px solid rgba(15, 77, 146, 0.03);
-                    "
-                  >
-                    <div
-                      style="
-                        font-weight: 700;
-                        font-size: 18px;
-                        color: var(--accent);
-                      "
-                      id="leftDonutPercent"
-                    >
-                      80%
+              <div class="attendance-area" style="margin-top: 16px">
+                <div class="attendance-left">
+                  <div class="box">
+                    <div style="font-size: 13px; color: var(--muted)">
+                      Present
                     </div>
-                    <div class="muted">Present</div>
+                    <div class="num" id="bigDonutLabel">80%</div>
+                    <div style="margin-top: 12px">
+                      <div style="width: 140px; height: 140px; margin: 0 auto">
+                        <canvas
+                          id="bigDonut"
+                          width="140"
+                          height="140"
+                          aria-label="Attendance donut chart"
+                        ></canvas>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div style="flex: 1; min-width: 260px">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: center;
-                      margin-bottom: 12px;
-                    "
-                  >
+                <div class="todo-res">
+                  <div class="todo-header">
                     <div>
                       <h4 style="margin: 0">To - Do List</h4>
                       <div class="muted">Manage quick tasks</div>
                     </div>
-                    <div>
+                    <div style="display: flex; gap: 8px; align-items: center">
                       <button id="newTodoBtn" class="btn primary">+ New</button>
+                      <button
+                        id="clearDone"
+                        class="btn ghost"
+                        title="Clear completed"
+                      >
+                        Clear done
+                      </button>
                     </div>
                   </div>
 
-                  <div class="mini-grid" style="margin-bottom: 10px">
-                    <!-- To-do Column -->
+                  <div class="mini-grid">
+                    <!-- To-do -->
                     <div>
-                      <div class="todo-list" id="todoList"></div>
-                      <div style="display: flex; gap: 8px; margin-top: 8px">
+                      <div
+                        class="todo-list"
+                        id="todoList"
+                        aria-live="polite"
+                      ></div>
+                      <div class="todo-actions">
                         <input
                           id="newTodoInput"
                           placeholder="Add a task..."
+                          aria-label="Add task"
                           style="
                             flex: 1;
-                            padding: 8px;
-                            border-radius: 10px;
+                            padding: 10px;
+                            border-radius: 8px;
                             border: 1px solid rgba(15, 77, 146, 0.06);
                           "
                         />
@@ -631,14 +726,14 @@
                       </div>
                     </div>
 
-                    <!-- Resources Column -->
+                    <!-- Resources -->
                     <div>
                       <div
                         style="
                           display: flex;
                           justify-content: space-between;
                           align-items: center;
-                          margin-bottom: 10px;
+                          margin-bottom: 8px;
                         "
                       >
                         <div>
@@ -648,6 +743,7 @@
                         <div>
                           <select
                             id="resourceFilter"
+                            aria-label="Filter resources"
                             style="
                               padding: 6px;
                               border-radius: 8px;
@@ -666,20 +762,14 @@
                         <div
                           class="resource"
                           data-type="books"
-                          style="
-                            flex-direction: column;
-                            align-items: center;
-                            padding: 12px;
-                            border-radius: 10px;
-                            background: #fbfdff;
-                            border: 1px solid rgba(15, 77, 146, 0.03);
-                          "
+                          role="button"
+                          tabindex="0"
                         >
                           <div
                             style="
-                              width: 46px;
-                              height: 46px;
-                              border-radius: 10px;
+                              height: 44px;
+                              width: 44px;
+                              border-radius: 8px;
                               background: #e6f0ff;
                               display: flex;
                               align-items: center;
@@ -692,26 +782,25 @@
                               height="18"
                             ></svg>
                           </div>
-                          <div style="font-weight: 600">Books</div>
-                          <div class="muted">12 items</div>
+                          <div style="font-weight: 700; margin-top: 8px">
+                            Books
+                          </div>
+                          <div class="muted" style="font-size: 12px">
+                            12 items
+                          </div>
                         </div>
+
                         <div
                           class="resource"
                           data-type="videos"
-                          style="
-                            flex-direction: column;
-                            align-items: center;
-                            padding: 12px;
-                            border-radius: 10px;
-                            background: #fbfdff;
-                            border: 1px solid rgba(15, 77, 146, 0.03);
-                          "
+                          role="button"
+                          tabindex="0"
                         >
                           <div
                             style="
-                              width: 46px;
-                              height: 46px;
-                              border-radius: 10px;
+                              height: 44px;
+                              width: 44px;
+                              border-radius: 8px;
                               background: #ecfdf5;
                               display: flex;
                               align-items: center;
@@ -724,26 +813,25 @@
                               height="18"
                             ></svg>
                           </div>
-                          <div style="font-weight: 600">Videos</div>
-                          <div class="muted">34 items</div>
+                          <div style="font-weight: 700; margin-top: 8px">
+                            Videos
+                          </div>
+                          <div class="muted" style="font-size: 12px">
+                            34 items
+                          </div>
                         </div>
+
                         <div
                           class="resource"
                           data-type="papers"
-                          style="
-                            flex-direction: column;
-                            align-items: center;
-                            padding: 12px;
-                            border-radius: 10px;
-                            background: #fbfdff;
-                            border: 1px solid rgba(15, 77, 146, 0.03);
-                          "
+                          role="button"
+                          tabindex="0"
                         >
                           <div
                             style="
-                              width: 46px;
-                              height: 46px;
-                              border-radius: 10px;
+                              height: 44px;
+                              width: 44px;
+                              border-radius: 8px;
                               background: #f5f3ff;
                               display: flex;
                               align-items: center;
@@ -756,26 +844,33 @@
                               height="18"
                             ></svg>
                           </div>
-                          <div style="font-weight: 600">Papers</div>
-                          <div class="muted">8 items</div>
+                          <div style="font-weight: 700; margin-top: 8px">
+                            Papers
+                          </div>
+                          <div class="muted" style="font-size: 12px">
+                            8 items
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div style="margin-top: 6px">
-                    <h4 style="margin: 0 0 8px 0">Test Score activity</h4>
+                  <!-- Test Score area -->
+                  <div style="margin-top: 16px">
                     <div
                       style="
                         display: flex;
-                        gap: 8px;
                         align-items: center;
+                        gap: 8px;
                         margin-bottom: 8px;
                       "
                     >
+                      <h4 style="margin: 0">Test Score activity</h4>
                       <select
                         id="scoreRange"
+                        aria-label="Score range"
                         style="
+                          margin-left: 10px;
                           padding: 6px;
                           border-radius: 8px;
                           border: 1px solid rgba(15, 77, 146, 0.06);
@@ -785,25 +880,27 @@
                         <option value="weekly">Weekly</option>
                       </select>
                       <div class="muted" style="margin-left: auto">
-                        View: <strong id="scoreRangeLabel">Monthly</strong>
+                        View: <strong id="scoreLabel">Monthly</strong>
                       </div>
                     </div>
-                    <div class="chart-lg">
-                      <canvas id="scoreChart"></canvas>
+
+                    <div class="chart-large">
+                      <canvas
+                        id="scoreChart"
+                        aria-label="Test score chart"
+                      ></canvas>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Bottom area -->
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px"
-            >
+            <!-- bottom row -->
+            <div class="bottom-row">
               <div class="panel">
-                <h3>Grade</h3>
-                <div class="chart-lg" style="margin-top: 10px">
-                  <canvas id="gradeChartLarge"></canvas>
+                <h3 style="margin: 0">Grade</h3>
+                <div style="margin-top: 12px" class="chart-large">
+                  <canvas id="gradeChart" aria-label="Grade chart"></canvas>
                 </div>
                 <div
                   style="
@@ -812,14 +909,12 @@
                     margin-top: 10px;
                   "
                 >
-                  <button id="exportGradesBtn" class="btn ghost">
-                    Export CSV
-                  </button>
+                  <button id="exportCSV" class="btn ghost">Export CSV</button>
                 </div>
               </div>
 
               <div class="panel">
-                <h3>Quick Insights</h3>
+                <h3 style="margin: 0">Quick Insights</h3>
                 <div
                   style="
                     margin-top: 12px;
@@ -830,31 +925,31 @@
                 >
                   <div style="display: flex; justify-content: space-between">
                     <div class="muted">Top Subject</div>
-                    <div style="font-weight: 700">Computer Science</div>
+                    <div style="font-weight: 800">Computer Science</div>
                   </div>
                   <div style="display: flex; justify-content: space-between">
                     <div class="muted">Weekly Improvement</div>
-                    <div style="font-weight: 700">+4.2%</div>
+                    <div style="font-weight: 800">+4.2%</div>
                   </div>
                   <div style="display: flex; justify-content: space-between">
                     <div class="muted">Next Exam</div>
-                    <div style="font-weight: 700">Math — 21 Sep</div>
+                    <div style="font-weight: 800">Math — 21 Sep</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Right narrow column -->
-          <aside style="display: flex; flex-direction: column; gap: 14px">
+          <!-- RIGHT NARROW -->
+          <aside>
             <div class="panel">
-              <h3>Attendance</h3>
+              <h3 style="margin: 0">Attendance</h3>
               <div
                 style="
                   display: flex;
                   gap: 12px;
                   align-items: center;
-                  margin-top: 10px;
+                  margin-top: 12px;
                 "
               >
                 <div style="width: 110px; height: 110px; position: relative">
@@ -866,26 +961,27 @@
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      font-weight: 800;
-                      color: var(--accent);
+                      font-weight: 900;
+                      color: var(--accent-2);
                     "
-                    id="miniDonutLabel"
+                    id="miniLabel"
                   >
                     80%
                   </div>
                 </div>
+
                 <div style="flex: 1">
                   <div
                     style="
-                      height: 10px;
-                      background: #eef2ff;
+                      height: 12px;
+                      background: #eef4ff;
                       border-radius: 999px;
                       overflow: hidden;
-                      margin-bottom: 10px;
+                      margin-bottom: 8px;
                     "
                   >
                     <div
-                      id="progressBarFill"
+                      id="progressFill"
                       style="
                         width: 80%;
                         height: 100%;
@@ -899,16 +995,12 @@
             </div>
 
             <div class="panel">
-              <h3>Grade by Subject</h3>
-              <div
-                style="margin-top: 12px"
-                class="grade-row"
-                id="gradeRows"
-              ></div>
+              <h3 style="margin: 0">Grade by Subject</h3>
+              <div class="grade-rows" id="gradeRows"></div>
             </div>
 
             <div class="panel">
-              <h3>Calendar</h3>
+              <h3 style="margin: 0">Calendar</h3>
               <div
                 style="
                   display: flex;
@@ -917,337 +1009,373 @@
                   margin-top: 8px;
                 "
               >
-                <button id="calPrevBtn" class="btn ghost">
+                <button id="calPrev" class="btn ghost">
                   <svg data-lucide="chevron-left" width="14" height="14"></svg>
                 </button>
-                <div class="muted" id="currentMonthLabel">September 2021</div>
-                <button id="calNextBtn" class="btn ghost">
+                <div class="muted" id="calMonthLabel">September 2021</div>
+                <button id="calNext" class="btn ghost">
                   <svg data-lucide="chevron-right" width="14" height="14"></svg>
                 </button>
               </div>
-              <div id="calendarGrid" class="calendar-grid"></div>
+              <div
+                id="calendar"
+                class="calendar-grid"
+                aria-label="Calendar"
+              ></div>
             </div>
           </aside>
         </section>
       </main>
     </div>
 
+    <!-- JS: charts + UI -->
     <script>
-      // init lucide
-      if (window.lucide) lucide.createIcons();
+      document.addEventListener("DOMContentLoaded", () => {
+        // lucide
+        if (window.lucide) lucide.createIcons();
 
-      /* ---------- Demo data ---------- */
-      const demo = {
-        attendance: 80,
-        tasksCompleted: 258,
-        inProgress: 64,
-        points: 245,
-        scoreMonthly: {
-          labels: [
-            "Apr 10",
-            "Apr 11",
-            "Apr 12",
-            "Apr 13",
-            "Apr 14",
-            "Apr 15",
-            "Apr 16",
-          ],
-          data: [60, 45, 70, 55, 75, 50, 85],
-        },
-        gradeData: [
-          { sub: "English", val: 85 },
-          { sub: "Math", val: 90 },
-          { sub: "Biology", val: 75 },
-          { sub: "Chemistry", val: 70 },
-          { sub: "Physics", val: 80 },
-          { sub: "Computer Science", val: 95 },
-        ],
-      };
+        // helper
+        const $ = (s) => document.querySelector(s);
+        const $$ = (s) => Array.from(document.querySelectorAll(s));
+        const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
-      // Animate counters
-      function animateCounter(elId, end, duration = 700) {
-        const el = document.getElementById(elId);
-        if (!el) return;
-        let start = 0;
-        const startTime = performance.now();
-        function step(now) {
-          const t = Math.min((now - startTime) / duration, 1);
-          el.textContent = Math.round(start + (end - start) * t);
-          if (t < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      }
-      animateCounter("attendanceCounter", demo.attendance);
-      animateCounter("taskCounter", demo.tasksCompleted);
-      animateCounter("progressCounter", demo.inProgress);
-      animateCounter("pointsCounter", demo.points);
-
-      // Update small labels
-      document.getElementById("leftDonutPercent").textContent =
-        demo.attendance + "%";
-      document.getElementById("miniDonutLabel").textContent =
-        demo.attendance + "%";
-      document.getElementById("progressBarFill").style.width =
-        demo.attendance + "%";
-
-      /* ---------- Charts ---------- */
-      // Attendance donut (large)
-      const attendanceDonutCtx = document
-        .getElementById("miniDonut")
-        .getContext("2d");
-      const miniDonutChart = new Chart(attendanceDonutCtx, {
-        type: "doughnut",
-        data: {
-          labels: ["Present", "Absent"],
-          datasets: [
-            {
-              data: [demo.attendance, 100 - demo.attendance],
-              backgroundColor: ["#1D4ED8", "#E5E7EB"],
-              borderWidth: 0,
-            },
-          ],
-        },
-        options: {
-          cutout: "72%",
-          plugins: { legend: { display: false } },
-          responsive: false,
-          maintainAspectRatio: false,
-        },
-      });
-
-      // Score chart
-      const scoreCtx = document.getElementById("scoreChart").getContext("2d");
-      const grad = scoreCtx.createLinearGradient(0, 0, 0, 220);
-      grad.addColorStop(0, "rgba(59,130,246,0.18)");
-      grad.addColorStop(1, "rgba(99,102,241,0.02)");
-      const scoreChart = new Chart(scoreCtx, {
-        type: "line",
-        data: {
-          labels: demo.scoreMonthly.labels,
-          datasets: [
-            {
-              label: "Score",
-              data: demo.scoreMonthly.data,
-              borderColor: "#f97316",
-              backgroundColor: grad,
-              tension: 0.32,
-              fill: true,
-              pointRadius: 3,
-            },
-          ],
-        },
-        options: {
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, max: 100, ticks: { stepSize: 25 } },
+        /* ---------- Data ---------- */
+        const DATA = {
+          attendance: 80,
+          tasks: 258,
+          progress: 64,
+          points: 245,
+          scoreMonthly: {
+            labels: [
+              "Apr 10",
+              "Apr 11",
+              "Apr 12",
+              "Apr 13",
+              "Apr 14",
+              "Apr 15",
+              "Apr 16",
+            ],
+            data: [60, 45, 70, 55, 75, 50, 85],
           },
-          responsive: true,
-          maintainAspectRatio: false,
-        },
-      });
-
-      // Grade bar chart
-      const gradeCtx = document
-        .getElementById("gradeChartLarge")
-        .getContext("2d");
-      const gradeChart = new Chart(gradeCtx, {
-        type: "bar",
-        data: {
-          labels: demo.gradeData.map((d) => d.sub),
-          datasets: [
-            {
-              data: demo.gradeData.map((d) => d.val),
-              backgroundColor: "#60a5fa",
-              borderRadius: 8,
-            },
+          grade: [
+            { sub: "English", val: 85 },
+            { sub: "Tamil", val: 75 },
+            { sub: "Math", val: 90 },
+            { sub: "Chemistry", val: 70 },
+            { sub: "Physics", val: 80 },
+            { sub: "Computer Science", val: 95 },
           ],
-        },
-        options: {
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true, max: 100 } },
-          responsive: true,
-          maintainAspectRatio: false,
-        },
-      });
+        };
 
-      /* ---------- Render grade rows (right) ---------- */
-      function renderGradeRows() {
-        const el = document.getElementById("gradeRows");
-        el.innerHTML = "";
-        demo.gradeData.forEach((g) => {
-          const row = document.createElement("div");
-          row.className = "grade-item";
-          row.innerHTML = `
-          <div class="label">${g.sub}</div>
-          <div class="grade-bar"><div class="fill" style="width:${g.val}%;height:100%;background:linear-gradient(90deg,#c7d2fe,#60a5fa)"></div></div>
-          <div style="width:36px;text-align:right;font-weight:700">${g.val}</div>
-        `;
-          el.appendChild(row);
+        // animate counters (numbers)
+        function animateNum(el, target, ms = 700) {
+          if (!el) return;
+          const start = parseInt(el.textContent.replace(/\D/g, "")) || 0;
+          const diff = target - start;
+          const startTime = performance.now();
+          const step = (now) => {
+            const t = clamp((now - startTime) / ms, 0, 1);
+            const val = Math.round(start + diff * t);
+            el.textContent =
+              el.id === "taskCounter"
+                ? val + (t < 1 ? "" : "+")
+                : val +
+                  (el.id.endsWith("Counter")
+                    ? el.id === "attendanceCounter" ||
+                      el.id === "progressCounter"
+                      ? "%"
+                      : ""
+                    : "");
+            if (t < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+
+        animateNum($("#attendanceCounter"), DATA.attendance);
+        $("#attendanceCounter").textContent = DATA.attendance + "%"; // final
+        animateNum($("#taskCounter"), DATA.tasks);
+        animateNum($("#progressCounter"), DATA.progress);
+        animateNum($("#pointsCounter"), DATA.points);
+
+        $("#bigDonutLabel").textContent = DATA.attendance + "%";
+        $("#miniLabel").textContent = DATA.attendance + "%";
+        $("#progressFill").style.width = DATA.attendance + "%";
+
+        /* ---------- Charts (unique names) ---------- */
+        // big donut (inside left box)
+        const bigDonutCtx = document
+          .getElementById("bigDonut")
+          .getContext("2d");
+        const bigDonutChart = new Chart(bigDonutCtx, {
+          type: "doughnut",
+          data: {
+            labels: ["Present", "Absent"],
+            datasets: [
+              {
+                data: [DATA.attendance, 100 - DATA.attendance],
+                backgroundColor: ["#1d4ed8", "#e6eef8"],
+                borderWidth: 0,
+              },
+            ],
+          },
+          options: {
+            cutout: "70%",
+            plugins: { legend: { display: false } },
+            responsive: false,
+            maintainAspectRatio: false,
+          },
         });
-      }
-      renderGradeRows();
 
-      /* ---------- To-do functionality ---------- */
-      const todoListEl = document.getElementById("todoList");
-      const newTodoInput = document.getElementById("newTodoInput");
-      const addTodoBtn = document.getElementById("addTodoBtn");
-      const newTodoBtn = document.getElementById("newTodoBtn");
+        // mini donut (right)
+        const miniCtx = document.getElementById("miniDonut").getContext("2d");
+        const miniDonutChart = new Chart(miniCtx, {
+          type: "doughnut",
+          data: {
+            labels: ["Present", "Absent"],
+            datasets: [
+              {
+                data: [DATA.attendance, 100 - DATA.attendance],
+                backgroundColor: ["#1d4ed8", "#eef2ff"],
+                borderWidth: 0,
+              },
+            ],
+          },
+          options: {
+            cutout: "75%",
+            plugins: { legend: { display: false } },
+            responsive: false,
+            maintainAspectRatio: false,
+          },
+        });
 
-      // load from localStorage if available
-      const TODOS_KEY = "banban_todos_v1";
-      let todos = JSON.parse(localStorage.getItem(TODOS_KEY) || "[]");
-      if (todos.length === 0) {
-        todos = [
-          { id: Date.now() + 1, text: "Finish math assignment", done: false },
-          { id: Date.now() + 2, text: "Read chapter 4 — Biology", done: false },
-        ];
-      }
+        // score (line)
+        const scoreCtx = document.getElementById("scoreChart").getContext("2d");
+        const grad = scoreCtx.createLinearGradient(0, 0, 0, 220);
+        grad.addColorStop(0, "rgba(29,78,216,0.16)");
+        grad.addColorStop(1, "rgba(99,102,241,0.02)");
+        const scoreLineChart = new Chart(scoreCtx, {
+          type: "line",
+          data: {
+            labels: DATA.scoreMonthly.labels,
+            datasets: [
+              {
+                label: "Score",
+                data: DATA.scoreMonthly.data,
+                borderColor: "#f97316",
+                backgroundColor: grad,
+                tension: 0.34,
+                fill: true,
+                pointRadius: 3,
+              },
+            ],
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, max: 100 } },
+            responsive: true,
+            maintainAspectRatio: false,
+          },
+        });
 
-      function saveTodos() {
-        localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
-      }
+        // grade bar
+        const gradeCtx = document.getElementById("gradeChart").getContext("2d");
+        const gradeBarChart = new Chart(gradeCtx, {
+          type: "bar",
+          data: {
+            labels: DATA.grade.map((g) => g.sub),
+            datasets: [
+              {
+                data: DATA.grade.map((g) => g.val),
+                backgroundColor: "#60a5fa",
+                borderRadius: 8,
+              },
+            ],
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, max: 100 } },
+            responsive: true,
+            maintainAspectRatio: false,
+          },
+        });
 
-      function renderTodos() {
-        todoListEl.innerHTML = "";
-        todos.forEach((t) => {
-          const item = document.createElement("div");
-          item.className = "todo-item";
-          item.innerHTML = `
-          <label style="display:flex;align-items:center;gap:10px;width:100%">
-            <input type="checkbox" ${t.done ? "checked" : ""} data-id="${t.id}">
-            <div style="flex:1;text-decoration:${
+        /* ---------- render grade rows on right ---------- */
+        function renderGradeRows() {
+          const wrap = $("#gradeRows");
+          wrap.innerHTML = "";
+          DATA.grade.forEach((g) => {
+            const r = document.createElement("div");
+            r.className = "grade-row";
+            r.innerHTML = `<div class="grade-label">${g.sub}</div>
+                       <div class="grade-bar" aria-hidden="true"><div class="grade-fill" style="width:${g.val}%;background:linear-gradient(90deg,#c7d2fe,#60a5fa);height:100%"></div></div>
+                       <div style="width:36px;text-align:right;font-weight:800">${g.val}</div>`;
+            wrap.appendChild(r);
+          });
+        }
+        renderGradeRows();
+
+        /* ---------- TODOS with localStorage ---------- */
+        const TODO_KEY = "banban_todos_v3";
+        let todos = JSON.parse(localStorage.getItem(TODO_KEY) || "null");
+        if (!Array.isArray(todos)) {
+          todos = [
+            { id: Date.now() + 1, text: "Finish math assignment", done: false },
+            {
+              id: Date.now() + 2,
+              text: "Read chapter 4 — Biology",
+              done: false,
+            },
+          ];
+          localStorage.setItem(TODO_KEY, JSON.stringify(todos));
+        }
+
+        const todoList = $("#todoList");
+        const newTodoInput = $("#newTodoInput");
+
+        function saveTodos() {
+          localStorage.setItem(TODO_KEY, JSON.stringify(todos));
+        }
+
+        function renderTodos() {
+          todoList.innerHTML = "";
+          todos.forEach((t) => {
+            const el = document.createElement("div");
+            el.className = "todo-item";
+            el.innerHTML = `<input type="checkbox" data-id="${t.id}" ${
+              t.done ? "checked" : ""
+            }/>
+                        <div class="txt" style="flex:1;color:${
+                          t.done ? "#9aa4b2" : "inherit"
+                        };text-decoration:${
               t.done ? "line-through" : "none"
             }">${escapeHtml(t.text)}</div>
-            <button class="btn ghost" data-delete="${t.id}">Del</button>
-          </label>
-        `;
-          todoListEl.appendChild(item);
-        });
-      }
-      function escapeHtml(s) {
-        return String(s)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;");
-      }
+                        <button class="btn ghost" data-del="${
+                          t.id
+                        }" aria-label="Delete task">Del</button>`;
+            todoList.appendChild(el);
+          });
+        }
+        function escapeHtml(s) {
+          return String(s)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;");
+        }
 
-      addTodoBtn.addEventListener("click", () => {
-        const v = newTodoInput.value.trim();
-        if (!v) return;
-        todos.unshift({ id: Date.now(), text: v, done: false });
-        newTodoInput.value = "";
-        saveTodos();
         renderTodos();
-      });
-      newTodoBtn.addEventListener("click", () => newTodoInput.focus());
 
-      // delegation for todo list
-      todoListEl.addEventListener("click", (ev) => {
-        const del = ev.target.getAttribute("data-delete");
-        if (del) {
-          todos = todos.filter((t) => String(t.id) !== del);
+        $("#addTodoBtn").addEventListener("click", () => {
+          const val = newTodoInput.value.trim();
+          if (!val) return;
+          todos.unshift({ id: Date.now(), text: val, done: false });
+          newTodoInput.value = "";
           saveTodos();
           renderTodos();
-        }
-      });
-      todoListEl.addEventListener("change", (ev) => {
-        if (ev.target.type === "checkbox") {
-          const id = ev.target.dataset.id;
-          const t = todos.find((x) => String(x.id) === id);
-          if (t) {
-            t.done = ev.target.checked;
+        });
+        $("#newTodoBtn").addEventListener("click", () => newTodoInput.focus());
+        $("#clearDone").addEventListener("click", () => {
+          todos = todos.filter((t) => !t.done);
+          saveTodos();
+          renderTodos();
+        });
+
+        todoList.addEventListener("click", (ev) => {
+          const del = ev.target.getAttribute("data-del");
+          if (del) {
+            todos = todos.filter((t) => String(t.id) !== del);
             saveTodos();
             renderTodos();
+            return;
+          }
+          if (ev.target.tagName === "INPUT" && ev.target.type === "checkbox") {
+            const id = ev.target.dataset.id;
+            const found = todos.find((x) => String(x.id) === id);
+            if (found) {
+              found.done = ev.target.checked;
+              saveTodos();
+              renderTodos();
+            }
+          }
+        });
+
+        /* ---------- resource filter ---------- */
+        $("#resourceFilter").addEventListener("change", (e) => {
+          const val = e.target.value;
+          $$("#resources .resource").forEach(
+            (r) =>
+              (r.style.display =
+                val === "all" || r.dataset.type === val ? "flex" : "none")
+          );
+        });
+
+        /* ---------- calendar ---------- */
+        const calEl = $("#calendar");
+        let calDate = new Date(2021, 8, 1);
+        function buildCalendar(date) {
+          calEl.innerHTML = "";
+          $("#calMonthLabel").textContent = date.toLocaleString("default", {
+            month: "long",
+            year: date.getFullYear(),
+          });
+          const y = date.getFullYear(),
+            m = date.getMonth();
+          const first = new Date(y, m, 1);
+          const start = (first.getDay() + 6) % 7;
+          for (let i = 0; i < start; i++) {
+            const blank = document.createElement("div");
+            blank.className = "cal-day";
+            calEl.appendChild(blank);
+          }
+          const days = new Date(y, m + 1, 0).getDate();
+          const today = 19;
+          for (let d = 1; d <= days; d++) {
+            const cell = document.createElement("div");
+            cell.className = "cal-day";
+            cell.textContent = d;
+            if (d === today) cell.classList.add("today");
+            cell.addEventListener("click", () =>
+              alert(`Selected: ${y}-${m + 1}-${d}`)
+            );
+            calEl.appendChild(cell);
           }
         }
-      });
+        buildCalendar(calDate);
+        $("#calPrev").addEventListener("click", () => {
+          calDate = new Date(calDate.getFullYear(), calDate.getMonth() - 1, 1);
+          buildCalendar(calDate);
+        });
+        $("#calNext").addEventListener("click", () => {
+          calDate = new Date(calDate.getFullYear(), calDate.getMonth() + 1, 1);
+          buildCalendar(calDate);
+        });
 
-      renderTodos();
-
-      /* ---------- Resources filter ---------- */
-      document
-        .getElementById("resourceFilter")
-        .addEventListener("change", (e) => {
+        /* ---------- score range toggle ---------- */
+        $("#scoreRange").addEventListener("change", (e) => {
           const v = e.target.value;
-          document.querySelectorAll("#resources .resource").forEach((el) => {
-            el.style.display =
-              v === "all" || el.dataset.type === v ? "flex" : "none";
-          });
+          $("#scoreLabel").textContent = v.charAt(0).toUpperCase() + v.slice(1);
+          if (v === "monthly") {
+            scoreLineChart.data.labels = DATA.scoreMonthly.labels;
+            scoreLineChart.data.datasets[0].data = DATA.scoreMonthly.data;
+          } else {
+            scoreLineChart.data.labels = [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat",
+              "Sun",
+            ];
+            scoreLineChart.data.datasets[0].data = [55, 60, 48, 72, 68, 74, 80];
+          }
+          scoreLineChart.update();
         });
 
-      /* ---------- Calendar (simple interactive) ---------- */
-      const calendarGrid = document.getElementById("calendarGrid");
-      const currentMonthLabel = document.getElementById("currentMonthLabel");
-      let calDate = new Date(2021, 8, 1); // Sept 2021 example
-
-      function buildCalendar(date) {
-        calendarGrid.innerHTML = "";
-        const year = date.getFullYear(),
-          month = date.getMonth();
-        currentMonthLabel.textContent = date.toLocaleString("default", {
-          month: "long",
-          year: year,
-        });
-        const firstDay = new Date(year, month, 1);
-        const startOffset = (firstDay.getDay() + 6) % 7; // Monday=0
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        for (let i = 0; i < startOffset; i++) {
-          const blank = document.createElement("div");
-          blank.className = "cal-day";
-          calendarGrid.appendChild(blank);
-        }
-        const todayMarker = 19;
-        for (let d = 1; d <= daysInMonth; d++) {
-          const cell = document.createElement("div");
-          cell.className = "cal-day";
-          cell.textContent = d;
-          if (d === todayMarker) cell.classList.add("today");
-          cell.addEventListener("click", () =>
-            alert(`Selected: ${year}-${month + 1}-${d}`)
-          );
-          calendarGrid.appendChild(cell);
-        }
-      }
-      buildCalendar(calDate);
-      document.getElementById("calPrevBtn").addEventListener("click", () => {
-        calDate = new Date(calDate.getFullYear(), calDate.getMonth() - 1, 1);
-        buildCalendar(calDate);
-      });
-      document.getElementById("calNextBtn").addEventListener("click", () => {
-        calDate = new Date(calDate.getFullYear(), calDate.getMonth() + 1, 1);
-        buildCalendar(calDate);
-      });
-
-      /* ---------- Score range toggle ---------- */
-      document.getElementById("scoreRange").addEventListener("change", (e) => {
-        const v = e.target.value;
-        document.getElementById("scoreRangeLabel").textContent =
-          v.charAt(0).toUpperCase() + v.slice(1);
-        if (v === "monthly") {
-          scoreChart.data.labels = demo.scoreMonthly.labels;
-          scoreChart.data.datasets[0].data = demo.scoreMonthly.data;
-        } else {
-          scoreChart.data.labels = [
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-          ];
-          scoreChart.data.datasets[0].data = [55, 60, 48, 72, 68, 74, 80];
-        }
-        scoreChart.update();
-      });
-
-      /* ---------- Export grades CSV ---------- */
-      document
-        .getElementById("exportGradesBtn")
-        .addEventListener("click", () => {
+        /* ---------- export CSV ---------- */
+        $("#exportCSV").addEventListener("click", () => {
           const rows = [
             ["Subject", "Grade"],
-            ...demo.gradeData.map((g) => [g.sub, g.val]),
+            ...DATA.grade.map((g) => [g.sub, g.val]),
           ];
           const csv = rows
             .map((r) =>
@@ -1265,27 +1393,94 @@
           URL.revokeObjectURL(url);
         });
 
-      /* ---------- Resize handling for charts ---------- */
-      window.addEventListener("resize", () => {
-        try {
-          scoreChart.resize();
-          gradeChart.resize();
-          miniDonutChart.resize();
-        } catch (e) {
-          /* ignore */
+        /* ---------- search highlight ---------- */
+        $("#globalSearch").addEventListener("input", (e) => {
+          const q = e.target.value.trim().toLowerCase();
+          if (!q) {
+            $$("#resources .resource").forEach((r) => (r.style.opacity = "1"));
+            todoList.style.opacity = "1";
+            return;
+          }
+          $$("#resources .resource").forEach(
+            (r) =>
+              (r.style.opacity = r.textContent.toLowerCase().includes(q)
+                ? "1"
+                : "0.3")
+          );
+          Array.from(todoList.children).forEach(
+            (it) =>
+              (it.style.opacity = it.textContent.toLowerCase().includes(q)
+                ? "1"
+                : "0.3")
+          );
+        });
+
+        /* ---------- sidebar mobile toggle ---------- */
+        const sidebar = $("#sidebar"),
+          burger = $("#btnBurger");
+        burger &&
+          burger.addEventListener("click", () =>
+            sidebar.classList.toggle("active")
+          );
+        document.addEventListener("click", (ev) => {
+          if (
+            window.innerWidth <= 640 &&
+            sidebar.classList.contains("active")
+          ) {
+            if (!sidebar.contains(ev.target) && !burger.contains(ev.target))
+              sidebar.classList.remove("active");
+          }
+        });
+
+        /* ---------- theme toggle (simple) ---------- */
+        const THEME_KEY = "banban_theme_v2";
+        const themeBtn = $("#btnTheme");
+        function applyTheme(mode) {
+          if (mode === "dark") {
+            document.documentElement.style.setProperty("--bg", "#071026");
+            document.documentElement.style.setProperty("--card", "#071026");
+            document.documentElement.style.setProperty("--text", "#e6eef8");
+            document.documentElement.style.setProperty("--muted", "#9aa4b2");
+          } else {
+            document.documentElement.style.removeProperty("--bg");
+            document.documentElement.style.removeProperty("--card");
+            document.documentElement.style.removeProperty("--text");
+            document.documentElement.style.removeProperty("--muted");
+          }
+          localStorage.setItem(THEME_KEY, mode);
+          // swap icon
+          themeBtn.innerHTML = "";
+          if (window.lucide) {
+            const icon = lucide.createIcon(mode === "dark" ? "moon" : "sun", {
+              width: 18,
+              height: 18,
+            });
+            themeBtn.appendChild(icon);
+          }
         }
-      });
+        applyTheme(localStorage.getItem(THEME_KEY) || "light");
+        themeBtn.addEventListener("click", () =>
+          applyTheme(
+            localStorage.getItem(THEME_KEY) === "dark" ? "light" : "dark"
+          )
+        );
 
-      /* ---------- Small event handlers (demo) ---------- */
-      document
-        .getElementById("prevMonthBtn")
-        .addEventListener("click", () => alert("Previous month — demo"));
-      document
-        .getElementById("nextMonthBtn")
-        .addEventListener("click", () => alert("Next month — demo"));
+        /* ---------- resize charts (debounced) ---------- */
+        let rt = null;
+        window.addEventListener("resize", () => {
+          if (rt) clearTimeout(rt);
+          rt = setTimeout(() => {
+            try {
+              bigDonutChart.resize();
+              miniDonutChart.resize();
+              scoreLineChart.resize();
+              gradeBarChart.resize();
+            } catch (e) {}
+          }, 140);
+        });
 
-      // done
-      console.info("Dashboard loaded — fixed version");
+        console.info("Polished dashboard loaded — charts + features active");
+      }); // DOMContentLoaded
     </script>
   </body>
 </html>
