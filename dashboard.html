@@ -1,58 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BANBAN Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BANBAN Dashboard — Fixed</title>
+
+    <!-- Font -->
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.396.0/lucide.min.css"
-    />
+
+    <!-- Chart.js (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Lucide icons -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.396.0/dist/lucide.min.js"></script>
+
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-      body {
-        font-family: "Inter", sans-serif;
+      :root {
+        --sidebar-w: 240px;
+        --blue-600: #0a73b7;
+        --accent: #1d4ed8;
+        --muted: #6b7280;
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --radius-lg: 14px;
+        --shadow-1: 0 8px 24px rgba(16, 24, 40, 0.06);
       }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+        background: linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);
+        color: #0f1724;
+      }
+      .app {
+        display: flex;
+        min-height: 100vh;
+        align-items: stretch;
+      }
+
+      /* SIDEBAR (TIDAK DIUBAH) */
       .sidebar {
-        width: 240px;
-        background: #0a73b7;
+        width: var(--sidebar-w);
+        background: var(--blue-600);
         color: white;
         display: flex;
         flex-direction: column;
         padding: 20px;
+        flex-shrink: 0;
       }
-
       .logo {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 10px;
       }
-
       .logo img {
         width: 120px;
       }
-
       .email {
         font-size: 14px;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 18px;
+        color: rgba(255, 255, 255, 0.95);
       }
-
       .menu {
         list-style: none;
+        padding: 0;
+        margin: 0;
         flex-grow: 1;
       }
-
       .menu li {
         margin: 8px 0;
       }
-
       .menu a {
         display: flex;
         align-items: center;
@@ -62,14 +85,12 @@
         text-decoration: none;
         color: white;
         font-size: 15px;
-        transition: 0.3s;
+        transition: 0.18s;
       }
-
       .menu a:hover,
       .menu a.active {
         background: #1e90ff;
       }
-
       .features {
         background: #004c7c;
         padding: 12px;
@@ -78,7 +99,6 @@
         font-size: 15px;
         margin-top: 20px;
       }
-
       .features span {
         background: red;
         color: white;
@@ -88,467 +108,841 @@
         margin-left: 6px;
       }
 
-      .chart-container {
+      /* MAIN */
+      .main {
+        flex: 1;
+        padding: 28px 34px;
+        min-width: 0;
+        overflow: auto;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+      .welcome h1 {
+        font-size: 26px;
+        margin: 0 0 8px 0;
+        color: #071433;
+        font-weight: 700;
+      }
+      .welcome p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+        max-width: 70%;
+      }
+
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-left: auto;
+      }
+      .search {
         position: relative;
-        height: 200px;
+        min-width: 260px;
+        width: 320px;
+      }
+      .search input {
         width: 100%;
+        padding: 10px 14px 10px 40px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 77, 146, 0.06);
+        background: white;
+        outline: none;
+        font-size: 14px;
+        box-shadow: var(--shadow-1);
+      }
+      .search svg {
+        position: absolute;
+        left: 12px;
+        top: 10px;
+        opacity: 0.6;
+        color: var(--muted);
+      }
+
+      .action-btn {
+        background: white;
+        padding: 8px;
+        border-radius: 10px;
+        border: 0;
+        box-shadow: var(--shadow-1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin: 18px 0 22px;
+      }
+      .stat {
+        background: var(--card);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        box-shadow: var(--shadow-1);
+        border: 1px solid rgba(15, 77, 146, 0.03);
+      }
+      .stat .icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .stat h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .stat p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .panel {
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        padding: 18px;
+        box-shadow: var(--shadow-1);
+        border: 1px solid rgba(15, 77, 146, 0.03);
+      }
+      .panel h3 {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+      }
+
+      .donut-wrap {
+        width: 180px;
+        height: 180px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .donut-center {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .donut-value {
+        font-weight: 800;
+        font-size: 20px;
+        color: var(--accent);
+      }
+      .donut-sub {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .todo-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+      .todo-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px;
+        border-radius: 10px;
+        background: #fbfdff;
+        border: 1px solid rgba(15, 77, 146, 0.03);
+      }
+      .resources {
+        display: flex;
+        gap: 10px;
+      }
+
+      .chart-lg {
+        height: 220px;
+        width: 100%;
+      }
+      .chart-sm {
+        height: 140px;
+        width: 100%;
+      }
+
+      .grade-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .grade-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .grade-item .label {
+        width: 120px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .grade-bar {
+        flex: 1;
+        height: 12px;
+        background: #f1f5f9;
+        border-radius: 999px;
+        overflow: hidden;
+        position: relative;
+      }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+        font-size: 13px;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .cal-day {
+        background: #fff;
+        padding: 10px 6px;
+        border-radius: 8px;
+        border: 1px solid rgba(15, 77, 146, 0.03);
+      }
+      .cal-day.today {
+        background: linear-gradient(90deg, #f0f6ff, #e6f0ff);
+        border-color: #bde0ff;
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .btn {
+        padding: 8px 12px;
+        border-radius: 10px;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn.primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 8px 18px rgba(29, 78, 216, 0.12);
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(15, 77, 146, 0.06);
+        color: var(--accent);
+      }
+
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 1100px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .welcome p {
+          max-width: 100%;
+        }
+        .search {
+          width: 100%;
+        }
+      }
+      @media (max-width: 640px) {
+        .stats {
+          grid-template-columns: 1fr;
+        }
+        .topbar {
+          flex-direction: column;
+          gap: 12px;
+          align-items: flex-start;
+        }
       }
     </style>
   </head>
-  <body class="bg-gray-50">
-    <div class="flex h-screen">
-      <!-- Sidebar -->
-      <div class="sidebar">
+  <body>
+    <div class="app">
+      <!-- Sidebar (unchanged) -->
+      <aside class="sidebar">
         <div class="logo"><img src="logo.png" alt="logo" /></div>
         <p class="email">BanBan@gmail.com</p>
         <ul class="menu">
           <li>
-            <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+            <a href="dashboard.html"><i data-lucide="home"></i> Dashboard</a>
           </li>
           <li>
-            <a href="Timer.html"><i class="fa fa-clock"></i> Podomoro Timer</a>
+            <a class="active" href="Timer.html"
+              ><i data-lucide="clock"></i> Podomoro Timer</a
+            >
           </li>
           <li>
             <a href="studygroup.html"
-              ><i class="fa fa-users"></i> Study Groups</a
+              ><i data-lucide="users"></i> Study Groups</a
             >
           </li>
           <li>
-            <a href="#"><i class="fa fa-book"></i> Materials</a>
+            <a href="#"><i data-lucide="book-open"></i> Materials</a>
           </li>
           <li>
             <a href="Achivement.html"
-              ><i class="fa fa-trophy"></i> Achievement</a
+              ><i data-lucide="award"></i> Achievement</a
             >
           </li>
           <li>
-            <a href="#"><i class="fa fa-cog"></i> Settings and profile</a>
+            <a href="#"><i data-lucide="settings"></i> Settings and profile</a>
           </li>
         </ul>
         <div class="features">Features <span>NEW</span></div>
-      </div>
+      </aside>
 
-      <!-- Main Content -->
-      <div class="ml-64 p-6 flex-1 overflow-y-auto">
-        <!-- Header -->
-        <header class="flex justify-between items-center mb-8">
-          <div>
-            <h1 class="text-2xl font-bold text-gray-800">Hello, BanBan</h1>
-            <p class="text-gray-500">Welcome back to your dashboard</p>
+      <!-- Main -->
+      <main class="main">
+        <div class="topbar">
+          <div class="welcome">
+            <h1>Hey Snappe.</h1>
+            <p>
+              Welcome back! We're here to support you on your learning journey.
+              Dive into your classes and keep progressing towards your goals.
+            </p>
           </div>
-          <div class="flex items-center space-x-4">
-            <div class="relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                class="bg-gray-100 rounded-full py-2 px-4 pl-10 focus:outline-none"
-              />
-              <i
-                data-lucide="search"
-                class="absolute left-3 top-2.5 w-4 h-4 text-gray-500"
-              ></i>
+
+          <div class="top-actions">
+            <div class="search" title="Search">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                style="
+                  position: absolute;
+                  left: 12px;
+                  top: 10px;
+                  color: var(--muted);
+                "
+              >
+                <path
+                  d="M21 21l-4.35-4.35"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle
+                  cx="11"
+                  cy="11"
+                  r="6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+              <input id="globalSearch" type="text" placeholder="Search..." />
             </div>
-            <button class="p-2 rounded-full bg-gray-100">
-              <i data-lucide="bell" class="w-5 h-5"></i>
+
+            <button class="action-btn" title="Notifications">
+              <svg data-lucide="bell" width="18" height="18"></svg>
             </button>
-            <div class="flex items-center space-x-2">
-              <div class="w-8 h-8 rounded-full bg-gray-300"></div>
-              <span class="font-medium">BanBan</span>
-            </div>
-          </div>
-        </header>
-
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div
-            class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4 border border-gray-100"
-          >
-            <div class="p-3 rounded-lg bg-blue-100 text-blue-600">
-              <i data-lucide="users" class="w-6 h-6"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold">80%</h3>
-              <p class="text-gray-500">Attendance</p>
-            </div>
-          </div>
-          <div
-            class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4 border border-gray-100"
-          >
-            <div class="p-3 rounded-lg bg-purple-100 text-purple-600">
-              <i data-lucide="check-circle" class="w-6 h-6"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold">258+</h3>
-              <p class="text-gray-500">Task Completed</p>
-            </div>
-          </div>
-          <div
-            class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4 border border-gray-100"
-          >
-            <div class="p-3 rounded-lg bg-amber-100 text-amber-600">
-              <i data-lucide="clock" class="w-6 h-6"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold">64%</h3>
-              <p class="text-gray-500">Task in Progress</p>
-            </div>
-          </div>
-          <div
-            class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4 border border-gray-100"
-          >
-            <div class="p-3 rounded-lg bg-pink-100 text-pink-600">
-              <i data-lucide="award" class="w-6 h-6"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold">245</h3>
-              <p class="text-gray-500">Reward Points</p>
+            <button class="action-btn" title="Messages">
+              <svg data-lucide="message-square" width="18" height="18"></svg>
+            </button>
+            <div style="display: flex; align-items: center; gap: 8px">
+              <div
+                style="
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  background: #cfe7ff;
+                "
+              ></div>
+              <div style="font-weight: 600">BanBan</div>
             </div>
           </div>
         </div>
 
-        <!-- Main Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <!-- Left Column -->
-          <div class="lg:col-span-2 space-y-6">
-            <!-- Attendance Chart -->
-            <div
-              class="bg-white rounded-xl shadow-sm p-6 border border-gray-100"
-            >
-              <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-semibold">Attendance</h2>
-                <div class="flex space-x-2">
-                  <button class="p-1 rounded hover:bg-gray-100">
-                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
-                  </button>
-                  <button class="p-1 rounded hover:bg-gray-100">
-                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="chart-container">
-                <canvas id="attendanceChart"></canvas>
-              </div>
+        <!-- Stats -->
+        <section class="stats" aria-label="Quick statistics">
+          <div class="stat">
+            <div class="icon" style="background: #e6f0ff; color: #1d4ed8">
+              <svg data-lucide="users" width="20" height="20"></svg>
             </div>
+            <div>
+              <h3><span id="attendanceCounter">80</span>%</h3>
+              <p>Attendance</p>
+            </div>
+          </div>
 
-            <!-- To-Do List -->
-            <div
-              class="bg-white rounded-xl shadow-sm p-6 border border-gray-100"
-            >
-              <h2 class="text-lg font-semibold mb-4">To-Do List</h2>
-              <div class="space-y-4">
-                <div class="flex items-center p-3 bg-blue-50 rounded-lg">
-                  <div
-                    class="p-2 rounded-lg bg-yellow-100 text-yellow-600 mr-3"
+          <div class="stat">
+            <div class="icon" style="background: #f5e9ff; color: #7c3aed">
+              <svg data-lucide="check-circle" width="20" height="20"></svg>
+            </div>
+            <div>
+              <h3 id="taskCounter">258+</h3>
+              <p>Task Completed</p>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="icon" style="background: #fff7ed; color: #d97706">
+              <svg data-lucide="clock" width="20" height="20"></svg>
+            </div>
+            <div>
+              <h3><span id="progressCounter">64</span>%</h3>
+              <p>Task in Progress</p>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="icon" style="background: #fff0f6; color: #db2777">
+              <svg data-lucide="award" width="20" height="20"></svg>
+            </div>
+            <div>
+              <h3 id="pointsCounter">245</h3>
+              <p>Reward Points</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Content grid -->
+        <section class="content-grid">
+          <!-- Left wide column -->
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <div class="panel">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  flex-wrap: wrap;
+                "
+              >
+                <div>
+                  <h3>Attendance</h3>
+                  <p class="muted" style="margin: 6px 0 0 0">
+                    Overview of presence across the selected month
+                  </p>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center">
+                  <button class="btn ghost" id="prevMonthBtn">Prev</button>
+                  <select
+                    id="monthSelect"
+                    style="
+                      padding: 8px;
+                      border-radius: 10px;
+                      border: 1px solid rgba(15, 77, 146, 0.06);
+                    "
                   >
-                    <i data-lucide="bell" class="w-4 h-4"></i>
-                  </div>
-                  <div>
-                    <h3 class="font-medium">Today</h3>
-                    <p class="text-sm text-gray-500">Before 12:00 PM</p>
-                  </div>
-                </div>
-                <div class="flex items-center p-3 bg-blue-50 rounded-lg">
-                  <div class="p-2 rounded-lg bg-blue-100 text-blue-600 mr-3">
-                    <i data-lucide="clock" class="w-4 h-4"></i>
-                  </div>
-                  <div>
-                    <h3 class="font-medium">Tomorrow</h3>
-                    <p class="text-sm text-gray-500">After 08:00 AM</p>
-                  </div>
+                    <option>April 2023</option>
+                    <option>May 2023</option>
+                  </select>
+                  <button class="btn ghost" id="nextMonthBtn">Next</button>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <!-- Right Column -->
-          <div class="space-y-6">
-            <!-- Resources -->
-            <div
-              class="bg-white rounded-xl shadow-sm p-6 border border-gray-100"
-            >
-              <h2 class="text-lg font-semibold mb-4">Resources</h2>
-              <div class="grid grid-cols-3 gap-4">
-                <div
-                  class="flex flex-col items-center p-4 rounded-lg bg-blue-50"
-                >
-                  <div class="p-3 rounded-lg bg-blue-100 text-blue-600 mb-2">
-                    <i data-lucide="book" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-sm font-medium">Books</span>
-                </div>
-                <div
-                  class="flex flex-col items-center p-4 rounded-lg bg-green-50"
-                >
-                  <div class="p-3 rounded-lg bg-green-100 text-green-600 mb-2">
-                    <i data-lucide="video" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-sm font-medium">Videos</span>
-                </div>
-                <div
-                  class="flex flex-col items-center p-4 rounded-lg bg-purple-50"
-                >
+              <div
+                style="
+                  display: flex;
+                  gap: 20px;
+                  margin-top: 14px;
+                  flex-wrap: wrap;
+                "
+              >
+                <div style="width: 180px">
                   <div
-                    class="p-3 rounded-lg bg-purple-100 text-purple-600 mb-2"
+                    style="
+                      background: #fff;
+                      border-radius: 12px;
+                      padding: 18px;
+                      text-align: center;
+                      border: 1px solid rgba(15, 77, 146, 0.03);
+                    "
                   >
-                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                    <div
+                      style="
+                        font-weight: 700;
+                        font-size: 18px;
+                        color: var(--accent);
+                      "
+                      id="leftDonutPercent"
+                    >
+                      80%
+                    </div>
+                    <div class="muted">Present</div>
                   </div>
-                  <span class="text-sm font-medium">Papers</span>
+                </div>
+
+                <div style="flex: 1; min-width: 260px">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 12px;
+                    "
+                  >
+                    <div>
+                      <h4 style="margin: 0">To - Do List</h4>
+                      <div class="muted">Manage quick tasks</div>
+                    </div>
+                    <div>
+                      <button id="newTodoBtn" class="btn primary">+ New</button>
+                    </div>
+                  </div>
+
+                  <div class="mini-grid" style="margin-bottom: 10px">
+                    <!-- To-do Column -->
+                    <div>
+                      <div class="todo-list" id="todoList"></div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px">
+                        <input
+                          id="newTodoInput"
+                          placeholder="Add a task..."
+                          style="
+                            flex: 1;
+                            padding: 8px;
+                            border-radius: 10px;
+                            border: 1px solid rgba(15, 77, 146, 0.06);
+                          "
+                        />
+                        <button id="addTodoBtn" class="btn primary">Add</button>
+                      </div>
+                    </div>
+
+                    <!-- Resources Column -->
+                    <div>
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          margin-bottom: 10px;
+                        "
+                      >
+                        <div>
+                          <h4 style="margin: 0">Resources</h4>
+                          <div class="muted">Books, Videos, Papers</div>
+                        </div>
+                        <div>
+                          <select
+                            id="resourceFilter"
+                            style="
+                              padding: 6px;
+                              border-radius: 8px;
+                              border: 1px solid rgba(15, 77, 146, 0.06);
+                            "
+                          >
+                            <option value="all">All</option>
+                            <option value="books">Books</option>
+                            <option value="videos">Videos</option>
+                            <option value="papers">Papers</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="resources" id="resources">
+                        <div
+                          class="resource"
+                          data-type="books"
+                          style="
+                            flex-direction: column;
+                            align-items: center;
+                            padding: 12px;
+                            border-radius: 10px;
+                            background: #fbfdff;
+                            border: 1px solid rgba(15, 77, 146, 0.03);
+                          "
+                        >
+                          <div
+                            style="
+                              width: 46px;
+                              height: 46px;
+                              border-radius: 10px;
+                              background: #e6f0ff;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                            "
+                          >
+                            <svg
+                              data-lucide="book"
+                              width="18"
+                              height="18"
+                            ></svg>
+                          </div>
+                          <div style="font-weight: 600">Books</div>
+                          <div class="muted">12 items</div>
+                        </div>
+                        <div
+                          class="resource"
+                          data-type="videos"
+                          style="
+                            flex-direction: column;
+                            align-items: center;
+                            padding: 12px;
+                            border-radius: 10px;
+                            background: #fbfdff;
+                            border: 1px solid rgba(15, 77, 146, 0.03);
+                          "
+                        >
+                          <div
+                            style="
+                              width: 46px;
+                              height: 46px;
+                              border-radius: 10px;
+                              background: #ecfdf5;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                            "
+                          >
+                            <svg
+                              data-lucide="video"
+                              width="18"
+                              height="18"
+                            ></svg>
+                          </div>
+                          <div style="font-weight: 600">Videos</div>
+                          <div class="muted">34 items</div>
+                        </div>
+                        <div
+                          class="resource"
+                          data-type="papers"
+                          style="
+                            flex-direction: column;
+                            align-items: center;
+                            padding: 12px;
+                            border-radius: 10px;
+                            background: #fbfdff;
+                            border: 1px solid rgba(15, 77, 146, 0.03);
+                          "
+                        >
+                          <div
+                            style="
+                              width: 46px;
+                              height: 46px;
+                              border-radius: 10px;
+                              background: #f5f3ff;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                            "
+                          >
+                            <svg
+                              data-lucide="file-text"
+                              width="18"
+                              height="18"
+                            ></svg>
+                          </div>
+                          <div style="font-weight: 600">Papers</div>
+                          <div class="muted">8 items</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 6px">
+                    <h4 style="margin: 0 0 8px 0">Test Score activity</h4>
+                    <div
+                      style="
+                        display: flex;
+                        gap: 8px;
+                        align-items: center;
+                        margin-bottom: 8px;
+                      "
+                    >
+                      <select
+                        id="scoreRange"
+                        style="
+                          padding: 6px;
+                          border-radius: 8px;
+                          border: 1px solid rgba(15, 77, 146, 0.06);
+                        "
+                      >
+                        <option value="monthly">Monthly</option>
+                        <option value="weekly">Weekly</option>
+                      </select>
+                      <div class="muted" style="margin-left: auto">
+                        View: <strong id="scoreRangeLabel">Monthly</strong>
+                      </div>
+                    </div>
+                    <div class="chart-lg">
+                      <canvas id="scoreChart"></canvas>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Test Score -->
+            <!-- Bottom area -->
             <div
-              class="bg-white rounded-xl shadow-sm p-6 border border-gray-100"
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px"
             >
-              <h2 class="text-lg font-semibold mb-4">Test Score</h2>
-              <div class="chart-container">
-                <canvas id="testScoreChart"></canvas>
+              <div class="panel">
+                <h3>Grade</h3>
+                <div class="chart-lg" style="margin-top: 10px">
+                  <canvas id="gradeChartLarge"></canvas>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 10px;
+                  "
+                >
+                  <button id="exportGradesBtn" class="btn ghost">
+                    Export CSV
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Bottom Section -->
-        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <!-- Grade Chart -->
-          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-            <h2 class="text-lg font-semibold mb-4">Grade</h2>
-            <div class="chart-container">
-              <canvas id="gradeChart"></canvas>
+              <div class="panel">
+                <h3>Quick Insights</h3>
+                <div
+                  style="
+                    margin-top: 12px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                  "
+                >
+                  <div style="display: flex; justify-content: space-between">
+                    <div class="muted">Top Subject</div>
+                    <div style="font-weight: 700">Computer Science</div>
+                  </div>
+                  <div style="display: flex; justify-content: space-between">
+                    <div class="muted">Weekly Improvement</div>
+                    <div style="font-weight: 700">+4.2%</div>
+                  </div>
+                  <div style="display: flex; justify-content: space-between">
+                    <div class="muted">Next Exam</div>
+                    <div style="font-weight: 700">Math — 21 Sep</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Calendar -->
-          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-            <div class="flex justify-between items-center mb-4">
-              <h2 class="text-lg font-semibold">Calendar</h2>
-              <div class="flex space-x-2">
-                <button class="p-1 rounded hover:bg-gray-100">
-                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          <!-- Right narrow column -->
+          <aside style="display: flex; flex-direction: column; gap: 14px">
+            <div class="panel">
+              <h3>Attendance</h3>
+              <div
+                style="
+                  display: flex;
+                  gap: 12px;
+                  align-items: center;
+                  margin-top: 10px;
+                "
+              >
+                <div style="width: 110px; height: 110px; position: relative">
+                  <canvas id="miniDonut" width="110" height="110"></canvas>
+                  <div
+                    style="
+                      position: absolute;
+                      inset: 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-weight: 800;
+                      color: var(--accent);
+                    "
+                    id="miniDonutLabel"
+                  >
+                    80%
+                  </div>
+                </div>
+                <div style="flex: 1">
+                  <div
+                    style="
+                      height: 10px;
+                      background: #eef2ff;
+                      border-radius: 999px;
+                      overflow: hidden;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <div
+                      id="progressBarFill"
+                      style="
+                        width: 80%;
+                        height: 100%;
+                        background: linear-gradient(90deg, #1d4ed8, #60a5fa);
+                      "
+                    ></div>
+                  </div>
+                  <div class="muted">Present vs Absent</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Grade by Subject</h3>
+              <div
+                style="margin-top: 12px"
+                class="grade-row"
+                id="gradeRows"
+              ></div>
+            </div>
+
+            <div class="panel">
+              <h3>Calendar</h3>
+              <div
+                style="
+                  display: flex;
+                  gap: 8px;
+                  align-items: center;
+                  margin-top: 8px;
+                "
+              >
+                <button id="calPrevBtn" class="btn ghost">
+                  <svg data-lucide="chevron-left" width="14" height="14"></svg>
                 </button>
-                <button class="p-1 rounded hover:bg-gray-100">
-                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                <div class="muted" id="currentMonthLabel">September 2021</div>
+                <button id="calNextBtn" class="btn ghost">
+                  <svg data-lucide="chevron-right" width="14" height="14"></svg>
                 </button>
               </div>
+              <div id="calendarGrid" class="calendar-grid"></div>
             </div>
-            <div class="mb-4">
-              <div
-                class="grid grid-cols-7 gap-1 text-center text-sm font-medium text-gray-500"
-              >
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-                <div>Sun</div>
-              </div>
-            </div>
-            <div class="grid grid-cols-7 gap-1">
-              <div class="h-10 border border-transparent"></div>
-              <div class="h-10 border border-transparent"></div>
-              <div class="h-10 border border-transparent"></div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                1
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                2
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                3
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                4
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                5
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                6
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                7
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                8
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                9
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                10
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                11
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                12
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                13
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                14
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                15
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                16
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                17
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                18
-              </div>
-              <div
-                class="h-10 border border-blue-300 bg-blue-100 rounded flex items-center justify-center font-medium"
-              >
-                19
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                20
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                21
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                22
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                23
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                24
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                25
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                26
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                27
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                28
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                29
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                30
-              </div>
-              <div
-                class="h-10 border border-gray-100 rounded hover:bg-blue-50 flex items-center justify-center"
-              >
-                31
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          </aside>
+        </section>
+      </main>
     </div>
 
     <script>
-      // Initialize Lucide icons
-      lucide.createIcons();
+      // init lucide
+      if (window.lucide) lucide.createIcons();
 
-      // Attendance Chart
-      const attendanceCtx = document
-        .getElementById("attendanceChart")
-        .getContext("2d");
-      new Chart(attendanceCtx, {
-        type: "doughnut",
-        data: {
-          labels: ["Present", "Absent"],
-          datasets: [
-            {
-              data: [80, 20],
-              backgroundColor: ["#1D4ED8", "#6B7280"],
-              borderWidth: 0,
-            },
-          ],
-        },
-        options: {
-          cutout: "70%",
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-        },
-      });
-
-      // Test Score Chart
-      const testScoreCtx = document
-        .getElementById("testScoreChart")
-        .getContext("2d");
-      new Chart(testScoreCtx, {
-        type: "line",
-        data: {
+      /* ---------- Demo data ---------- */
+      const demo = {
+        attendance: 80,
+        tasksCompleted: 258,
+        inProgress: 64,
+        points: 245,
+        scoreMonthly: {
           labels: [
             "Apr 10",
             "Apr 11",
@@ -558,74 +952,340 @@
             "Apr 15",
             "Apr 16",
           ],
+          data: [60, 45, 70, 55, 75, 50, 85],
+        },
+        gradeData: [
+          { sub: "English", val: 85 },
+          { sub: "Math", val: 90 },
+          { sub: "Biology", val: 75 },
+          { sub: "Chemistry", val: 70 },
+          { sub: "Physics", val: 80 },
+          { sub: "Computer Science", val: 95 },
+        ],
+      };
+
+      // Animate counters
+      function animateCounter(elId, end, duration = 700) {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        let start = 0;
+        const startTime = performance.now();
+        function step(now) {
+          const t = Math.min((now - startTime) / duration, 1);
+          el.textContent = Math.round(start + (end - start) * t);
+          if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      animateCounter("attendanceCounter", demo.attendance);
+      animateCounter("taskCounter", demo.tasksCompleted);
+      animateCounter("progressCounter", demo.inProgress);
+      animateCounter("pointsCounter", demo.points);
+
+      // Update small labels
+      document.getElementById("leftDonutPercent").textContent =
+        demo.attendance + "%";
+      document.getElementById("miniDonutLabel").textContent =
+        demo.attendance + "%";
+      document.getElementById("progressBarFill").style.width =
+        demo.attendance + "%";
+
+      /* ---------- Charts ---------- */
+      // Attendance donut (large)
+      const attendanceDonutCtx = document
+        .getElementById("miniDonut")
+        .getContext("2d");
+      const miniDonutChart = new Chart(attendanceDonutCtx, {
+        type: "doughnut",
+        data: {
+          labels: ["Present", "Absent"],
           datasets: [
             {
-              label: "Score",
-              data: [60, 45, 70, 55, 75, 50, 85],
-              borderColor: "#1D4ED8",
-              backgroundColor: "rgba(29, 78, 216, 0.1)",
-              tension: 0.4,
-              fill: true,
+              data: [demo.attendance, 100 - demo.attendance],
+              backgroundColor: ["#1D4ED8", "#E5E7EB"],
+              borderWidth: 0,
             },
           ],
         },
         options: {
-          plugins: {
-            legend: {
-              display: false,
+          cutout: "72%",
+          plugins: { legend: { display: false } },
+          responsive: false,
+          maintainAspectRatio: false,
+        },
+      });
+
+      // Score chart
+      const scoreCtx = document.getElementById("scoreChart").getContext("2d");
+      const grad = scoreCtx.createLinearGradient(0, 0, 0, 220);
+      grad.addColorStop(0, "rgba(59,130,246,0.18)");
+      grad.addColorStop(1, "rgba(99,102,241,0.02)");
+      const scoreChart = new Chart(scoreCtx, {
+        type: "line",
+        data: {
+          labels: demo.scoreMonthly.labels,
+          datasets: [
+            {
+              label: "Score",
+              data: demo.scoreMonthly.data,
+              borderColor: "#f97316",
+              backgroundColor: grad,
+              tension: 0.32,
+              fill: true,
+              pointRadius: 3,
             },
-          },
+          ],
+        },
+        options: {
+          plugins: { legend: { display: false } },
           scales: {
-            y: {
-              beginAtZero: true,
-              max: 100,
-            },
+            y: { beginAtZero: true, max: 100, ticks: { stepSize: 25 } },
           },
           responsive: true,
           maintainAspectRatio: false,
         },
       });
 
-      // Grade Chart
-      const gradeCtx = document.getElementById("gradeChart").getContext("2d");
-      new Chart(gradeCtx, {
+      // Grade bar chart
+      const gradeCtx = document
+        .getElementById("gradeChartLarge")
+        .getContext("2d");
+      const gradeChart = new Chart(gradeCtx, {
         type: "bar",
         data: {
-          labels: [
-            "English",
-            "Tamil",
-            "Math",
-            "Chemistry",
-            "Physics",
-            "Biology",
-            "History",
-            "Geography",
-            "Computer Science",
-          ],
+          labels: demo.gradeData.map((d) => d.sub),
           datasets: [
             {
-              label: "Grade",
-              data: [85, 75, 90, 70, 80, 75, 65, 85, 95],
-              backgroundColor: "#1D4ED8",
+              data: demo.gradeData.map((d) => d.val),
+              backgroundColor: "#60a5fa",
+              borderRadius: 8,
             },
           ],
         },
         options: {
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 100,
-            },
-          },
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, max: 100 } },
           responsive: true,
           maintainAspectRatio: false,
         },
       });
+
+      /* ---------- Render grade rows (right) ---------- */
+      function renderGradeRows() {
+        const el = document.getElementById("gradeRows");
+        el.innerHTML = "";
+        demo.gradeData.forEach((g) => {
+          const row = document.createElement("div");
+          row.className = "grade-item";
+          row.innerHTML = `
+          <div class="label">${g.sub}</div>
+          <div class="grade-bar"><div class="fill" style="width:${g.val}%;height:100%;background:linear-gradient(90deg,#c7d2fe,#60a5fa)"></div></div>
+          <div style="width:36px;text-align:right;font-weight:700">${g.val}</div>
+        `;
+          el.appendChild(row);
+        });
+      }
+      renderGradeRows();
+
+      /* ---------- To-do functionality ---------- */
+      const todoListEl = document.getElementById("todoList");
+      const newTodoInput = document.getElementById("newTodoInput");
+      const addTodoBtn = document.getElementById("addTodoBtn");
+      const newTodoBtn = document.getElementById("newTodoBtn");
+
+      // load from localStorage if available
+      const TODOS_KEY = "banban_todos_v1";
+      let todos = JSON.parse(localStorage.getItem(TODOS_KEY) || "[]");
+      if (todos.length === 0) {
+        todos = [
+          { id: Date.now() + 1, text: "Finish math assignment", done: false },
+          { id: Date.now() + 2, text: "Read chapter 4 — Biology", done: false },
+        ];
+      }
+
+      function saveTodos() {
+        localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
+      }
+
+      function renderTodos() {
+        todoListEl.innerHTML = "";
+        todos.forEach((t) => {
+          const item = document.createElement("div");
+          item.className = "todo-item";
+          item.innerHTML = `
+          <label style="display:flex;align-items:center;gap:10px;width:100%">
+            <input type="checkbox" ${t.done ? "checked" : ""} data-id="${t.id}">
+            <div style="flex:1;text-decoration:${
+              t.done ? "line-through" : "none"
+            }">${escapeHtml(t.text)}</div>
+            <button class="btn ghost" data-delete="${t.id}">Del</button>
+          </label>
+        `;
+          todoListEl.appendChild(item);
+        });
+      }
+      function escapeHtml(s) {
+        return String(s)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+      }
+
+      addTodoBtn.addEventListener("click", () => {
+        const v = newTodoInput.value.trim();
+        if (!v) return;
+        todos.unshift({ id: Date.now(), text: v, done: false });
+        newTodoInput.value = "";
+        saveTodos();
+        renderTodos();
+      });
+      newTodoBtn.addEventListener("click", () => newTodoInput.focus());
+
+      // delegation for todo list
+      todoListEl.addEventListener("click", (ev) => {
+        const del = ev.target.getAttribute("data-delete");
+        if (del) {
+          todos = todos.filter((t) => String(t.id) !== del);
+          saveTodos();
+          renderTodos();
+        }
+      });
+      todoListEl.addEventListener("change", (ev) => {
+        if (ev.target.type === "checkbox") {
+          const id = ev.target.dataset.id;
+          const t = todos.find((x) => String(x.id) === id);
+          if (t) {
+            t.done = ev.target.checked;
+            saveTodos();
+            renderTodos();
+          }
+        }
+      });
+
+      renderTodos();
+
+      /* ---------- Resources filter ---------- */
+      document
+        .getElementById("resourceFilter")
+        .addEventListener("change", (e) => {
+          const v = e.target.value;
+          document.querySelectorAll("#resources .resource").forEach((el) => {
+            el.style.display =
+              v === "all" || el.dataset.type === v ? "flex" : "none";
+          });
+        });
+
+      /* ---------- Calendar (simple interactive) ---------- */
+      const calendarGrid = document.getElementById("calendarGrid");
+      const currentMonthLabel = document.getElementById("currentMonthLabel");
+      let calDate = new Date(2021, 8, 1); // Sept 2021 example
+
+      function buildCalendar(date) {
+        calendarGrid.innerHTML = "";
+        const year = date.getFullYear(),
+          month = date.getMonth();
+        currentMonthLabel.textContent = date.toLocaleString("default", {
+          month: "long",
+          year: year,
+        });
+        const firstDay = new Date(year, month, 1);
+        const startOffset = (firstDay.getDay() + 6) % 7; // Monday=0
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        for (let i = 0; i < startOffset; i++) {
+          const blank = document.createElement("div");
+          blank.className = "cal-day";
+          calendarGrid.appendChild(blank);
+        }
+        const todayMarker = 19;
+        for (let d = 1; d <= daysInMonth; d++) {
+          const cell = document.createElement("div");
+          cell.className = "cal-day";
+          cell.textContent = d;
+          if (d === todayMarker) cell.classList.add("today");
+          cell.addEventListener("click", () =>
+            alert(`Selected: ${year}-${month + 1}-${d}`)
+          );
+          calendarGrid.appendChild(cell);
+        }
+      }
+      buildCalendar(calDate);
+      document.getElementById("calPrevBtn").addEventListener("click", () => {
+        calDate = new Date(calDate.getFullYear(), calDate.getMonth() - 1, 1);
+        buildCalendar(calDate);
+      });
+      document.getElementById("calNextBtn").addEventListener("click", () => {
+        calDate = new Date(calDate.getFullYear(), calDate.getMonth() + 1, 1);
+        buildCalendar(calDate);
+      });
+
+      /* ---------- Score range toggle ---------- */
+      document.getElementById("scoreRange").addEventListener("change", (e) => {
+        const v = e.target.value;
+        document.getElementById("scoreRangeLabel").textContent =
+          v.charAt(0).toUpperCase() + v.slice(1);
+        if (v === "monthly") {
+          scoreChart.data.labels = demo.scoreMonthly.labels;
+          scoreChart.data.datasets[0].data = demo.scoreMonthly.data;
+        } else {
+          scoreChart.data.labels = [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun",
+          ];
+          scoreChart.data.datasets[0].data = [55, 60, 48, 72, 68, 74, 80];
+        }
+        scoreChart.update();
+      });
+
+      /* ---------- Export grades CSV ---------- */
+      document
+        .getElementById("exportGradesBtn")
+        .addEventListener("click", () => {
+          const rows = [
+            ["Subject", "Grade"],
+            ...demo.gradeData.map((g) => [g.sub, g.val]),
+          ];
+          const csv = rows
+            .map((r) =>
+              r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")
+            )
+            .join("\n");
+          const blob = new Blob([csv], { type: "text/csv" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "grades.csv";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+        });
+
+      /* ---------- Resize handling for charts ---------- */
+      window.addEventListener("resize", () => {
+        try {
+          scoreChart.resize();
+          gradeChart.resize();
+          miniDonutChart.resize();
+        } catch (e) {
+          /* ignore */
+        }
+      });
+
+      /* ---------- Small event handlers (demo) ---------- */
+      document
+        .getElementById("prevMonthBtn")
+        .addEventListener("click", () => alert("Previous month — demo"));
+      document
+        .getElementById("nextMonthBtn")
+        .addEventListener("click", () => alert("Next month — demo"));
+
+      // done
+      console.info("Dashboard loaded — fixed version");
     </script>
   </body>
 </html>
