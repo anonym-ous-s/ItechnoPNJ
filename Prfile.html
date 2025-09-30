@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings and Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background: #fff;
+    }
+
+ 
+    .sidebar {
+      width: 240px;
+      background: #0099ff;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .logo img {
+      width: 120px;
+    }
+
+    .email {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #e2e2e2;
+    }
+
+    .menu {
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .menu li {
+      margin: 8px 0;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: #0a2f5c;
+    }
+
+    .features {
+      background: #16386d;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 15px;
+      margin-top: 20px;
+    }
+
+    .features span {
+      background: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+    }
+
+
+    .content {
+      flex-grow: 1;
+      padding: 30px;
+    }
+
+    .content h1 {
+      color: #0d3b66;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+  
+    .profile-card {
+      background: #a8dbff;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .profile-pic {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: #0d3b66;
+    }
+    .profile-info h2 {
+      color: #0d3b66;
+      font-size: 20px;
+    }
+    .profile-info p {
+      font-size: 14px;
+      margin: 4px 0;
+      color: #333;
+    }
+    .edit-btn {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .rank {
+      margin-top: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0d3b66;
+      text-align: right;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+    }
+    .stat-card {
+      flex: 1;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .yellow {
+      background: #ffcc00;
+    }
+    .gold {
+      background: #ffe066;
+    }
+    .red {
+      background: #ff4d6d;
+      color: #fff;
+    }
+    .blue {
+      background: #66ccff;
+    }
+    .stat-card span {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="sidebar">
+    <div class="logo">
+      <img src="banban.jpg" alt="BANBAN Logo">
+    </div>
+    <p class="email">BanBan@gmail.com</p>
+    <ul class="menu">
+      <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
+      <li><a href="#"><i class="fa fa-clock"></i> Podomoro Timer</a></li>
+      <li><a href="#"><i class="fa fa-users"></i> Study Groups</a></li>
+      <li><a href="#"><i class="fa fa-book"></i> Materials</a></li>
+      <li><a href="#"><i class="fa fa-trophy"></i> Achievement</a></li>
+      <li><a href="#"><i class="fa fa-cog"></i> Settings and profile</a></li>
+    </ul>
+    <div class="features">
+      Features <span>NEW</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Settings and profile</h1>
+    <div class="profile-card">
+      <div class="profile-left">
+        <div class="profile-pic"></div>
+        <div class="profile-info">
+          <h2>Ahmad Kurniawan</h2>
+          <p>🏅 Level 10 ⚡ 1000 XP 🔥 11 day streak</p>
+        </div>
+      </div>
+      <div>
+        <button class="edit-btn">Edit Profile</button>
+        <div class="rank">Rank #3 🏆</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card yellow">⚡ 1000 XP <span>TOTAL EXP</span></div>
+      <div class="stat-card gold">💰 1.050 <span>TOTAL Gold</span></div>
+      <div class="stat-card red">🔥 11 DAY <span>STREAK</span></div>
+      <div class="stat-card blue">🏆 24 Achievements<span>TOTAL Achivement</span></div>
+    </div>
+  </div>
+</body>
+</html>
