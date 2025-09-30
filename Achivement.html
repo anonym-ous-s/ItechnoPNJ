@@ -1,87 +1,1270 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Achievements</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Achievements — BANBAN</title>
+
+    <!-- FontAwesome untuk ikon (CDN) -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="achivement.css" />
+
+    <style>
+      :root {
+        --sidebar-w: 240px;
+        --blue: #0a73b7;
+        --nav-blue: #0a66a3;
+        --accent: #0f4d92;
+        --accent-2: #1d4ed8;
+        --muted: #6b7280;
+        --card-bg: #ffffff;
+        --glass: rgba(255, 255, 255, 0.85);
+        --radius: 14px;
+        --shadow-lg: 0 20px 40px rgba(16, 24, 40, 0.08);
+        --shadow-sm: 0 4px 12px rgba(16, 24, 40, 0.04);
+        --success: #10b981;
+        --gold: #ffc107;
+        --silver: #c0c0c0;
+        --bronze: #cd7f32;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+        background: linear-gradient(180deg, #f6fbff, #f3f7fb);
+        color: #071433;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        font-family: inherit;
+        transition: all 0.2s ease;
+      }
+
+      /* app layout */
+      .app {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* ============= Sidebar (DO NOT CHANGE CONTENT) ============= */
+      .sidebar {
+        width: var(--sidebar-w);
+        background: var(--nav-blue);
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+      }
+      .logo img {
+        width: 120px;
+      }
+      .email {
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 18px;
+        opacity: 0.95;
+      }
+      .menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+      }
+      .menu li {
+        margin: 8px 0;
+      }
+      .menu a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+        transition: all 0.2s ease;
+      }
+      .menu a:hover,
+      .menu a.active {
+        background: #1e90ff;
+        transform: translateX(4px);
+      }
+      .features {
+        background: #044c6d;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: auto;
+      }
+      .features span {
+        background: #ff4b4b;
+        color: #fff;
+        padding: 3px 6px;
+        border-radius: 6px;
+        margin-left: 8px;
+        font-size: 12px;
+      }
+
+      /* ============= Main content ============= */
+      .main {
+        flex: 1;
+        padding: 28px;
+        min-width: 0;
+        overflow: auto;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .title {
+        font-size: 34px;
+        color: var(--accent-2);
+        font-weight: 700;
+        margin: 0;
+      }
+      .subtitle {
+        color: var(--muted);
+        margin-top: 6px;
+        font-size: 15px;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .controls input[type="search"] {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 77, 146, 0.08);
+        width: 340px;
+        outline: none;
+        box-shadow: 0 8px 20px rgba(16, 24, 40, 0.04);
+        transition: all 0.3s ease;
+      }
+      .controls input[type="search"]:focus {
+        box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+        border-color: var(--accent-2);
+      }
+      .controls .btn {
+        padding: 10px 16px;
+        border-radius: 10px;
+        border: 0;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.2s ease;
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(15, 77, 146, 0.12);
+        color: var(--accent-2);
+      }
+      .btn.ghost:hover {
+        background: rgba(15, 77, 146, 0.05);
+      }
+      .btn.primary {
+        background: var(--accent-2);
+        color: white;
+        box-shadow: 0 10px 30px rgba(29, 78, 216, 0.12);
+      }
+      .btn.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px rgba(29, 78, 216, 0.2);
+      }
+
+      /* achievement area */
+      .achievements-wrap {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 36px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+
+      .card {
+        width: 260px;
+        border-radius: 14px;
+        padding: 26px 20px 18px;
+        color: white;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        box-shadow: var(--shadow-lg);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 26px 60px rgba(12, 44, 80, 0.12);
+      }
+
+      /* first/second/third styling */
+      .card.first {
+        background: linear-gradient(180deg, #0b67b2, #235ea8);
+        transform: scale(1.07) translateY(-6px);
+        z-index: 3;
+      }
+      .card.second {
+        background: linear-gradient(180deg, #06b6d4, #0da7bd);
+      }
+      .card.third {
+        background: linear-gradient(180deg, #a7e8f9, #bfeffc);
+        color: #023047;
+      }
+
+      /* profile avatar & crown */
+      .avatar-wrap {
+        position: relative;
+        margin-top: -56px;
+      }
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 6px solid white;
+        object-fit: cover;
+        display: block;
+        box-shadow: 0 8px 18px rgba(12, 44, 80, 0.12);
+      }
+      .crown {
+        position: absolute;
+        width: 56px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -34px;
+        pointer-events: none;
+        filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
+      }
+
+      /* content text inside card */
+      .card h3 {
+        margin: 10px 0 2px 0;
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+      }
+      .card .level {
+        font-size: 13px;
+        opacity: 0.95;
+        margin-bottom: 8px;
+      }
+      .xp {
+        font-weight: 800;
+        font-size: 18px;
+        margin-top: 6px;
+      }
+
+      /* medal icon box (left card) */
+      .icon-box {
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+      }
+      .icon-box i {
+        font-size: 28px;
+        color: white;
+        opacity: 0.95;
+      }
+
+      /* badges & actions */
+      .card-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .small-btn {
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 0;
+        cursor: pointer;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+        transition: all 0.2s ease;
+      }
+      .small-btn:hover {
+        background: rgba(255, 255, 255, 0.22);
+        transform: scale(1.05);
+      }
+
+      /* progress / subtle info */
+      .progress {
+        width: 100%;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      .progress > i {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #ffd166, #ff7a7a);
+        width: 0%;
+        transition: width 1s cubic-bezier(0.2, 0.9, 0.3, 1);
+      }
+
+      /* top crown labels */
+      .leader-label {
+        position: absolute;
+        top: -66px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        width: 120px;
+      }
+
+      /* utilities row below */
+      .util-row {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 34px;
+        flex-wrap: wrap;
+      }
+
+      /* additional user cards */
+      .other-users {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .user-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: var(--shadow-sm);
+        width: 260px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .user-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .user-info {
+        flex: 1;
+      }
+
+      .user-name {
+        font-weight: 600;
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+
+      .user-level {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .user-xp {
+        font-weight: 700;
+        color: var(--accent-2);
+        font-size: 14px;
+      }
+
+      /* responsive */
+      @media (max-width: 1100px) {
+        .controls input[type="search"] {
+          width: 220px;
+        }
+        .achievements-wrap {
+          gap: 18px;
+        }
+      }
+      @media (max-width: 760px) {
+        .app {
+          flex-direction: column;
+        }
+        .sidebar {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 12px;
+          padding: 12px;
+        }
+        .logo img {
+          width: 80px;
+        }
+        .main {
+          padding: 16px;
+        }
+        .achievements-wrap {
+          flex-direction: column;
+          align-items: center;
+        }
+        .card {
+          width: 86%;
+          max-width: 420px;
+        }
+        .leader-label {
+          top: -46px;
+          width: 100px;
+        }
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .controls {
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+
+      /* modal */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(3, 6, 23, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 80;
+        backdrop-filter: blur(4px);
+      }
+      .modal {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 28px;
+        width: min(720px, 94%);
+        box-shadow: 0 28px 60px rgba(3, 6, 23, 0.3);
+        animation: modalFadeIn 0.3s ease;
+      }
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .modal h4 {
+        margin: 0 0 8px 0;
+        font-size: 22px;
+      }
+      .modal .row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .modal .row .avatar {
+        width: 84px;
+        height: 84px;
+        border-width: 4px;
+      }
+
+      /* confetti small (emoji-based) */
+      .confetti-wrap {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 90;
+      }
+      .confetti {
+        position: absolute;
+        font-size: 22px;
+        transform: translateY(-40px) rotate(10deg);
+        animation: fall 1600ms linear forwards;
+      }
+      @keyframes fall {
+        0% {
+          transform: translateY(-20vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0.02;
+        }
+      }
+
+      /* focus states */
+      button:focus,
+      .card:focus {
+        outline: 3px solid rgba(29, 78, 216, 0.12);
+        outline-offset: 3px;
+      }
+
+      /* toast notification */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: var(--accent-2);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: var(--shadow-lg);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* loading indicator */
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(29, 78, 216, 0.1);
+        border-left-color: var(--accent-2);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* achievement badges */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        background: rgba(29, 78, 216, 0.08);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent-2);
+        margin-right: 8px;
+        margin-bottom: 8px;
+      }
+
+      .badge i {
+        font-size: 10px;
+      }
+    </style>
   </head>
   <body>
-    <div class="sidebar">
-      <div class="logo"><img src="logo.png" alt="logo"></div>
-      <p class="email">BanBan@gmail.com</p>
-      <ul class="menu">
-        <li>
-          <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
-        </li>
-        <li>
-          <a href="Timer.html"><i class="fa fa-clock"></i> Podomoro Timer</a>
-        </li>
-        <li>
-          <a href="studygroup.html"><i class="fa fa-users"></i> Study Groups</a>
-        </li>
-        <li>
-          <a href="#"><i class="fa fa-book"></i> Materials</a>
-        </li>
-        <li>
-          <a href="Achivement.html"><i class="fa fa-trophy"></i> Achievement</a>
-        </li>
-        <li>
-          <a href="#"><i class="fa fa-cog"></i> Settings and profile</a>
-        </li>
-      </ul>
-      <div class="features">Features <span>NEW</span></div>
+    <div class="app">
+      <!-- SIDEBAR (preserve content exactly) -->
+      <aside class="sidebar" aria-label="Sidebar">
+        <div class="logo"><img src="logo.png" alt="logo" /></div>
+        <p class="email">BanBan@gmail.com</p>
+        <ul class="menu" role="navigation">
+          <li>
+            <a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="Timer.html"><i class="fa fa-clock"></i> Podomoro Timer</a>
+          </li>
+          <li>
+            <a href="studygroup.html"
+              ><i class="fa fa-users"></i> Study Groups</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-book"></i> Materials</a>
+          </li>
+          <li>
+            <a class="active" href="Achivement.html"
+              ><i class="fa fa-trophy"></i> Achievement</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-cog"></i> Settings and profile</a>
+          </li>
+        </ul>
+        <div class="features">Features <span>NEW</span></div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main" id="main">
+        <div class="header">
+          <div>
+            <h1 class="title">Achievements</h1>
+            <div class="subtitle">
+              Leaderboard dan pencapaian terbaik — rayakan kontributor teratas.
+            </div>
+          </div>
+
+          <div class="controls" role="toolbar" aria-label="controls">
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Cari nama..."
+              aria-label="Cari users"
+            />
+            <button id="sortBtn" class="btn ghost" title="Sort">
+              Sort: Top XP
+            </button>
+            <button id="exportBtn" class="btn primary" title="Export CSV">
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Achievements cards -->
+        <section class="achievements-wrap" id="cardsWrap" aria-live="polite">
+          <!-- cards injected by JS -->
+        </section>
+
+        <!-- Additional users section -->
+        <section class="other-users" id="otherUsers" aria-live="polite">
+          <!-- other users injected by JS -->
+        </section>
+
+        <div class="util-row" aria-hidden="true">
+          <small class="muted"
+            >Tip: klik nama untuk lihat detail / share / download
+            sertifikat</small
+          >
+        </div>
+      </main>
     </div>
 
-    <div class="content">
-      <h1>Achievements</h1>
-      <div class="achievements">
-        <div class="card second">
-          <div class="profile">
-            <img src="https://via.placeholder.com/90" alt="Kaila" />
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
-              class="crown"
-              alt="crown"
-            />
-          </div>
-          <h2>Kaila Fahranas</h2>
-          <p>Level 28</p>
-          <p>1,150 XP</p>
+    <!-- modal -->
+    <div
+      class="modal-backdrop"
+      id="modalBackdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+    >
+      <div class="modal" role="document" aria-labelledby="modalTitle">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h4 id="modalTitle">Detail Achievement</h4>
+          <button id="modalClose" class="btn ghost" aria-label="Close">
+            Close
+          </button>
         </div>
-
-        <div class="card first">
-          <div class="profile">
-            <img src="https://via.placeholder.com/90" alt="Sintia" />
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
-              class="crown"
-              alt="crown"
-            />
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            align-items: center;
+          "
+        >
+          <img
+            id="modalAvatar"
+            class="avatar"
+            src=""
+            alt="avatar"
+            style="
+              width: 84px;
+              height: 84px;
+              border-radius: 50%;
+              object-fit: cover;
+              border: 4px solid #fff;
+            "
+          />
+          <div>
+            <div id="modalName" style="font-weight: 800; font-size: 18px">
+              Name
+            </div>
+            <div id="modalLevel" class="muted" style="margin-top: 6px">
+              Level
+            </div>
+            <div id="modalXP" style="margin-top: 8px; font-weight: 800">
+              0 XP
+            </div>
+            <div style="margin-top: 10px">
+              <button id="celebrateBtn" class="btn primary">
+                Celebrate 🎉
+              </button>
+              <button id="downloadCert" class="btn ghost">
+                Download Certificate
+              </button>
+            </div>
           </div>
-          <h2>Sintia Nur Nia</h2>
-          <p>Level 28</p>
-          <p>1,250 XP</p>
         </div>
-
-        <div class="card third">
-          <div class="profile">
-            <img src="https://via.placeholder.com/90" alt="Warrahma" />
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
-              class="crown"
-              alt="crown"
-            />
-          </div>
-          <h2>Warrahma S.I</h2>
-          <p>Level 10</p>
-          <p>1,000 XP</p>
+        <div style="margin-top: 12px" id="modalBio" class="muted">
+          Bio / notes tentang user akan muncul di sini.
         </div>
+        <div id="modalBadges" style="margin-top: 16px"></div>
       </div>
     </div>
+
+    <!-- confetti container -->
+    <div class="confetti-wrap" id="confettiWrap" aria-hidden="true"></div>
+
+    <!-- toast notification -->
+    <div class="toast" id="toast">
+      <i class="fa fa-check-circle"></i>
+      <span id="toastMessage">Action completed successfully</span>
+    </div>
+
+    <script>
+      /* ------------- Data (can be replaced with API) ------------- */
+      const users = [
+        {
+          id: "u1",
+          name: "Sintia Nur Nia",
+          level: 28,
+          xp: 1250,
+          avatar:
+            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop",
+          bio: "Top contributor in Computer Science. Active in coding challenges and community support.",
+          badges: ["Top Contributor", "Coding Expert", "Community Helper"],
+        },
+        {
+          id: "u2",
+          name: "Kaila Fahranas",
+          level: 28,
+          xp: 1150,
+          avatar:
+            "https://images.unsplash.com/photo-1545996124-1b3b4d7b22f6?q=80&w=400&auto=format&fit=crop",
+          bio: "Active in coding challenges and study groups. Always helping others.",
+          badges: ["Study Group Leader", "Problem Solver"],
+        },
+        {
+          id: "u3",
+          name: "Warrahma S.I",
+          level: 10,
+          xp: 1000,
+          avatar:
+            "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400&auto=format&fit=crop",
+          bio: "Great at community support and material contributions.",
+          badges: ["Material Contributor", "Community Helper"],
+        },
+        {
+          id: "u4",
+          name: "Rizky Pratama",
+          level: 15,
+          xp: 850,
+          avatar:
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop",
+          bio: "Active learner with consistent progress.",
+          badges: ["Consistent Learner"],
+        },
+        {
+          id: "u5",
+          name: "Sari Dewi",
+          level: 12,
+          xp: 720,
+          avatar:
+            "https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=400&auto=format&fit=crop",
+          bio: "Enthusiastic participant in study groups.",
+          badges: ["Study Group Participant"],
+        },
+      ];
+
+      /* clone and compute ranking */
+      let leaderboard = users.slice().sort((a, b) => b.xp - a.xp);
+
+      /* ---------- helpers ---------- */
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => Array.from(document.querySelectorAll(s));
+      function el(tag, props = {}, children = []) {
+        const e = document.createElement(tag);
+        Object.assign(e, props);
+        (Array.isArray(children) ? children : [children]).forEach((c) => {
+          if (typeof c === "string") e.appendChild(document.createTextNode(c));
+          else if (c) e.appendChild(c);
+        });
+        return e;
+      }
+      function formatXP(n) {
+        return n.toLocaleString("en-US") + " XP";
+      }
+
+      /* ---------- toast notification ---------- */
+      function showToast(message) {
+        const toast = $("#toast");
+        $("#toastMessage").textContent = message;
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+
+      /* ---------- render cards ---------- */
+      const cardsWrap = $("#cardsWrap");
+      const otherUsersWrap = $("#otherUsers");
+
+      function renderCards(list) {
+        cardsWrap.innerHTML = "";
+        otherUsersWrap.innerHTML = "";
+
+        // Show loading state if no data
+        if (list.length === 0) {
+          cardsWrap.innerHTML =
+            '<div class="loading"><div class="spinner"></div></div>';
+          return;
+        }
+
+        // Ensure top 3 arranged: second (left), first (center), third (right) visually like mock
+        // We will pick top3 in order: [1st,2nd,3rd] but render as [2nd,1st,3rd]
+        const top3 = list.slice(0, 3);
+        if (top3.length < 3) {
+          // basic fallback
+          top3.push(...Array(3 - top3.length).fill(null));
+        }
+
+        // map to render order left-centre-right
+        const order = [1, 0, 2];
+        order.forEach((idx, pos) => {
+          const u = top3[idx];
+          if (!u) return;
+          const card = createCard(
+            u,
+            idx === 0 ? "first" : idx === 1 ? "second" : "third"
+          );
+          cardsWrap.appendChild(card);
+        });
+
+        // Render other users
+        if (list.length > 3) {
+          list.slice(3).forEach((u) => {
+            const userCard = createUserCard(u);
+            otherUsersWrap.appendChild(userCard);
+          });
+        }
+      }
+
+      function createCard(user, sizeClass) {
+        // sizeClass: 'first','second','third' (affects styling)
+        const card = el("article", {
+          className: "card " + sizeClass,
+          role: "button",
+          tabIndex: 0,
+          "aria-label": user.name + " — " + user.xp + " XP",
+        });
+        // leader label + crown placement for center
+        const leaderLabel = el("div", { className: "leader-label" }, []);
+        // crown svg (inline) to match mock
+        const crownSvg = el("img", {
+          src: "https://cdn-icons-png.flaticon.com/512/2583/2583344.png",
+          className: "crown",
+          alt: "crown",
+        });
+        // avatar
+        const avatarWrap = el("div", { className: "avatar-wrap" }, []);
+        const avatar = el("img", {
+          src: user.avatar,
+          className: "avatar",
+          alt: user.name + " avatar",
+        });
+        avatarWrap.appendChild(avatar);
+
+        // Only show crown for first place
+        if (sizeClass === "first") {
+          avatarWrap.appendChild(crownSvg);
+        }
+
+        // Icon box for left card (medal)
+        const iconBox = el("div", { className: "icon-box" }, [
+          el("i", { className: "fa fa-award" }),
+        ]);
+
+        const nameH = el("h3", {}, [user.name]);
+        const levelP = el("div", { className: "level" }, [
+          "Level " + user.level,
+        ]);
+        const xpP = el("div", { className: "xp" }, [formatXP(user.xp)]);
+
+        // progress bar (visual)
+        const progress = el("div", { className: "progress" }, [
+          el("i", { style: "width:0%" }),
+        ]);
+        // actions
+        const actions = el("div", { className: "card-actions" }, []);
+        const viewBtn = el(
+          "button",
+          { className: "small-btn", title: "View detail" },
+          ["View"]
+        );
+        const favBtn = el(
+          "button",
+          {
+            className: "small-btn",
+            "aria-pressed": "false",
+            title: "Mark favorite",
+          },
+          [el("i", { className: "fa fa-heart" })]
+        );
+        const shareBtn = el(
+          "button",
+          { className: "small-btn", title: "Share" },
+          [el("i", { className: "fa fa-share" })]
+        );
+
+        actions.appendChild(viewBtn);
+        actions.appendChild(favBtn);
+        actions.appendChild(shareBtn);
+
+        // institution: left/right/middle decide icon vs nothing
+        if (sizeClass === "second") card.appendChild(iconBox);
+        card.appendChild(avatarWrap);
+        card.appendChild(nameH);
+        card.appendChild(levelP);
+        card.appendChild(xpP);
+        card.appendChild(progress);
+        card.appendChild(actions);
+
+        // event listeners
+        card.addEventListener("click", () => openModal(user.id));
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openModal(user.id);
+          }
+        });
+
+        viewBtn.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          openModal(user.id);
+        });
+        shareBtn.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          shareUser(user);
+        });
+        favBtn.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          toggleFavorite(user.id, favBtn);
+        });
+
+        // animate counters and progress fill using requestAnimationFrame
+        requestAnimationFrame(() => {
+          xpP.textContent = formatXP(0);
+          animateNumber(xpP, user.xp, 900);
+          const fill = progress.querySelector("i");
+          const pct = Math.round((user.xp / 1500) * 100);
+          // cap between 5 and 100
+          const targetPct = Math.max(6, Math.min(100, pct));
+          setTimeout(() => {
+            fill.style.width = targetPct + "%";
+          }, 100);
+        });
+
+        return card;
+      }
+
+      function createUserCard(user) {
+        const userCard = el(
+          "div",
+          { className: "user-card", role: "button", tabIndex: 0 },
+          []
+        );
+
+        const avatar = el("img", {
+          src: user.avatar,
+          className: "user-avatar",
+          alt: user.name + " avatar",
+        });
+        const userInfo = el("div", { className: "user-info" }, []);
+        const userName = el("div", { className: "user-name" }, [user.name]);
+        const userLevel = el("div", { className: "user-level" }, [
+          "Level " + user.level,
+        ]);
+        const userXP = el("div", { className: "user-xp" }, [formatXP(user.xp)]);
+
+        userInfo.appendChild(userName);
+        userInfo.appendChild(userLevel);
+        userCard.appendChild(avatar);
+        userCard.appendChild(userInfo);
+        userCard.appendChild(userXP);
+
+        userCard.addEventListener("click", () => openModal(user.id));
+        userCard.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openModal(user.id);
+          }
+        });
+
+        return userCard;
+      }
+
+      /* animate number function */
+      function animateNumber(el, to, ms = 800) {
+        const start = 0;
+        const startTime = performance.now();
+        (function step(now) {
+          const t = Math.min(1, (now - startTime) / ms);
+          const val = Math.round(start + (to - start) * t);
+          el.textContent = val.toLocaleString("en-US") + " XP";
+          if (t < 1) requestAnimationFrame(step);
+        })(performance.now());
+      }
+
+      /* ---------- favorites persistence ---------- */
+      const FAV_KEY = "achv_favs_v1";
+      function toggleFavorite(id, btn) {
+        const favs = JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
+        const idx = favs.indexOf(id);
+        if (idx === -1) {
+          favs.push(id);
+          btn.style.background = "rgba(255,255,255,0.22)";
+          btn.setAttribute("aria-pressed", "true");
+          showToast("Added to favorites");
+        } else {
+          favs.splice(idx, 1);
+          btn.style.background = "rgba(255,255,255,0.12)";
+          btn.setAttribute("aria-pressed", "false");
+          showToast("Removed from favorites");
+        }
+        localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+      }
+
+      /* ---------- modal & interactions ---------- */
+      const modalBackdrop = $("#modalBackdrop");
+      const modalTitle = $("#modalTitle");
+      const modalName = $("#modalName");
+      const modalLevel = $("#modalLevel");
+      const modalXP = $("#modalXP");
+      const modalAvatar = $("#modalAvatar");
+      const modalBio = $("#modalBio");
+      const modalBadges = $("#modalBadges");
+      const celebrateBtn = $("#celebrateBtn");
+      const downloadCert = $("#downloadCert");
+      const confettiWrap = $("#confettiWrap");
+
+      function openModal(id) {
+        const user = leaderboard.find((u) => u.id === id);
+        if (!user) return;
+        modalBackdrop.style.display = "flex";
+        modalBackdrop.setAttribute("aria-hidden", "false");
+        modalTitle.textContent = "Achievement — " + user.name;
+        modalName.textContent = user.name;
+        modalLevel.textContent = "Level " + user.level;
+        modalXP.textContent = user.xp + " XP";
+        modalAvatar.src = user.avatar;
+        modalBio.textContent = user.bio || "No description available.";
+
+        // Render badges
+        modalBadges.innerHTML = "";
+        if (user.badges && user.badges.length > 0) {
+          user.badges.forEach((badge) => {
+            const badgeEl = el("span", { className: "badge" }, [
+              el("i", { className: "fa fa-award" }),
+              badge,
+            ]);
+            modalBadges.appendChild(badgeEl);
+          });
+        }
+
+        // attach actions
+        celebrateBtn.onclick = () => {
+          spawnConfetti(18);
+        };
+        downloadCert.onclick = () => {
+          downloadCertificate(user);
+        };
+      }
+
+      $("#modalClose").addEventListener("click", closeModal);
+      modalBackdrop.addEventListener("click", (ev) => {
+        if (ev.target === modalBackdrop) closeModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+
+      function closeModal() {
+        modalBackdrop.style.display = "none";
+        modalBackdrop.setAttribute("aria-hidden", "true");
+        // clear callbacks
+        celebrateBtn.onclick = null;
+        downloadCert.onclick = null;
+      }
+
+      /* ---------- confetti (emoji) ---------- */
+      function spawnConfetti(amount = 12) {
+        const emojis = ["🎉", "✨", "🏆", "🎈", "🥳"];
+        for (let i = 0; i < amount; i++) {
+          const node = document.createElement("div");
+          node.className = "confetti";
+          node.style.left = Math.random() * 100 + "vw";
+          node.style.top = -10 - Math.random() * 20 + "vh";
+          node.style.fontSize = 12 + Math.random() * 32 + "px";
+          node.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          confettiWrap.appendChild(node);
+          setTimeout(() => node.remove(), 1800 + Math.random() * 800);
+        }
+        showToast("Celebration started!");
+      }
+
+      /* ---------- share & export ---------- */
+      function shareUser(user) {
+        // simple share: copy text to clipboard
+        const text = `${user.name} — Level ${user.level} — ${user.xp} XP`;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(
+            () => showToast("Profile copied to clipboard"),
+            () => showToast("Failed to copy to clipboard")
+          );
+        } else {
+          // Fallback for older browsers
+          const textArea = document.createElement("textarea");
+          textArea.value = text;
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          try {
+            document.execCommand("copy");
+            showToast("Profile copied to clipboard");
+          } catch (err) {
+            showToast("Failed to copy to clipboard");
+          }
+          document.body.removeChild(textArea);
+        }
+      }
+
+      /* export CSV */
+      $("#exportBtn").addEventListener("click", () => {
+        const rows = [
+          ["Name", "Level", "XP"],
+          ...leaderboard.map((u) => [u.name, u.level, u.xp]),
+        ];
+        const csv = rows
+          .map((r) =>
+            r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")
+          )
+          .join("\n");
+        const blob = new Blob([csv], { type: "text/csv" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "leaderboard.csv";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        showToast("CSV exported successfully");
+      });
+
+      /* ---------- certificate (very simple PNG via canvas) ---------- */
+      function downloadCertificate(user) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1000;
+        canvas.height = 700;
+        const ctx = canvas.getContext("2d");
+        // background
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // heading
+        ctx.fillStyle = "#111827";
+        ctx.font = "bold 36px Inter, Arial";
+        ctx.fillText("Certificate of Achievement", 60, 120);
+        ctx.font = "600 22px Inter, Arial";
+        ctx.fillStyle = "#374151";
+        ctx.fillText(`This certifies that`, 60, 180);
+        ctx.font = "800 40px Inter, Arial";
+        ctx.fillStyle = "#0b67b2";
+        ctx.fillText(user.name, 60, 240);
+        ctx.font = "600 18px";
+        ctx.fillStyle = "#6b7280";
+        ctx.fillText(
+          `has reached Level ${user.level} with ${user.xp} XP`,
+          60,
+          290
+        );
+        ctx.fillStyle = "#0b67b2";
+        ctx.fillRect(60, 340, 260, 6); // accent
+        // small logo
+        const logo = new Image();
+        logo.crossOrigin = "anonymous";
+        logo.onload = () => {
+          ctx.drawImage(logo, canvas.width - 220, 40, 160, 80);
+          const link = document.createElement("a");
+          link.download = `${user.name.replaceAll(" ", "_")}_certificate.png`;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+          showToast("Certificate downloaded");
+        };
+        logo.onerror = () => {
+          const link = document.createElement("a");
+          link.download = `${user.name.replaceAll(" ", "_")}_certificate.png`;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+          showToast("Certificate downloaded");
+        };
+        logo.src = "logo.png";
+      }
+
+      /* ---------- search & sort UI ---------- */
+      $("#searchInput").addEventListener("input", (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        let filtered = users.filter((u) => u.name.toLowerCase().includes(q));
+        leaderboard = filtered.sort((a, b) => b[sortMode] - a[sortMode]);
+        renderCards(leaderboard);
+      });
+
+      let sortMode = "xp"; // or 'level'
+      $("#sortBtn").addEventListener("click", () => {
+        sortMode = sortMode === "xp" ? "level" : "xp";
+        $("#sortBtn").textContent =
+          "Sort: " + (sortMode === "xp" ? "Top XP" : "Top Level");
+        leaderboard = leaderboard.sort((a, b) => b[sortMode] - a[sortMode]);
+        renderCards(leaderboard);
+      });
+
+      /* ---------- initial render ---------- */
+      renderCards(leaderboard);
+
+      /* ensure keyboard accessibility for exported buttons */
+      $("#exportBtn").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") $("#exportBtn").click();
+      });
+    </script>
   </body>
 </html>
