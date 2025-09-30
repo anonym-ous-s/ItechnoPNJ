@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materials</title>
+  <link rel="stylesheet" href="materials.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">BANBAN</div>
+      <div class="email">BanBan@gmail.com</div>
+
+      <nav class="menu">
+        <a href="#" class="menu-item">Dashboard</a>
+        <a href="#" class="menu-item">Podomoro Timer</a>
+        <a href="#" class="menu-item">Study Groups</a>
+        <a href="#" class="menu-item active">Materials</a>
+        <a href="#" class="menu-item">Achievement</a>
+        <a href="#" class="menu-item">Settings and profile</a>
+      </nav>
+
+      <div class="features">
+        <a href="#" class="menu-item">Features <span class="new-badge">NEW</span></a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <h1>Materials</h1>
+      <input type="text" id="search" placeholder="Search materials">
+
+      <div class="materials-grid">
+        <div class="material-card">
+          <div class="card-bg">
+            <img src="/matematika.jpg" alt="Mathematics" onclick="cardClicked('Mathematics')">
+          </div>
+          <div class="card-title">Mathematics</div>
+        </div>
+
+        <div class="material-card">
+          <div class="card-bg">
+            <img src="" alt="Science" onclick="cardClicked('Science')">
+          </div>
+          <div class="card-title">Science</div>
+        </div>
+
+        <div class="material-card">
+          <div class="card-bg">
+            <img src="" alt="History" onclick="cardClicked('History')">
+          </div>
+          <div class="card-title">History</div>
+        </div>
+
+        <div class="material-card">
+          <div class="card-bg">
+            <img src="" alt="English" onclick="cardClicked('English')">
+          </div>
+          <div class="card-title">English</div>
+        </div>
+
+        <div class="material-card">
+          <div class="card-bg">
+            <img src="" alt="Biology" onclick="cardClicked('Biology')">
+          </div>
+          <div class="card-title">Biology</div>
+        </div>
+
+        <div class="material-card">
+          <div class="card-bg">
+            <img src="" alt="Geography" onclick="cardClicked('Geography')">
+          </div>
+          <div class="card-title">Geography</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="materials.js"></script>
+</body>
+</html>
