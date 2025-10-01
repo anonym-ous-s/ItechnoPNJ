@@ -1,1648 +1,847 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Materials — BANBAN (Final)</title>
-    <style>
-      :root {
-        --sidebar-w: 260px;
-        --blue-600: #0a73b7;
-        --accent-2: #1d4ed8;
-        --muted: #6b7280;
-        --card: #fff;
-        --radius: 14px;
-        --shadow: 0 18px 40px rgba(12, 44, 80, 0.06);
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-        -webkit-font-smoothing: antialiased;
-      }
-      body {
-        background: linear-gradient(180deg, #f8fbff, #f3f7fb);
-        color: #071433;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Materials — BANBAN (final)</title>
+  <style>
+    :root{
+      --sidebar-w:260px;
+      --blue:#0a73b7;
+      --accent:#1d4ed8;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --radius:12px;
+      --shadow: 0 18px 40px rgba(12,44,80,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,-apple-system}
+    body{background:linear-gradient(180deg,#f8fbff,#f3f7fb);color:#071433}
+    .app{display:flex;min-height:100vh;align-items:stretch}
 
-      /* Layout */
-      .app {
-        display: flex;
-        min-height: 100vh;
-        align-items: stretch;
-      }
-      .sidebar {
-        width: var(--sidebar-w);
-        background: var(--blue-600);
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        gap: 12px;
-        flex-shrink: 0;
-      }
-      .logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 6px;
-      }
-      .logo img {
-        width: 120px;
-        height: auto;
-        object-fit: contain;
-      }
-      .email {
-        font-size: 13px;
-        text-align: center;
-        opacity: 0.95;
-        margin-bottom: 6px;
-      }
-      .menu {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .menu a {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px;
-        border-radius: 10px;
-        text-decoration: none;
-        color: white;
-        font-size: 15px;
-        transition: background 0.18s;
-      }
-      .menu a:hover,
-      .menu a.active {
-        background: #1e90ff;
-      }
+    /* Sidebar */
+    .sidebar{
+      width:var(--sidebar-w);
+      background:var(--blue);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      padding:20px;
+      gap:12px;
+      flex-shrink:0;
+    }
+    .logo img{width:120px;display:block;margin:2px auto}
+    .email{font-size:13px;text-align:center;opacity:.95;margin-bottom:6px}
+    .menu{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;flex-grow:1}
+    .menu a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;text-decoration:none;color:white;font-size:15px;transition:background .15s}
+    .menu a:hover,.menu a.active{background:#1e90ff}
+    .ico{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:18px}
 
-      /* Features button moved bottom and made larger */
-      .features-block {
-        margin-top: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .features-btn {
-        width: 100%;
-        border-radius: 12px;
-        padding: 14px;
-        background: linear-gradient(180deg, #033e68, #046698);
-        border: 2px solid rgba(255, 255, 255, 0.06);
-        color: white;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        box-shadow: 0 16px 36px rgba(3, 6, 23, 0.12);
-      }
-      .features-btn .new {
-        background: #ff5a5f;
-        color: white;
-        padding: 6px 8px;
-        border-radius: 8px;
-        font-size: 12px;
-        font-weight: 800;
-      }
+    .features-block{margin-top:auto}
+    .features-btn{width:100%;padding:14px;border-radius:12px;background:linear-gradient(180deg,#033e68,#046698);display:flex;justify-content:center;align-items:center;gap:10px;border:0;color:white;font-weight:800}
+    .features-btn .new{background:#ff4d4d;padding:6px 8px;border-radius:8px;font-size:12px}
 
-      /* Main */
-      .main {
-        flex: 1;
-        padding: 26px;
-        min-width: 0;
-        overflow: auto;
-      }
-      .topbar {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        align-items: center;
-        margin-bottom: 16px;
-      }
-      .left {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-      }
-      .burger {
-        display: none;
-        background: transparent;
-        border: 0;
-        padding: 8px;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-      .title {
-        font-size: 34px;
-        color: var(--accent-2);
-        font-weight: 800;
-        margin: 0;
-      }
-      .subtitle {
-        color: var(--muted);
-        font-size: 14px;
-        margin-top: 6px;
-        max-width: 60%;
-      }
+    /* Main */
+    .main{flex:1;padding:22px;overflow:auto;min-width:0}
+    .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .left{display:flex;gap:12px;align-items:center}
+    .burger{display:none;background:transparent;border:0;font-size:20px;padding:6px;border-radius:8px;cursor:pointer}
+    h1{margin:0;color:var(--accent);font-size:28px}
+    .subtitle{color:var(--muted);font-size:13px;margin-top:6px}
 
-      /* Controls */
-      .controls {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        margin-left: auto;
-      }
-      .search {
-        position: relative;
-        min-width: 260px;
-        width: 44vw;
-        max-width: 640px;
-      }
-      .search input {
-        width: 100%;
-        padding: 12px 14px 12px 44px;
-        border-radius: 999px;
-        border: 2px solid rgba(15, 77, 146, 0.08);
-        background: var(--card);
-        outline: none;
-        font-size: 14px;
-        box-shadow: var(--shadow);
-      }
-      .search svg {
-        position: absolute;
-        left: 12px;
-        top: 12px;
-        color: var(--muted);
-      }
-      .btn {
-        padding: 10px 12px;
-        border-radius: 10px;
-        border: 0;
-        cursor: pointer;
-        font-weight: 700;
-      }
-      .btn.ghost {
-        background: transparent;
-        border: 1px solid rgba(15, 77, 146, 0.06);
-        color: var(--accent-2);
-      }
-      .btn.primary {
-        background: var(--accent-2);
-        color: white;
-        box-shadow: 0 10px 26px rgba(29, 78, 216, 0.12);
-      }
+    .controls{display:flex;gap:10px;align-items:center}
+    .search{position:relative;min-width:220px}
+    .search input{width:100%;padding:10px 12px 10px 40px;border-radius:999px;border:2px solid rgba(15,77,146,0.08);outline:none;background:var(--card)}
+    .search svg{position:absolute;left:10px;top:10px;color:var(--muted);width:18px;height:18px}
 
-      /* Top metrics */
-      .metrics {
-        display: flex;
-        gap: 12px;
-        margin-top: 10px;
-        margin-bottom: 18px;
-      }
-      .metric {
-        background: var(--card);
-        padding: 12px;
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(15, 77, 146, 0.03);
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        min-width: 150px;
-      }
-      .metric .num {
-        font-weight: 800;
-        font-size: 18px;
-      }
-      .metric .muted {
-        color: var(--muted);
-        font-size: 13px;
-      }
+    .metrics{display:flex;gap:12px;margin:18px 0}
+    .metric{background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow);min-width:140px}
+    .metric strong{display:block;font-size:18px}
 
-      /* Layout columns */
-      .layout {
-        display: grid;
-        grid-template-columns: 1fr 360px;
-        gap: 20px;
-        align-items: start;
-      }
+    .layout{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+    .panel{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
 
-      /* Left column */
-      .left-col {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-      .section {
-        background: var(--card);
-        border-radius: 16px;
-        padding: 14px;
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(15, 77, 146, 0.03);
-      }
+    .cat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+    .tab{padding:6px 10px;border-radius:999px;border:1px solid rgba(15,77,146,0.06);cursor:pointer}
+    .tab.active{background:linear-gradient(180deg,#e8f5ff,#dff3ff);border-color:#bfe3ff;color:var(--accent)}
 
-      /* category tabs */
-      .cat-tabs {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-      }
-      .tab {
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: transparent;
-        border: 1px solid rgba(15, 77, 146, 0.06);
-        cursor: pointer;
-        font-weight: 700;
-      }
-      .tab.active {
-        background: linear-gradient(180deg, #e8f5ff, #dff3ff);
-        border-color: #bfe3ff;
-        color: var(--accent-2);
-      }
+    .materials-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;max-height:560px;overflow:auto;padding:8px}
+    .card{border-radius:12px;padding:12px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:0 10px 26px rgba(12,44,80,0.04);border:1px solid rgba(15,77,146,0.03);display:flex;flex-direction:column;gap:8px;transition:transform .12s}
+    .card:hover{transform:translateY(-6px)}
+    .thumb{height:140px;border-radius:8px;overflow:hidden;background:#eef6ff;display:flex;align-items:center;justify-content:center}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .title{font-weight:800;color:var(--accent)}
+    .cat{color:var(--muted);font-weight:700;font-size:13px}
+    .topics{display:flex;gap:6px;flex-wrap:wrap}
+    .topic{background:#f3f8ff;padding:6px;border-radius:8px;font-weight:700;color:var(--accent);font-size:12px}
+    .card-actions{display:flex;gap:8px;align-items:center}
+    .favorite{background:linear-gradient(90deg,#ff7a7a,#ffb1b1);color:#fff;padding:6px 8px;border-radius:8px;border:0;font-weight:800;cursor:pointer}
+    .detail-btn{padding:6px 8px;border-radius:8px;border:1px solid rgba(15,77,146,0.06);background:transparent;cursor:pointer}
 
-      /* big scrollable materials area */
-      .materials-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 20px;
-        padding: 8px;
-        max-height: 640px;
-        overflow: auto;
-        scroll-behavior: smooth;
-      }
-      .material-card {
-        background: linear-gradient(180deg, #ffffff, #fbfdff);
-        border-radius: 16px;
-        padding: 10px;
-        box-shadow: 0 10px 26px rgba(12, 44, 80, 0.04);
-        border: 1px solid rgba(15, 77, 146, 0.03);
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        transition: transform 0.18s, box-shadow 0.18s;
-      }
-      .material-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 26px 60px rgba(12, 44, 80, 0.12);
-        cursor: pointer;
-      }
-      .thumb {
-        height: 140px;
-        border-radius: 12px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #e6f0ff;
-      }
-      .thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .title {
-        font-weight: 800;
-        font-size: 18px;
-        color: var(--accent-2);
-      }
-      .cat {
-        font-weight: 700;
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .topics {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-top: 6px;
-      }
-      .topic {
-        padding: 6px 8px;
-        background: #f3f8ff;
-        border-radius: 8px;
-        font-size: 12px;
-        color: var(--accent-2);
-        font-weight: 700;
-      }
+    .progress-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+    .progress-bar{background:#eef6ff;border-radius:999px;flex:1;height:10px;overflow:hidden}
+    .fill{height:100%;background:linear-gradient(90deg,#1d4ed8,#60a5fa);width:0%;transition:width .6s}
+    .progress-num{min-width:44px;text-align:right;font-weight:800}
 
-      /* actions & progress */
-      .card-actions {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        margin-top: 6px;
-      }
-      .favorite {
-        background: linear-gradient(90deg, #ff7a7a, #ffb1b1);
-        color: white;
-        border-radius: 10px;
-        padding: 6px 8px;
-        display: flex;
-        gap: 6px;
-        align-items: center;
-        font-weight: 800;
-      }
-      .progress-row {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        margin-top: 8px;
-      }
-      .progress-bar {
-        height: 10px;
-        background: #eef6ff;
-        border-radius: 999px;
-        overflow: hidden;
-        flex: 1;
-      }
-      .progress-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #1d4ed8, #60a5fa);
-        width: 0%;
-        transition: width 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-      }
-      .progress-num {
-        min-width: 44px;
-        text-align: right;
-        font-weight: 800;
-      }
+    .fav-list{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto}
+    .fav-item{display:flex;gap:8px;align-items:center;padding:8px;border-radius:10px;background:#fbfdff;border:1px solid rgba(15,77,146,0.03)}
+    .fav-item img{width:44px;height:44px;border-radius:8px;object-fit:cover}
 
-      /* Right column panels */
-      .right-col {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-      .side-panel {
-        padding: 12px;
-        border-radius: 12px;
-        background: var(--card);
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(15, 77, 146, 0.03);
-      }
-      .side-panel h4 {
-        margin: 0 0 8px 0;
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--accent-2);
-      }
-      .fav-list {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        max-height: 260px;
-        overflow: auto;
-        padding-right: 6px;
-      }
-      .fav-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px;
-        border-radius: 10px;
-        background: #fbfdff;
-        border: 1px solid rgba(15, 77, 146, 0.03);
-      }
-      .fav-item .mini {
-        width: 44px;
-        height: 44px;
-        border-radius: 8px;
-        overflow: hidden;
-        background: #e6f0ff;
-      }
-      .fav-item .mini img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+    .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,6,23,0.44);z-index:120}
+    .modal{width:min(760px,94%);background:var(--card);border-radius:12px;padding:16px;box-shadow:0 28px 60px rgba(3,6,23,0.3)}
+    .confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:130;overflow:hidden}
+    .confetti{position:absolute;font-size:22px;animation:fall 1.6s linear forwards}
+    @keyframes fall{0%{transform:translateY(-20vh) rotate(0)}100%{transform:translateY(110vh) rotate(720deg);opacity:.02}}
 
-      /* footer note */
-      .footer-note {
-        text-align: center;
-        color: var(--muted);
-        font-size: 13px;
-        margin-top: 14px;
-      }
+    @media (max-width:1100px){.layout{grid-template-columns:1fr}.materials-list{max-height:420px}.burger{display:inline-flex}}
+    @media (max-width:720px){.sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-112%);z-index:140}.sidebar.open{transform:translateX(0)}.materials-list{grid-template-columns:1fr}.search{min-width:140px}}
+    button:focus, .card:focus, .tab:focus{outline:3px solid rgba(29,78,216,0.12);outline-offset:3px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo"><img src="logo.png" alt="BANBAN logo" onerror="this.style.opacity=.7"></div>
+      <div class="email">BanBan@gmail.com</div>
 
-      /* modal */
-      .modal-backdrop {
-        position: fixed;
-        inset: 0;
-        display: none;
-        background: rgba(3, 6, 23, 0.44);
-        align-items: center;
-        justify-content: center;
-        z-index: 90;
-      }
-      .modal {
-        width: min(760px, 94%);
-        background: var(--card);
-        border-radius: 12px;
-        padding: 18px;
-        box-shadow: 0 28px 60px rgba(3, 6, 23, 0.3);
-      }
+      <ul class="menu" role="navigation">
+        <li><a href="dashboard.html"><span class="ico">🏠</span> Dashboard</a></li>
+        <li><a href="Timer.html"><span class="ico">⏱️</span> Podomoro Timer</a></li>
+        <li><a href="studygroup.html"><span class="ico">👥</span> Study Groups</a></li>
+        <li><a class="active" href="materials.html"><span class="ico">📚</span> Materials</a></li>
+        <li><a href="Achivement.html"><span class="ico">🏆</span> Achievement</a></li>
+        <li><a href="Profile.html"><span class="ico">⚙️</span> Settings and profile</a></li>
+      </ul>
 
-      /* confetti */
-      .confetti-wrap {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
-        z-index: 120;
-      }
-      .confetti {
-        position: absolute;
-        font-size: 22px;
-        transform: translateY(-40px) rotate(10deg);
-        animation: fall 1600ms linear forwards;
-      }
-      @keyframes fall {
-        0% {
-          transform: translateY(-20vh) rotate(0deg);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(110vh) rotate(720deg);
-          opacity: 0.02;
-        }
-      }
+      <div class="features-block">
+        <button class="features-btn"><span>Features <span class="new">NEW</span></span></button>
+      </div>
+    </aside>
 
-      /* responsive */
-      @media (max-width: 1100px) {
-        .layout {
-          grid-template-columns: 1fr;
-        }
-        .materials-list {
-          max-height: 520px;
-        }
-        .search {
-          width: 320px;
-        }
-        .burger {
-          display: inline-flex;
-        }
-      }
-      @media (max-width: 720px) {
-        .sidebar {
-          position: fixed;
-          left: 0;
-          top: 0;
-          bottom: 0;
-          transform: translateX(-112%);
-          z-index: 120;
-        }
-        .sidebar.open {
-          transform: translateX(0);
-        }
-        .burger {
-          display: inline-flex;
-        }
-        .main {
-          padding: 14px;
-        }
-        .materials-list {
-          grid-template-columns: 1fr;
-          max-height: 56vh;
-        }
-        .title {
-          font-size: 26px;
-        }
-      }
-      button:focus,
-      .material-card:focus,
-      .tab:focus {
-        outline: 3px solid rgba(29, 78, 216, 0.12);
-        outline-offset: 3px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="app">
-      <!-- Sidebar (unchanged content) -->
-      <aside class="sidebar" id="sidebar">
-        <div class="logo">
-          <img
-            src="logo.png"
-            alt="BANBAN logo"
-            onerror="this.style.opacity=.6"
-          />
-        </div>
-        <div class="email">BanBan@gmail.com</div>
-
-        <ul class="menu" role="navigation">
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="Timer.html">Podomoro Timer</a></li>
-          <li><a href="studygroup.html">Study Groups</a></li>
-          <li><a class="active" href="#">Materials</a></li>
-          <li><a href="Achivement.html">Achievement</a></li>
-          <li><a href="Prfile.html">Settings and profile</a></li>
-        </ul>
-
-        <!-- FEATURES button placed at bottom and larger -->
-        <div class="features-block">
-          <button class="features-btn" id="featuresBtn" title="Features">
-            <span style="display: flex; align-items: center; gap: 10px"
-              >Features <span class="new">NEW</span></span
-            >
-          </button>
-        </div>
-      </aside>
-
-      <!-- Main -->
-      <main class="main">
-        <div class="topbar">
-          <div class="left">
-            <button class="burger" id="btnBurger" aria-label="Toggle sidebar">
-              ☰
-            </button>
-            <div>
-              <h1 class="title">Materials</h1>
-              <div class="subtitle">
-                Explore subjects, mark favorites, follow lessons & track
-                progress.
-              </div>
-            </div>
-          </div>
-
-          <div class="controls">
-            <div class="search">
-              <svg viewBox="0 0 24 24" width="18" height="18">
-                <path
-                  d="M21 21l-4.35-4.35"
-                  stroke="#6b7280"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <circle
-                  cx="11"
-                  cy="11"
-                  r="6"
-                  stroke="#6b7280"
-                  stroke-width="2"
-                />
-              </svg>
-              <input
-                id="searchBox"
-                type="search"
-                placeholder="Search materials, topics..."
-                aria-label="Search materials"
-              />
-            </div>
-
-            <!-- Persist toggle: OFF by default so progress cleared on refresh -->
-            <label
-              style="
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                font-weight: 700;
-              "
-            >
-              <input
-                id="persistToggle"
-                type="checkbox"
-                title="Persist progress across refresh"
-              />
-              <span style="font-size: 13px; color: var(--muted)"
-                >Persist Progress</span
-              >
-            </label>
-
-            <button id="viewFavBtn" class="btn ghost" title="View Favorites">
-              Favorites
-            </button>
-            <button
-              id="logoutBtn"
-              class="btn ghost"
-              title="Logout (clears data)"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-
-        <div class="metrics">
-          <div class="metric">
-            <div>
-              <div class="num" id="totalMaterials">0</div>
-              <div class="muted">Materials</div>
-            </div>
-          </div>
-          <div class="metric">
-            <div>
-              <div class="num" id="favCount">0</div>
-              <div class="muted">Favorites</div>
-            </div>
-          </div>
-          <div class="metric">
-            <div>
-              <div class="num" id="overallProgress">0%</div>
-              <div class="muted">Overall Progress</div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          style="
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
-            align-items: center;
-          "
-        >
-          <div class="muted">Results: <strong id="resultCount">0</strong></div>
-          <div style="margin-left: auto; display: flex; gap: 8px">
-            <button id="sortBtn" class="btn ghost">Sort: A→Z</button>
-            <button
-              id="resetProgress"
-              class="btn ghost"
-              title="Reset all progress"
-            >
-              Reset Progress
-            </button>
-          </div>
-        </div>
-
-        <div class="layout">
-          <div class="left-col">
-            <div class="section">
-              <div id="categoryTabs" class="cat-tabs" role="tablist"></div>
-
-              <div
-                class="materials-list"
-                id="materialsList"
-                tabindex="0"
-                aria-label="Materials list"
-              >
-                <!-- cards injected by JS -->
-              </div>
-            </div>
-
-            <div class="section">
-              <h4 style="margin: 0 0 8px 0">Progress by Category</h4>
-              <div id="categoryProgress"></div>
-            </div>
-          </div>
-
-          <aside class="right-col">
-            <div class="side-panel">
-              <h4>Favorites (grouped)</h4>
-              <div class="fav-list" id="favList"></div>
-              <div style="display: flex; gap: 8px; margin-top: 10px">
-                <button id="clearFavs" class="btn ghost">
-                  Clear Favorites
-                </button>
-                <button id="openFavDetail" class="btn primary">
-                  Open Favorites
-                </button>
-              </div>
-            </div>
-
-            <div class="side-panel">
-              <h4>Quick Insights</h4>
-              <div style="display: flex; flex-direction: column; gap: 8px">
-                <div style="display: flex; justify-content: space-between">
-                  <div class="muted">Total categories</div>
-                  <div id="catCount" style="font-weight: 800">0</div>
-                </div>
-                <div style="display: flex; justify-content: space-between">
-                  <div class="muted">Materials followed</div>
-                  <div id="followedCount" style="font-weight: 800">0</div>
-                </div>
-                <div style="display: flex; justify-content: space-between">
-                  <div class="muted">Avg completion</div>
-                  <div id="avgComp" style="font-weight: 800">0%</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="side-panel">
-              <h4>Quick Actions</h4>
-              <div style="display: flex; flex-direction: column; gap: 8px">
-                <button id="markAllDone" class="btn primary">
-                  Mark all followed as Done
-                </button>
-                <button id="exportFavs" class="btn ghost">
-                  Export Favorites (disabled)
-                </button>
-              </div>
-            </div>
-          </aside>
-        </div>
-
-        <div class="footer-note">
-          Tip: tekan "/" untuk fokus ke pencarian. Toggle "Persist Progress" ke
-          ON jika ingin menyimpan progress walau refresh.
-        </div>
-      </main>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal-backdrop" id="modal" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" tabindex="-1">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
-          <h3 id="modalTitle">Material</h3>
+    <!-- Main -->
+    <main class="main">
+      <div class="topbar">
+        <div class="left">
+          <button id="burger" class="burger" aria-label="Toggle sidebar">☰</button>
           <div>
-            <button id="modalClose" class="btn ghost">Close</button>
+            <h1>Materials</h1>
+            <div class="subtitle">Explore subjects, favorite, follow, and track progress.</div>
           </div>
         </div>
-        <div
-          style="
-            display: flex;
-            gap: 14px;
-            margin-top: 12px;
-            align-items: flex-start;
-          "
-        >
-          <div
-            style="
-              width: 260px;
-              height: 160px;
-              border-radius: 12px;
-              overflow: hidden;
-              background: #eef6ff;
-            "
-          >
-            <img
-              id="modalImg"
-              src=""
-              alt=""
-              style="width: 100%; height: 100%; object-fit: cover"
-            />
+
+        <div class="controls">
+          <div class="search">
+            <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="6" stroke="#6b7280" stroke-width="2"/></svg>
+            <input id="searchInput" type="search" placeholder="Search materials, topics..." aria-label="Search materials">
           </div>
-          <div style="flex: 1">
-            <div id="modalName" style="font-weight: 800; font-size: 18px"></div>
-            <div id="modalCat" class="muted" style="margin-top: 6px"></div>
-            <p id="modalDesc" style="color: var(--muted); margin-top: 10px"></p>
 
-            <div style="display: flex; gap: 8px; margin-top: 12px">
-              <button id="modalFav" class="btn ghost">Favorite</button>
-              <button id="modalFollow" class="btn primary">
-                Follow / Start
-              </button>
+          <label style="display:flex;align-items:center;gap:8px">
+            <input id="persistToggle" type="checkbox"><small style="color:var(--muted);font-weight:700">Persist Progress</small>
+          </label>
+
+          <button id="favPanelBtn" class="btn">Favorites</button>
+          <button id="logoutBtn" class="btn">Logout</button>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><strong id="totalCount">0</strong><div style="color:var(--muted)">Materials</div></div>
+        <div class="metric"><strong id="favCount">0</strong><div style="color:var(--muted)">Favorites</div></div>
+        <div class="metric"><strong id="overallProgress">0%</strong><div style="color:var(--muted)">Overall Progress</div></div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div class="cat-tabs" id="categoryTabs" role="tablist"></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button id="sortBtn" class="btn">Sort A→Z</button>
+          <button id="resetBtn" class="btn">Reset Progress</button>
+        </div>
+      </div>
+
+      <div class="layout">
+        <section class="panel">
+          <div id="materialsList" class="materials-list" aria-live="polite"></div>
+        </section>
+
+        <aside>
+          <div class="panel">
+            <h4>Favorites</h4>
+            <div id="favoritesList" class="fav-list"></div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button id="clearFavs" class="btn">Clear Favorites</button>
+              <button id="openFav" class="btn">Open Favorites</button>
             </div>
+          </div>
 
-            <div style="margin-top: 12px" class="progress-row">
-              <div class="progress-bar" style="flex: 1">
-                <div
-                  id="modalProgress"
-                  class="progress-fill"
-                  style="width: 0%"
-                ></div>
+          <div class="panel" style="margin-top:12px">
+            <h4>Quick Insights</h4>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Categories</span><strong id="catCount">0</strong></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Followed</span><strong id="followedCount">0</strong></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Avg completion</span><strong id="avgComp">0%</strong></div>
+              <div style="margin-top:8px;display:flex;gap:8px">
+                <button id="markAllDone" class="btn">Mark followed Done</button>
+                <button disabled class="btn">Export (disabled)</button>
               </div>
-              <div class="progress-num" id="modalProgressNum">0%</div>
             </div>
+          </div>
+        </aside>
+      </div>
 
-            <div style="margin-top: 12px; display: flex; gap: 8px">
-              <button id="incProgress" class="btn ghost">+10%</button>
-              <button id="setDone" class="btn primary">Set 100%</button>
-              <button id="downloadCert" class="btn ghost" style="display: none">
-                Download Certificate
-              </button>
-            </div>
+      <p style="color:var(--muted);margin-top:12px">Tip: tekan <kbd>/</kbd> untuk fokus ke pencarian. Toggle "Persist Progress" jika ingin menyimpan antar-refresh.</p>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 id="modalTitle">Material</h3>
+        <div><button id="modalClose" class="btn">Close</button></div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:12px;align-items:flex-start">
+        <div style="width:260px;height:160px;border-radius:10px;overflow:hidden;background:#eef6ff">
+          <img id="modalImg" alt="" style="width:100%;height:100%;object-fit:cover">
+        </div>
+
+        <div style="flex:1">
+          <div id="modalName" style="font-weight:800"></div>
+          <div id="modalCat" style="color:var(--muted);margin-top:6px"></div>
+          <p id="modalDesc" style="color:var(--muted);margin-top:8px"></p>
+
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button id="modalFavBtn" class="btn">Favorite</button>
+            <button id="modalFollowBtn" class="btn">Follow</button>
+          </div>
+
+          <div style="margin-top:12px" class="progress-row">
+            <div class="progress-bar" style="flex:1"><div id="modalFill" class="fill" style="width:0%"></div></div>
+            <div class="progress-num" id="modalPct">0%</div>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button id="incProgress" class="btn">+10%</button>
+            <button id="setDone" class="btn">Set 100%</button>
+            <button id="downloadCert" class="btn" style="display:none">Download Certificate</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- confetti container -->
-    <div class="confetti-wrap" id="confettiWrap" aria-hidden="true"></div>
+  <div id="confettiWrap" class="confetti-wrap" aria-hidden="true"></div>
 
-    <script>
-      /* ---------------- DATA ---------------- */
-      const materials = [
-        // core set + many extras to allow scroll
-        {
-          id: "mat-alg",
-          title: "Algebra I — Linear Equations",
-          category: "Mathematics",
-          topics: ["Equations", "Inequalities"],
-          img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop",
-          desc: "Basics of linear equations & problem solving.",
-        },
-        {
-          id: "mat-geo",
-          title: "Geometry — Triangles & Proofs",
-          category: "Mathematics",
-          topics: ["Triangles", "Proofs", "Angles"],
-          img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=900&auto=format&fit=crop",
-          desc: "Constructive geometry and proofs.",
-        },
-        {
-          id: "mat-calc",
-          title: "Calculus — Limits & Derivatives",
-          category: "Mathematics",
-          topics: ["Limits", "Derivatives"],
-          img: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?q=80&w=900&auto=format&fit=crop",
-          desc: "Intro to limits and derivative rules.",
-        },
-        {
-          id: "eng-gram",
-          title: "English — Grammar Essentials",
-          category: "English",
-          topics: ["Tenses", "Parts of Speech"],
-          img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=900&auto=format&fit=crop",
-          desc: "Core grammar for writing.",
-        },
-        {
-          id: "eng-lit",
-          title: "English — Literature Anthology",
-          category: "English",
-          topics: ["Poetry", "Short Stories"],
-          img: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?q=80&w=900&auto=format&fit=crop",
-          desc: "Selected works and analysis.",
-        },
-        {
-          id: "sci-phy",
-          title: "Physics — Mechanics",
-          category: "Science",
-          topics: ["Forces", "Motion"],
-          img: "https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=900&auto=format&fit=crop",
-          desc: "Newton mechanics.",
-        },
-        {
-          id: "sci-chem",
-          title: "Chemistry — Atom to Molecules",
-          category: "Science",
-          topics: ["Atoms", "Bonding"],
-          img: "https://images.unsplash.com/photo-1581090700227-05592b4f2b4d?q=80&w=900&auto=format&fit=crop",
-          desc: "Atomic structure & bonds.",
-        },
-        {
-          id: "bio-cell",
-          title: "Biology — Cell Biology",
-          category: "Biology",
-          topics: ["Cells", "Microscopy"],
-          img: "https://images.unsplash.com/photo-1559757175-5708c58c04a3?q=80&w=900&auto=format&fit=crop",
-          desc: "Cells & organelles.",
-        },
-        {
-          id: "geo-land",
-          title: "Geography — Physical Landscapes",
-          category: "Geography",
-          topics: ["Landforms", "Rivers"],
-          img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=900&auto=format&fit=crop",
-          desc: "Physical geography & maps.",
-        },
-        {
-          id: "hist-ww2",
-          title: "History — World War II",
-          category: "History",
-          topics: ["20th Century", "Wars"],
-          img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=900&auto=format&fit=crop",
-          desc: "Events & analysis of WWII.",
-        },
-        // many extras
-        ...Array.from({ length: 30 }).map((_, i) => {
-          const cats = [
-            "Mathematics",
-            "English",
-            "Science",
-            "Biology",
-            "Geography",
-            "History",
-          ];
-          const cat = cats[i % cats.length];
-          return {
-            id: "more-" + i,
-            title: `${cat} — Extra Lesson ${i + 1}`,
-            category: cat,
-            topics: ["Lesson", "Exercise"],
-            img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=900&auto=format&fit=crop",
-            desc: `Extra ${cat} material ${i + 1}`,
-          };
-        }),
-      ];
+<script>
+/* ---------- Core logic (all in one file) ---------- */
+document.addEventListener('DOMContentLoaded', ()=>{
 
-      /* ---------------- STORAGE KEYS ---------------- */
-      const FAV_KEY = "banban_materials_favs_v1";
-      const PROG_KEY = "banban_materials_prog_v1";
-      const FOLLOW_KEY = "banban_materials_follow_v1";
-      const PERSIST_KEY = "banban_materials_persist_v1";
+  /* ---------- Dataset (lots of items so list is non-empty) ---------- */
+  const DATA = [
+    {id:'m-alg',title:'Algebra I — Linear Equations',category:'Mathematics',topics:['Equations','Inequalities'],img:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop',desc:'Linear equations fundamentals and problem solving.'},
+    {id:'m-geo',title:'Geometry — Triangles & Proofs',category:'Mathematics',topics:['Triangles','Proofs'],img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=900&auto=format&fit=crop',desc:'Angles, triangles, and reasoning.'},
+    {id:'m-calc',title:'Calculus — Limits & Derivatives',category:'Mathematics',topics:['Limits','Derivatives'],img:'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?q=80&w=900&auto=format&fit=crop',desc:'Intro to limits and differentiation.'},
+    {id:'eng-gram',title:'English — Grammar Essentials',category:'English',topics:['Tenses','Parts of Speech'],img:'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=900&auto=format&fit=crop',desc:'Core grammar for clear writing.'},
+    {id:'eng-conv',title:'English Conversation',category:'English',topics:['Speaking','Listening'],img:'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=900&auto=format&fit=crop',desc:'Practice speaking and listening.'},
+    {id:'sci-phy',title:'Physics — Mechanics',category:'Science',topics:['Forces','Motion'],img:'https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=900&auto=format&fit=crop',desc:'Newtonian mechanics basics.'},
+    {id:'bio-cell',title:'Biology — Cell Biology',category:'Biology',topics:['Cells','Microscopy'],img:'https://images.unsplash.com/photo-1559757175-5708c58c04a3?q=80&w=900&auto=format&fit=crop',desc:'Cells and their functions.'},
+    {id:'geo-land',title:'Geography — Physical Landscapes',category:'Geography',topics:['Landforms','Maps'],img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=900&auto=format&fit=crop',desc:'Rivers, mountains and maps.'},
+    {id:'hist-ww2',title:'History — World War II',category:'History',topics:['WWII','20th Century'],img:'https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=900&auto=format&fit=crop',desc:'Causes and consequences.'},
+    // add many more to allow scrolling
+    ...Array.from({length:26}).map((_,i)=>({
+      id:`extra-${i}`,
+      title:`Extra Resource ${i+1}`,
+      category:['Mathematics','English','Science','Biology','Geography','History'][i%6],
+      topics:['Lesson','Practice'],
+      img:'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=900&auto=format&fit=crop',
+      desc:`Additional material #${i+1}`
+    }))
+  ];
 
-      /* restore from storage */
-      let favorites = JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
-      let progress = JSON.parse(localStorage.getItem(PROG_KEY) || "{}");
-      let followed = JSON.parse(localStorage.getItem(FOLLOW_KEY) || "[]");
-      let persistProgress = localStorage.getItem(PERSIST_KEY) === "true"; // default false
+  /* ---------- Storage keys & initial state ---------- */
+  const KEY_FAV = 'banban:materials:favs:v1';
+  const KEY_PROG = 'banban:materials:prog:v1';
+  const KEY_FOLLOW = 'banban:materials:follow:v1';
+  const KEY_PERSIST = 'banban:materials:persist:v1';
 
-      /* if persistProgress is false, clear progress on load (per your request) */
-      if (!persistProgress) {
-        progress = {};
-        localStorage.removeItem(PROG_KEY);
-        // do not clear favorites/followed unless logout/explicit reset
-      }
+  let favorites = JSON.parse(localStorage.getItem(KEY_FAV) || '[]');
+  let progress = JSON.parse(localStorage.getItem(KEY_PROG) || '{}');
+  let followed = JSON.parse(localStorage.getItem(KEY_FOLLOW) || '[]');
+  let persistProgress = localStorage.getItem(KEY_PERSIST) === 'true';
 
-      /* ---------------- DOM refs ---------------- */
-      const materialsList = document.getElementById("materialsList");
-      const categoryTabs = document.getElementById("categoryTabs");
-      const searchBox = document.getElementById("searchBox");
-      const resultCount = document.getElementById("resultCount");
-      const totalMaterials = document.getElementById("totalMaterials");
-      const favCount = document.getElementById("favCount");
-      const overallProgress = document.getElementById("overallProgress");
-      const categoryProgress = document.getElementById("categoryProgress");
-      const favList = document.getElementById("favList");
-      const catCountEl = document.getElementById("catCount");
-      const followedCountEl = document.getElementById("followedCount");
-      const avgCompEl = document.getElementById("avgComp");
+  // if persistence is off, clear progress on initial load (as requested)
+  if(!persistProgress){ progress = {}; localStorage.removeItem(KEY_PROG); }
 
-      const persistToggle = document.getElementById("persistToggle");
-      const resetProgressBtn = document.getElementById("resetProgress");
-      const logoutBtn = document.getElementById("logoutBtn");
-      const sortBtn = document.getElementById("sortBtn");
-      const viewFavBtn = document.getElementById("viewFavBtn");
-      const clearFavsBtn = document.getElementById("clearFavs");
-      const openFavDetail = document.getElementById("openFavDetail");
-      const markAllDone = document.getElementById("markAllDone");
-      const exportFavs = document.getElementById("exportFavs"); // left as disabled per request
-      const featuresBtn = document.getElementById("featuresBtn");
-      const btnBurger = document.getElementById("btnBurger");
-      const sidebar = document.getElementById("sidebar");
+  /* ---------- DOM refs ---------- */
+  const materialsList = document.getElementById('materialsList');
+  const categoryTabs = document.getElementById('categoryTabs');
+  const searchInput = document.getElementById('searchInput');
+  const totalCountEl = document.getElementById('totalCount');
+  const favCountEl = document.getElementById('favCount');
+  const overallProgressEl = document.getElementById('overallProgress');
+  const favoritesListEl = document.getElementById('favoritesList');
+  const catCountEl = document.getElementById('catCount');
+  const followedCountEl = document.getElementById('followedCount');
+  const avgCompEl = document.getElementById('avgComp');
 
-      const modal = document.getElementById("modal");
-      const modalTitle = document.getElementById("modalTitle");
-      const modalImg = document.getElementById("modalImg");
-      const modalName = document.getElementById("modalName");
-      const modalCat = document.getElementById("modalCat");
-      const modalDesc = document.getElementById("modalDesc");
-      const modalFav = document.getElementById("modalFav");
-      const modalFollow = document.getElementById("modalFollow");
-      const modalProgress = document.getElementById("modalProgress");
-      const modalProgressNum = document.getElementById("modalProgressNum");
-      const incProgress = document.getElementById("incProgress");
-      const setDone = document.getElementById("setDone");
-      const downloadCert = document.getElementById("downloadCert");
-      const modalClose = document.getElementById("modalClose");
-      const confettiWrap = document.getElementById("confettiWrap");
+  const persistToggle = document.getElementById('persistToggle');
+  const resetBtn = document.getElementById('resetBtn');
+  const sortBtn = document.getElementById('sortBtn');
+  const favPanelBtn = document.getElementById('favPanelBtn');
+  const clearFavsBtn = document.getElementById('clearFavs');
+  const openFavBtn = document.getElementById('openFav');
+  const markAllDoneBtn = document.getElementById('markAllDone');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const burgerBtn = document.getElementById('burger');
+  const sidebar = document.getElementById('sidebar');
 
-      /* ---------------- HELPERS ---------------- */
-      function saveFavs() {
-        localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
-      }
-      function saveProg() {
-        localStorage.setItem(PROG_KEY, JSON.stringify(progress));
-      }
-      function saveFollow() {
-        localStorage.setItem(FOLLOW_KEY, JSON.stringify(followed));
-      }
-      function savePersist() {
-        localStorage.setItem(PERSIST_KEY, persistProgress ? "true" : "false");
-      }
-      function isFav(id) {
-        return favorites.includes(id);
-      }
-      function isFollowed(id) {
-        return followed.includes(id);
-      }
-      function getProgress(id) {
-        return progress[id] || 0;
-      }
-      function clamp(n) {
-        return Math.max(0, Math.min(100, Math.round(n)));
-      }
+  // modal refs
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalImg = document.getElementById('modalImg');
+  const modalName = document.getElementById('modalName');
+  const modalCat = document.getElementById('modalCat');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalFavBtn = document.getElementById('modalFavBtn');
+  const modalFollowBtn = document.getElementById('modalFollowBtn');
+  const modalFill = document.getElementById('modalFill');
+  const modalPct = document.getElementById('modalPct');
+  const incProgressBtn = document.getElementById('incProgress');
+  const setDoneBtn = document.getElementById('setDone');
+  const downloadCertBtn = document.getElementById('downloadCert');
+  const modalCloseBtn = document.getElementById('modalClose');
 
-      /* ---------------- CATEGORIES / UI ---------------- */
-      const categories = Array.from(
-        new Set(materials.map((m) => m.category))
-      ).sort();
-      let activeCategory = "All";
-      let sortAZ = true;
-      let currentList = materials.slice();
+  const confettiWrap = document.getElementById('confettiWrap');
 
-      function renderTabs() {
-        categoryTabs.innerHTML = "";
-        const allBtn = document.createElement("button");
-        allBtn.className = "tab" + (activeCategory === "All" ? " active" : "");
-        allBtn.textContent = "All";
-        allBtn.onclick = () => {
-          activeCategory = "All";
-          renderTabs();
-          applyFilters();
-        };
-        categoryTabs.appendChild(allBtn);
-        categories.forEach((cat) => {
-          const b = document.createElement("button");
-          b.className = "tab" + (activeCategory === cat ? " active" : "");
-          b.textContent = cat;
-          b.onclick = () => {
-            activeCategory = cat;
-            renderTabs();
-            applyFilters();
-          };
-          categoryTabs.appendChild(b);
-        });
-      }
+  /* ---------- UI state ---------- */
+  let activeCategory = 'All';
+  let sortAZ = true;
+  let currentModalId = null;
 
-      /* ---------------- MATERIAL CARD ---------------- */
-      function createCard(item) {
-        const card = document.createElement("div");
-        card.className = "material-card";
-        card.tabIndex = 0;
-        const thumb = document.createElement("div");
-        thumb.className = "thumb";
-        const img = document.createElement("img");
-        img.src = item.img;
-        img.alt = item.title;
-        img.loading = "lazy";
-        img.onerror = () => {
-          img.style.objectFit = "contain";
-          img.style.opacity = ".7";
-        };
-        thumb.appendChild(img);
+  /* ---------- Helpers ---------- */
+  function saveFavs(){ localStorage.setItem(KEY_FAV, JSON.stringify(favorites)); }
+  function saveProg(){ localStorage.setItem(KEY_PROG, JSON.stringify(progress)); }
+  function saveFollowed(){ localStorage.setItem(KEY_FOLLOW, JSON.stringify(followed)); }
+  function savePersist(){ localStorage.setItem(KEY_PERSIST, persistProgress ? 'true' : 'false'); }
 
-        const title = document.createElement("div");
-        title.className = "title";
-        title.textContent = item.title;
-        const cat = document.createElement("div");
-        cat.className = "cat";
-        cat.textContent = item.category;
+  function isFav(id){ return favorites.includes(id); }
+  function isFollowed(id){ return followed.includes(id); }
+  function getProgress(id){ return progress[id] || 0; }
+  function clamp(v){ return Math.max(0, Math.min(100, Math.round(v))); }
 
-        const topicsWrap = document.createElement("div");
-        topicsWrap.className = "topics";
-        (item.topics || []).slice(0, 4).forEach((t) => {
-          const tk = document.createElement("div");
-          tk.className = "topic";
-          tk.textContent = t;
-          topicsWrap.appendChild(tk);
-        });
+  /* ---------- Render tabs (categories) ---------- */
+  function renderCategoryTabs(){
+    const cats = ['All', ...Array.from(new Set(DATA.map(d=>d.category))).sort()];
+    categoryTabs.innerHTML = '';
+    cats.forEach(c=>{
+      const btn = document.createElement('button');
+      btn.className = 'tab' + (c === activeCategory ? ' active' : '');
+      btn.textContent = c;
+      btn.addEventListener('click', ()=> { activeCategory = c; renderAll(); });
+      categoryTabs.appendChild(btn);
+    });
+  }
 
-        const actions = document.createElement("div");
-        actions.className = "card-actions";
-        const favBtn = document.createElement("button");
-        favBtn.className = "favorite";
-        favBtn.textContent = isFav(item.id) ? "★ Favorite" : "☆ Favorite";
-        favBtn.onclick = (ev) => {
-          ev.stopPropagation();
-          toggleFavorite(item.id);
-          updateUI();
-        };
-        const detailBtn = document.createElement("button");
-        detailBtn.className = "action";
-        detailBtn.textContent = "Detail";
-        detailBtn.onclick = (ev) => {
-          ev.stopPropagation();
-          openModalFor(item.id);
-        };
+  /* ---------- Render materials list ---------- */
+  function createCard(item){
+    const root = document.createElement('div');
+    root.className = 'card';
+    root.tabIndex = 0;
 
-        actions.appendChild(favBtn);
-        actions.appendChild(detailBtn);
+    const thumb = document.createElement('div'); thumb.className='thumb';
+    const img = document.createElement('img'); img.src = item.img; img.alt = item.title; img.loading='lazy';
+    img.onerror = ()=>{ img.style.objectFit='contain'; img.style.opacity='.7' };
+    thumb.appendChild(img);
 
-        const progRow = document.createElement("div");
-        progRow.className = "progress-row";
-        const progBar = document.createElement("div");
-        progBar.className = "progress-bar";
-        const progFill = document.createElement("div");
-        progFill.className = "progress-fill";
-        progFill.style.width = getProgress(item.id) + "%";
-        progBar.appendChild(progFill);
-        const progNum = document.createElement("div");
-        progNum.className = "progress-num";
-        progNum.textContent = getProgress(item.id) + "%";
-        progRow.appendChild(progBar);
-        progRow.appendChild(progNum);
+    const title = document.createElement('div'); title.className='title'; title.textContent = item.title;
+    const cat = document.createElement('div'); cat.className='cat'; cat.textContent = item.category;
 
-        const followLine = document.createElement("div");
-        followLine.style.marginTop = "6px";
-        followLine.style.fontSize = "13px";
-        followLine.style.color = "var(--muted)";
-        followLine.textContent = isFollowed(item.id) ? "Following" : "";
+    const topics = document.createElement('div'); topics.className='topics';
+    (item.topics || []).slice(0,4).forEach(t => { const tk = document.createElement('div'); tk.className='topic'; tk.textContent = t; topics.appendChild(tk); });
 
-        card.appendChild(thumb);
-        card.appendChild(title);
-        card.appendChild(cat);
-        card.appendChild(topicsWrap);
-        card.appendChild(actions);
-        card.appendChild(progRow);
-        card.appendChild(followLine);
+    const actions = document.createElement('div'); actions.className='card-actions';
+    const favBtn = document.createElement('button'); favBtn.className='favorite'; favBtn.textContent = isFav(item.id) ? '★ Favorite' : '☆ Favorite';
+    favBtn.addEventListener('click', e => { e.stopPropagation(); toggleFavorite(item.id); updateUI(); });
 
-        card.onclick = () => openModalFor(item.id);
-        card.onkeydown = (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            openModalFor(item.id);
-          }
-        };
+    const detBtn = document.createElement('button'); detBtn.className='detail-btn'; detBtn.textContent='Detail';
+    detBtn.addEventListener('click', e => { e.stopPropagation(); openModal(item.id); });
 
-        return card;
-      }
+    actions.appendChild(favBtn); actions.appendChild(detBtn);
 
-      /* ---------------- RENDER LIST ---------------- */
-      function renderList(list) {
-        materialsList.innerHTML = "";
-        if (!list.length) {
-          materialsList.innerHTML =
-            '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:20px">No materials found.</div>';
-          return;
-        }
-        const frag = document.createDocumentFragment();
-        list.forEach((i) => frag.appendChild(createCard(i)));
-        materialsList.appendChild(frag);
-        resultCount.textContent = list.length;
-      }
+    const progressRow = document.createElement('div'); progressRow.className='progress-row';
+    const bar = document.createElement('div'); bar.className='progress-bar';
+    const fill = document.createElement('div'); fill.className='fill'; fill.style.width = getProgress(item.id) + '%';
+    bar.appendChild(fill);
+    const pct = document.createElement('div'); pct.className='progress-num'; pct.textContent = getProgress(item.id) + '%';
+    progressRow.appendChild(bar); progressRow.appendChild(pct);
 
-      /* ---------------- FILTER / SEARCH / SORT ---------------- */
-      function applyFilters() {
-        const q = (searchBox.value || "").trim().toLowerCase();
-        currentList = materials.filter((m) => {
-          const byCat =
-            activeCategory === "All" || m.category === activeCategory;
-          const byQ =
-            !q ||
-            m.title.toLowerCase().includes(q) ||
-            (m.topics || []).join(" ").toLowerCase().includes(q) ||
-            (m.desc || "").toLowerCase().includes(q);
-          return byCat && byQ;
-        });
-        currentList.sort((a, b) =>
-          sortAZ
-            ? a.title.localeCompare(b.title)
-            : b.title.localeCompare(a.title)
-        );
-        renderList(currentList);
-        updateCounts();
-      }
+    root.appendChild(thumb);
+    root.appendChild(title);
+    root.appendChild(cat);
+    root.appendChild(topics);
+    root.appendChild(actions);
+    root.appendChild(progressRow);
 
-      /* ---------------- FAVORITES / FOLLOW / PROGRESS ---------------- */
-      function toggleFavorite(id) {
-        if (favorites.includes(id))
-          favorites = favorites.filter((x) => x !== id);
-        else favorites.push(id);
-        saveFavs();
-        updateUI();
-      }
-      function followMaterial(id) {
-        if (!followed.includes(id)) {
-          followed.push(id);
-          saveFollow();
-          updateUI();
-        }
-      }
-      function unfollowMaterial(id) {
-        followed = followed.filter((x) => x !== id);
-        saveFollow();
-        updateUI();
-      }
-      function incMaterialProgress(id, step = 10) {
-        progress[id] = clamp(getProgress(id) + step);
-        persistProgressSave();
-        updateUI();
-      }
-      function setMaterialProgress(id, val) {
-        progress[id] = clamp(val);
-        persistProgressSave();
-        updateUI();
-      }
+    // clicking card opens modal/detail
+    root.addEventListener('click', ()=> openModal(item.id));
+    root.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(item.id); } });
 
-      /* persist/save depending on toggle */
-      function persistProgressSave() {
-        if (persistProgress) saveProg();
-        else {
-          /* don't save to storage */
-        }
-      }
+    return root;
+  }
 
-      /* Reset progress (keeps favorites/followed) */
-      function resetAllProgress() {
-        progress = {};
-        if (persistProgress) saveProg();
-        updateUI();
-      }
+  function getFilteredSorted(){
+    const q = (searchInput.value || '').trim().toLowerCase();
+    const list = DATA.filter(d => {
+      if(activeCategory !== 'All' && d.category !== activeCategory) return false;
+      if(!q) return true;
+      return d.title.toLowerCase().includes(q) || (d.topics || []).join(' ').toLowerCase().includes(q) || (d.desc || '').toLowerCase().includes(q);
+    });
+    list.sort((a,b) => sortAZ ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
+    return list;
+  }
 
-      /* Logout: clears everything */
-      function logoutAll() {
-        favorites = [];
-        followed = [];
-        progress = {};
-        persistProgress = false;
-        localStorage.removeItem(FAV_KEY);
-        localStorage.removeItem(FOLLOW_KEY);
-        localStorage.removeItem(PROG_KEY);
-        localStorage.removeItem(PERSIST_KEY);
-        // reflect toggle UI
-        persistToggle.checked = false;
-        updateUI();
-        // reload to give fresh state
-        location.reload();
-      }
+  function renderMaterials(){
+    const arr = getFilteredSorted();
+    materialsList.innerHTML = '';
+    if(arr.length === 0){
+      materialsList.innerHTML = '<div style="padding:20px;color:var(--muted)">No materials found.</div>';
+      return;
+    }
+    const frag = document.createDocumentFragment();
+    arr.forEach(item => frag.appendChild(createCard(item)));
+    materialsList.appendChild(frag);
+  }
 
-      /* Render grouped favorites in right panel */
-      function renderFavorites() {
-        favList.innerHTML = "";
-        if (!favorites.length) {
-          favList.innerHTML =
-            '<div style="color:var(--muted)">No favorites yet — click Favorite on a material.</div>';
-          return;
-        }
-        const groups = {};
-        favorites.forEach((id) => {
-          const m = materials.find((x) => x.id === id);
-          if (!m) return;
-          groups[m.category] = groups[m.category] || [];
-          groups[m.category].push(m);
-        });
-        for (const cat of Object.keys(groups)) {
-          const catTitle = document.createElement("div");
-          catTitle.style.fontWeight = "800";
-          catTitle.style.marginTop = "6px";
-          catTitle.textContent = cat;
-          favList.appendChild(catTitle);
-          groups[cat].forEach((item) => {
-            const row = document.createElement("div");
-            row.className = "fav-item";
-            const mini = document.createElement("div");
-            mini.className = "mini";
-            const im = document.createElement("img");
-            im.src = item.img;
-            im.alt = item.title;
-            im.loading = "lazy";
-            mini.appendChild(im);
-            const info = document.createElement("div");
-            info.style.flex = "1";
-            const t = document.createElement("div");
-            t.style.fontWeight = "700";
-            t.textContent = item.title;
-            const sub = document.createElement("div");
-            sub.className = "muted";
-            sub.textContent = (getProgress(item.id) || 0) + "% completed";
-            info.appendChild(t);
-            info.appendChild(sub);
-            const btn = document.createElement("button");
-            btn.className = "btn ghost";
-            btn.textContent = "Open";
-            btn.onclick = () => openModalFor(item.id);
-            row.appendChild(mini);
-            row.appendChild(info);
-            row.appendChild(btn);
-            favList.appendChild(row);
-          });
-        }
-      }
-
-      /* Render category progress */
-      function renderCategoryProgress() {
-        categoryProgress.innerHTML = "";
-        categories.forEach((cat) => {
-          const items = materials.filter((m) => m.category === cat);
-          const total = items.length;
-          const sum = items.reduce(
-            (acc, m) => acc + (getProgress(m.id) || 0),
-            0
-          );
-          const avg = total ? Math.round(sum / total) : 0;
-          const wrapper = document.createElement("div");
-          wrapper.className = "summary-row";
-          wrapper.innerHTML = `<div style="font-weight:700">${cat} (${total})</div><div style="display:flex;align-items:center;gap:12px"><div style="width:160px;background:#eef6ff;border-radius:999px;overflow:hidden"><div style="height:8px;background:linear-gradient(90deg,#1d4ed8,#60a5fa);width:${avg}%"></div></div><div style="font-weight:800">${avg}%</div></div>`;
-          categoryProgress.appendChild(wrapper);
-        });
-      }
-
-      /* Update top counts */
-      function updateCounts() {
-        totalMaterials.textContent = materials.length;
-        favCount.textContent = favorites.length;
-        // overall progress: if some followed exist average them, else average all
-        const base = followed.length ? followed : materials.map((m) => m.id);
-        const avg = base.length
-          ? Math.round(
-              base.reduce((s, id) => s + (getProgress(id) || 0), 0) /
-                base.length
-            )
-          : 0;
-        overallProgress.textContent = avg + "%";
-        catCountEl.textContent = categories.length;
-        followedCountEl.textContent = followed.length;
-        avgCompEl.textContent = avg + "%";
-        renderFavorites();
-        renderCategoryProgress();
-      }
-
-      /* ---------------- MODAL ---------------- */
-      let currentModalId = null;
-      function openModalFor(id) {
-        const item = materials.find((m) => m.id === id);
-        if (!item) return;
-        currentModalId = id;
-        modalTitle.textContent = item.title;
-        modalImg.src = item.img;
-        modalName.textContent = item.title;
-        modalCat.textContent = item.category;
-        modalDesc.textContent = item.desc || "";
-        modalFav.textContent = isFav(id) ? "Unfavorite" : "Favorite";
-        modalFollow.textContent = isFollowed(id)
-          ? "Unfollow"
-          : "Follow / Start";
-        modalProgress.style.width = getProgress(id) + "%";
-        modalProgressNum.textContent = getProgress(id) + "%";
-        downloadCert.style.display =
-          getProgress(id) === 100 ? "inline-flex" : "none";
-        modal.style.display = "flex";
-        modal.setAttribute("aria-hidden", "false");
-
-        modalFav.onclick = () => {
-          toggleFavorite(id);
-          modalFav.textContent = isFav(id) ? "Unfavorite" : "Favorite";
-          updateCounts();
-        };
-        modalFollow.onclick = () => {
-          if (isFollowed(id)) {
-            unfollowMaterial(id);
-            modalFollow.textContent = "Follow / Start";
-          } else {
-            followMaterial(id);
-            modalFollow.textContent = "Unfollow";
-          }
-          updateCounts();
-        };
-        incProgress.onclick = () => {
-          incMaterialProgress(id, 10);
-          modalProgress.style.width = getProgress(id) + "%";
-          modalProgressNum.textContent = getProgress(id) + "%";
-          if (getProgress(id) === 100) {
-            spawnConfetti(22);
-            downloadCert.style.display = "inline-flex";
-          }
-        };
-        setDone.onclick = () => {
-          setMaterialProgress(id, 100);
-          modalProgress.style.width = "100%";
-          modalProgressNum.textContent = "100%";
-          spawnConfetti(28);
-          downloadCert.style.display = "inline-flex";
-        };
-        downloadCert.onclick = () => {
-          downloadCertificate(materials.find((m) => m.id === id));
-        };
-      }
-      modalClose.addEventListener("click", () => {
-        modal.style.display = "none";
-        modal.setAttribute("aria-hidden", "true");
+  /* ---------- Favorites right panel ---------- */
+  function renderFavoritesPanel(){
+    favoritesListEl.innerHTML = '';
+    if(!favorites.length){ favoritesListEl.innerHTML = '<div style="color:var(--muted)">No favorites yet.</div>'; return; }
+    // group by category
+    const grouped = {};
+    favorites.forEach(id => {
+      const m = DATA.find(x=>x.id === id);
+      if(!m) return;
+      (grouped[m.category] = grouped[m.category] || []).push(m);
+    });
+    Object.keys(grouped).sort().forEach(cat => {
+      const header = document.createElement('div'); header.style.fontWeight='800'; header.style.marginTop='6px'; header.textContent = cat;
+      favoritesListEl.appendChild(header);
+      grouped[cat].forEach(m => {
+        const row = document.createElement('div'); row.className='fav-item';
+        const i = document.createElement('img'); i.src = m.img; i.alt = m.title; i.loading='lazy'; i.style.width='44px'; i.style.height='44px'; i.style.borderRadius='8px';
+        const info = document.createElement('div'); info.style.flex='1';
+        const t = document.createElement('div'); t.style.fontWeight='700'; t.textContent = m.title;
+        const s = document.createElement('div'); s.style.color='var(--muted)'; s.textContent = (getProgress(m.id) || 0) + '% completed';
+        info.appendChild(t); info.appendChild(s);
+        const btn = document.createElement('button'); btn.className='btn'; btn.textContent = 'Open'; btn.addEventListener('click', ()=> openModal(m.id));
+        row.appendChild(i); row.appendChild(info); row.appendChild(btn);
+        favoritesListEl.appendChild(row);
       });
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          modal.style.display = "none";
-          modal.setAttribute("aria-hidden", "true");
-        }
+    });
+  }
+
+  /* ---------- Insights ---------- */
+  function renderInsights(){
+    totalCountEl.textContent = DATA.length;
+    favCountEl.textContent = favorites.length;
+    const categories = Array.from(new Set(DATA.map(d=>d.category)));
+    catCountEl.textContent = categories.length;
+    followedCountEl.textContent = followed.length;
+    // overall progress (if have follows, average their progress; otherwise average all materials)
+    const base = followed.length ? followed : DATA.map(d=>d.id);
+    const avg = base.length ? Math.round(base.reduce((s,id)=> s + (progress[id] || 0), 0) / base.length) : 0;
+    overallProgressEl.textContent = avg + '%';
+    avgCompEl.textContent = avg + '%';
+  }
+
+  /* ---------- Actions: favorite, follow, progress ---------- */
+  function toggleFavorite(id){
+    if(isFav(id)) favorites = favorites.filter(x=>x!==id);
+    else favorites.push(id);
+    saveFavs();
+  }
+
+  function toggleFollow(id){
+    if(isFollowed(id)) followed = followed.filter(x=>x!==id);
+    else followed.push(id);
+    saveFollowed();
+  }
+
+  function incProgress(id, step=10){
+    progress[id] = clamp((progress[id] || 0) + step);
+    if(persistProgress) saveProg();
+  }
+
+  function setProgress(id, value){
+    progress[id] = clamp(value);
+    if(persistProgress) saveProg();
+  }
+
+  function resetProgressAll(){
+    progress = {};
+    if(persistProgress) saveProg();
+  }
+
+  function clearFavorites(){
+    favorites = [];
+    saveFavs();
+  }
+
+  function logoutClear(){
+    if(!confirm('Logout will clear favorites, follows, and progress. Continue?')) return;
+    favorites = []; followed = []; progress = {}; persistProgress = false;
+    saveFavs(); saveFollowed(); localStorage.removeItem(KEY_PROG); localStorage.removeItem(KEY_PERSIST); persistToggle.checked = false;
+  }
+
+  /* ---------- Modal: open/close & interactions ---------- */
+  function openModal(id){
+    currentModalId = id;
+    const item = DATA.find(x=>x.id === id);
+    if(!item) return;
+    modalTitle.textContent = item.title;
+    modalImg.src = item.img;
+    modalName.textContent = item.title;
+    modalCat.textContent = item.category;
+    modalDesc.textContent = item.desc || '';
+    modalFavBtn.textContent = isFav(id) ? 'Unfavorite' : 'Favorite';
+    modalFollowBtn.textContent = isFollowed(id) ? 'Unfollow' : 'Follow';
+    modalFill.style.width = (progress[id] || 0) + '%';
+    modalPct.textContent = (progress[id] || 0) + '%';
+    downloadCertBtn.style.display = (progress[id] === 100) ? 'inline-flex' : 'none';
+    modalBackdrop.style.display = 'flex';
+    modalBackdrop.setAttribute('aria-hidden','false');
+  }
+  function closeModal(){
+    modalBackdrop.style.display = 'none';
+    modalBackdrop.setAttribute('aria-hidden','true');
+    currentModalId = null;
+  }
+
+  modalCloseBtn.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', e => { if(e.target === modalBackdrop) closeModal(); });
+
+  modalFavBtn.addEventListener('click', ()=> {
+    if(!currentModalId) return;
+    toggleFavorite(currentModalId);
+    modalFavBtn.textContent = isFav(currentModalId) ? 'Unfavorite' : 'Favorite';
+    updateUI();
+  });
+
+  modalFollowBtn.addEventListener('click', ()=> {
+    if(!currentModalId) return;
+    toggleFollow(currentModalId);
+    modalFollowBtn.textContent = isFollowed(currentModalId) ? 'Unfollow' : 'Follow';
+    updateUI();
+  });
+
+  incProgressBtn.addEventListener('click', ()=> {
+    if(!currentModalId) return;
+    incProgress(currentModalId, 10);
+    modalFill.style.width = (progress[currentModalId] || 0) + '%';
+    modalPct.textContent = (progress[currentModalId] || 0) + '%';
+    if(progress[currentModalId] === 100){ spawnConfetti(22); downloadCertBtn.style.display = 'inline-flex'; }
+    updateUI();
+  });
+
+  setDoneBtn.addEventListener('click', ()=> {
+    if(!currentModalId) return;
+    setProgress(currentModalId, 100);
+    modalFill.style.width = '100%';
+    modalPct.textContent = '100%';
+    spawnConfetti(28);
+    downloadCertBtn.style.display = 'inline-flex';
+    updateUI();
+  });
+
+  downloadCertBtn.addEventListener('click', ()=> {
+    if(!currentModalId) return;
+    const item = DATA.find(x=>x.id === currentModalId);
+    if(item) downloadCertificate(item);
+  });
+
+  /* ---------- Confetti & certificate generation ---------- */
+  function spawnConfetti(amount=12){
+    const emojis = ['🎉','✨','🏆','🎈','🥳'];
+    for(let i=0;i<amount;i++){
+      const n = document.createElement('div');
+      n.className = 'confetti';
+      n.style.left = (Math.random()*100)+'vw';
+      n.style.top = (-10 - Math.random()*20)+'vh';
+      n.style.fontSize = (12 + Math.random()*28)+'px';
+      n.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      confettiWrap.appendChild(n);
+      setTimeout(()=> n.remove(), 1700 + Math.random()*800);
+    }
+  }
+
+  function downloadCertificate(item){
+    // simple canvas-based certificate
+    const c = document.createElement('canvas'); c.width = 1000; c.height = 700; const ctx = c.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,c.width,c.height);
+    ctx.fillStyle = '#071433'; ctx.font = 'bold 36px Arial'; ctx.fillText('Certificate of Completion', 60,120);
+    ctx.font = '600 20px Arial'; ctx.fillStyle = '#374151'; ctx.fillText('This certifies that', 60,180);
+    ctx.font = '800 40px Arial'; ctx.fillStyle = '#0b67b2'; ctx.fillText(item.title || 'Participant', 60,240);
+    ctx.font = '600 18px Arial'; ctx.fillStyle = '#6b7280'; ctx.fillText(`has completed the material "${item.title || ''}"`, 60,290);
+    const a = document.createElement('a'); a.href = c.toDataURL('image/png'); a.download = (item.title || 'certificate').replace(/\s+/g,'_') + '.png'; a.click();
+  }
+
+  /* ---------- Utilities & events ---------- */
+  function toggleFavorite(id){ if(isFav(id)) favorites = favorites.filter(x=>x!==id); else favorites.push(id); saveFavs(); }
+  function toggleFollow(id){ if(isFollowed(id)) followed = followed.filter(x=>x!==id); else followed.push(id); saveFollowed(); }
+
+  function updateUI(){
+    renderMaterials();
+    renderFavoritesPanel();
+    renderInsights();
+  }
+
+  // search, sorting, tabs, persist toggles
+  searchInput.addEventListener('input', ()=> updateUI());
+  sortBtn.addEventListener('click', ()=> { sortAZ = !sortAZ; sortBtn.textContent = sortAZ ? 'Sort A→Z' : 'Sort Z→A'; updateUI(); });
+  persistToggle.checked = persistProgress;
+  persistToggle.addEventListener('change', ()=> {
+    persistProgress = persistToggle.checked;
+    savePersist();
+    if(!persistProgress){ progress = {}; localStorage.removeItem(KEY_PROG); }
+    else saveProg();
+    updateUI();
+  });
+
+  resetBtn.addEventListener('click', ()=> {
+    if(!confirm('Reset all progress?')) return;
+    resetProgressAll();
+    updateUI();
+  });
+
+  clearFavsBtn.addEventListener('click', ()=> {
+    if(!confirm('Clear all favorites?')) return;
+    clearFavorites();
+    updateUI();
+  });
+
+  openFavBtn.addEventListener('click', ()=> {
+    if(favorites.length) openModal(favorites[0]);
+    else alert('No favorites yet.');
+  });
+
+  markAllDoneBtn.addEventListener('click', ()=> {
+    if(!followed.length){ alert('No followed materials'); return; }
+    if(!confirm('Mark all followed materials as 100% complete?')) return;
+    followed.forEach(id => progress[id] = 100);
+    if(persistProgress) saveProg();
+    spawnConfetti(36);
+    updateUI();
+  });
+
+  logoutBtn.addEventListener('click', ()=> logoutClear());
+
+  // sidebar burger for mobile
+  burgerBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
+
+  // search focus shortcut
+  document.addEventListener('keydown', (e)=> { if(e.key === '/') { e.preventDefault(); searchInput.focus(); } });
+
+  /* ---------- Rendering functions ---------- */
+  function renderMaterials(){
+    const list = getFilteredSorted();
+    materialsList.innerHTML = '';
+    if(list.length === 0){
+      materialsList.innerHTML = '<div style="padding:20px;color:var(--muted)">No materials found.</div>';
+      return;
+    }
+    const frag = document.createDocumentFragment();
+    list.forEach(item => frag.appendChild(createCard(item)));
+    materialsList.appendChild(frag);
+  }
+
+  function createCard(item){
+    const node = document.createElement('div'); node.className = 'card'; node.tabIndex = 0;
+    const thumb = document.createElement('div'); thumb.className='thumb';
+    const img = document.createElement('img'); img.src = item.img; img.alt = item.title; img.loading='lazy';
+    img.onerror = ()=>{ img.style.objectFit='contain'; img.style.opacity='.7'; }
+    thumb.appendChild(img);
+    const title = document.createElement('div'); title.className='title'; title.textContent = item.title;
+    const cat = document.createElement('div'); cat.className='cat'; cat.textContent = item.category;
+    const topics = document.createElement('div'); topics.className='topics'; (item.topics||[]).slice(0,4).forEach(t=>{ const tk=document.createElement('div'); tk.className='topic'; tk.textContent=t; topics.appendChild(tk); });
+    const actions = document.createElement('div'); actions.className='card-actions';
+    const fav = document.createElement('button'); fav.className='favorite'; fav.textContent = isFav(item.id)?'★ Favorite':'☆ Favorite';
+    fav.addEventListener('click', e => { e.stopPropagation(); toggleFavorite(item.id); updateUI(); });
+    const det = document.createElement('button'); det.className='detail-btn'; det.textContent='Detail';
+    det.addEventListener('click', e => { e.stopPropagation(); openModal(item.id); });
+    actions.appendChild(fav); actions.appendChild(det);
+    const progressRow = document.createElement('div'); progressRow.className='progress-row';
+    const bar = document.createElement('div'); bar.className='progress-bar';
+    const fill = document.createElement('div'); fill.className='fill'; fill.style.width = (progress[item.id] || 0) + '%';
+    bar.appendChild(fill);
+    const pct = document.createElement('div'); pct.className='progress-num'; pct.textContent = (progress[item.id] || 0) + '%';
+    progressRow.appendChild(bar); progressRow.appendChild(pct);
+
+    node.appendChild(thumb); node.appendChild(title); node.appendChild(cat); node.appendChild(topics); node.appendChild(actions); node.appendChild(progressRow);
+
+    node.addEventListener('click', ()=> openModal(item.id));
+    node.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(item.id); } });
+    return node;
+  }
+
+  function getFilteredSorted(){
+    const q = (searchInput.value || '').trim().toLowerCase();
+    let filtered = DATA.filter(d => {
+      if(activeCategory !== 'All' && d.category !== activeCategory) return false;
+      if(!q) return true;
+      return d.title.toLowerCase().includes(q) || (d.topics||[]).join(' ').toLowerCase().includes(q) || (d.desc||'').toLowerCase().includes(q);
+    });
+    filtered.sort((a,b) => sortAZ ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
+    return filtered;
+  }
+
+  function renderCategoryTabsAndInit(){
+    const cats = ['All', ...Array.from(new Set(DATA.map(d=>d.category))).sort()];
+    categoryTabs.innerHTML = '';
+    cats.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'tab' + (c===activeCategory ? ' active' : '');
+      btn.textContent = c;
+      btn.addEventListener('click', ()=> { activeCategory = c; renderAll(); });
+      categoryTabs.appendChild(btn);
+    });
+  }
+
+  function renderFavoritesPanel(){
+    favoritesListEl.innerHTML = '';
+    if(!favorites.length){ favoritesListEl.innerHTML = '<div style="color:var(--muted)">No favorites yet.</div>'; return; }
+    const grouped = {};
+    favorites.forEach(id => {
+      const m = DATA.find(x=>x.id===id); if(!m) return;
+      (grouped[m.category] = grouped[m.category] || []).push(m);
+    });
+    Object.keys(grouped).sort().forEach(cat => {
+      const heading = document.createElement('div'); heading.style.fontWeight='800'; heading.style.marginTop='6px'; heading.textContent = cat;
+      favoritesListEl.appendChild(heading);
+      grouped[cat].forEach(m => {
+        const row = document.createElement('div'); row.className='fav-item';
+        const img = document.createElement('img'); img.src = m.img; img.alt = m.title; img.loading='lazy';
+        img.style.width='44px'; img.style.height='44px'; img.style.borderRadius='8px';
+        const info = document.createElement('div'); info.style.flex='1';
+        const t = document.createElement('div'); t.style.fontWeight='700'; t.textContent = m.title;
+        const sub = document.createElement('div'); sub.style.color='var(--muted)'; sub.textContent = (progress[m.id] || 0) + '% completed';
+        info.appendChild(t); info.appendChild(sub);
+        const btn = document.createElement('button'); btn.className='btn'; btn.textContent='Open'; btn.addEventListener('click', ()=> openModal(m.id));
+        row.appendChild(img); row.appendChild(info); row.appendChild(btn);
+        favoritesListEl.appendChild(row);
       });
+    });
+  }
 
-      /* ---------------- CONFETTI ---------------- */
-      function spawnConfetti(amount = 16) {
-        const emojis = ["🎉", "✨", "🏆", "🎈", "🥳"];
-        for (let i = 0; i < amount; i++) {
-          const node = document.createElement("div");
-          node.className = "confetti";
-          node.style.left = Math.random() * 100 + "vw";
-          node.style.top = -10 - Math.random() * 20 + "vh";
-          node.style.fontSize = 12 + Math.random() * 32 + "px";
-          node.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-          confettiWrap.appendChild(node);
-          setTimeout(() => node.remove(), 1800 + Math.random() * 800);
-        }
-      }
+  function renderInsights(){
+    totalCountEl.textContent = DATA.length;
+    favCountEl.textContent = favorites.length;
+    catCountEl.textContent = Array.from(new Set(DATA.map(d=>d.category))).length;
+    followedCountEl.textContent = followed.length;
+    const base = followed.length ? followed : DATA.map(d=>d.id);
+    const avg = base.length ? Math.round(base.reduce((s,id)=> s + (progress[id] || 0), 0) / base.length) : 0;
+    overallProgressEl.textContent = avg + '%';
+    avgCompEl.textContent = avg + '%';
+  }
 
-      /* ---------------- CERTIFICATE (simple PNG) ---------------- */
-      function downloadCertificate(user) {
-        const canvas = document.createElement("canvas");
-        canvas.width = 1000;
-        canvas.height = 700;
-        const ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#071433";
-        ctx.font = "bold 36px Inter, Arial";
-        ctx.fillText("Certificate of Completion", 60, 120);
-        ctx.font = "600 20px Inter, Arial";
-        ctx.fillStyle = "#374151";
-        ctx.fillText("This certifies that", 60, 180);
-        ctx.font = "800 40px Inter, Arial";
-        ctx.fillStyle = "#0b67b2";
-        ctx.fillText(user.title || user.name || "Participant", 60, 240);
-        ctx.font = "600 18px";
-        ctx.fillStyle = "#6b7280";
-        ctx.fillText(
-          `has completed the material "${user.title || ""}"`,
-          60,
-          290
-        );
-        // logo attempt
-        const logo = new Image();
-        logo.crossOrigin = "anonymous";
-        logo.onload = () => {
-          ctx.drawImage(logo, canvas.width - 260, 40, 200, 80);
-          const a = document.createElement("a");
-          a.href = canvas.toDataURL("image/png");
-          a.download = `${(user.title || "certificate").replaceAll(
-            /\s+/g,
-            "_"
-          )}.png`;
-          a.click();
-        };
-        logo.onerror = () => {
-          const a = document.createElement("a");
-          a.href = canvas.toDataURL("image/png");
-          a.download = `${(user.title || "certificate").replaceAll(
-            /\s+/g,
-            "_"
-          )}.png`;
-          a.click();
-        };
-        logo.src = "logo.png";
-      }
+  /* ---------- initial render ---------- */
+  function renderAll(){
+    renderCategoryTabsAndInit();
+    renderMaterials();
+    renderFavoritesPanel();
+    renderInsights();
+  }
 
-      /* ---------------- UI wiring ---------------- */
-      const categoriesList = Array.from(
-        new Set(materials.map((m) => m.category))
-      ).sort();
-      renderTabs();
-      applyFilters(); // initial render
-      updateCounts();
+  // initial render
+  renderAll();
 
-      /* persist toggle UI state */
-      persistToggle.checked = persistProgress;
-      persistToggle.addEventListener("change", () => {
-        persistProgress = persistToggle.checked;
-        savePersist();
-        if (!persistProgress) {
-          // if user turned persistence off, clear server-saved progress right away to match behavior
-          localStorage.removeItem(PROG_KEY);
-        } else {
-          // if user turns on, save current progress
-          saveProg();
-        }
-      });
+  /* ---------- UI wiring for buttons & events ---------- */
+  sortBtn.addEventListener('click', ()=> { sortAZ = !sortAZ; sortBtn.textContent = sortAZ ? 'Sort A→Z' : 'Sort Z→A'; renderAll(); });
+  searchInput.addEventListener('input', ()=> renderAll());
+  resetBtn.addEventListener('click', ()=> { if(confirm('Reset all progress?')){ resetProgressAll(); if(persistProgress) saveProg(); renderAll(); } });
+  clearFavsBtn.addEventListener('click', ()=> { if(confirm('Clear favorites?')){ clearFavorites(); renderAll(); } });
+  openFavBtn.addEventListener('click', ()=> { if(favorites.length) openModal(favorites[0]); else alert('No favorites'); });
+  markAllDoneBtn.addEventListener('click', ()=> {
+    if(!followed.length){ alert('No followed'); return; }
+    if(!confirm('Mark all followed as 100%?')) return;
+    followed.forEach(id => progress[id] = 100);
+    if(persistProgress) saveProg();
+    spawnConfetti(30);
+    renderAll();
+  });
+  favPanelBtn.addEventListener('click', ()=> favoritesListEl.scrollIntoView({behavior:'smooth', block:'center'}));
+  logoutBtn.addEventListener('click', ()=> logoutClear());
+  persistToggle.checked = persistProgress;
+  persistToggle.addEventListener('change', ()=> {
+    persistProgress = persistToggle.checked;
+    savePersist();
+    if(!persistProgress){ progress = {}; localStorage.removeItem(KEY_PROG); }
+    else saveProg();
+    renderAll();
+  });
 
-      /* search */
-      searchBox.addEventListener("input", () => applyFilters());
+  // burger for mobile
+  burgerBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
 
-      /* sort */
-      sortBtn.addEventListener("click", () => {
-        sortAZ = !sortAZ;
-        sortBtn.textContent = sortAZ ? "Sort: A→Z" : "Sort: Z→A";
-        applyFilters();
-      });
+  // keyboard shortcut for search
+  document.addEventListener('keydown', (e)=> { if(e.key === '/') { e.preventDefault(); searchInput.focus(); } });
 
-      /* Reset progress button */
-      resetProgressBtn.addEventListener("click", () => {
-        if (
-          !confirm(
-            "Reset all progress? This will set progress to 0% for all materials."
-          )
-        )
-          return;
-        resetAllProgress();
-        // if persist ON, remove saved storage
-        if (persistProgress) {
-          saveProg();
-        }
-      });
+  /* ---------- Helpers used earlier but declared here for closure access ---------- */
+  function getFilteredSorted(){ return getFilteredSortedFn(); }
+  function getFilteredSortedFn(){
+    const q = (searchInput.value || '').trim().toLowerCase();
+    const list = DATA.filter(d => {
+      if(activeCategory !== 'All' && d.category !== activeCategory) return false;
+      if(!q) return true;
+      return d.title.toLowerCase().includes(q) || (d.topics||[]).join(' ').toLowerCase().includes(q) || (d.desc||'').toLowerCase().includes(q);
+    });
+    list.sort((a,b) => sortAZ ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
+    return list;
+  }
 
-      /* Logout button clears everything & reload */
-      logoutBtn.addEventListener("click", () => {
-        if (
-          !confirm(
-            "Logout will clear favorites, follows, and progress. Continue?"
-          )
-        )
-          return;
-        logoutAll();
-      });
+  /* ---------- Confetti & certificate implementation (reused functions) ---------- */
+  function spawnConfetti(n=12){
+    const icons = ['🎉','✨','🏆','🎈','🥳'];
+    for(let i=0;i<n;i++){
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      el.textContent = icons[Math.floor(Math.random()*icons.length)];
+      el.style.left = (Math.random()*100) + 'vw';
+      el.style.top = (-20 - Math.random()*20) + 'vh';
+      el.style.fontSize = (12 + Math.random()*28) + 'px';
+      confettiWrap.appendChild(el);
+      setTimeout(()=> el.remove(), 1800 + Math.random()*800);
+    }
+  }
 
-      /* view favorites */
-      viewFavBtn.addEventListener("click", () => {
-        favList.scrollIntoView({ behavior: "smooth", block: "center" });
-      });
+  function downloadCertificate(item){
+    const c = document.createElement('canvas'); c.width = 1000; c.height = 700; const ctx = c.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,c.width,c.height);
+    ctx.fillStyle = '#071433'; ctx.font = 'bold 36px Arial'; ctx.fillText('Certificate of Completion', 60,120);
+    ctx.font = '600 20px Arial'; ctx.fillStyle = '#374151'; ctx.fillText('This certifies that', 60,180);
+    ctx.font = '800 40px Arial'; ctx.fillStyle = '#0b67b2'; ctx.fillText(item.title || 'Participant', 60,240);
+    ctx.font = '600 18px Arial'; ctx.fillStyle = '#6b7280'; ctx.fillText(`has completed the material "${item.title}"`, 60,290);
+    const a = document.createElement('a'); a.href = c.toDataURL('image/png'); a.download = (item.title || 'certificate').replace(/\s+/g,'_') + '.png'; a.click();
+  }
 
-      /* clear favorites */
-      clearFavsBtn.addEventListener("click", () => {
-        if (!confirm("Clear all favorites?")) return;
-        favorites = [];
-        saveFavs();
-        updateCounts();
-      });
+  /* ---------- Ensure UI updates after actions like inc/set ---------- */
+  // Modal-specific wiring for dynamic IDs (re-bind after opening)
+  // (These were bound above to the modal buttons; they operate on currentModalId.)
 
-      /* open first favorite detail if any */
-      openFavDetail.addEventListener("click", () => {
-        if (favorites.length) openModalFor(favorites[0]);
-        else alert("No favorites to open.");
-      });
+  // Also update UI periodically to reflect any programmatic changes (lightweight)
+  setInterval(()=> {
+    // update progress bars quickly without heavy work
+    document.querySelectorAll('.fill').forEach(el=>{
+      const pctTextEl = el.parentElement.nextElementSibling;
+      const card = el.closest('.card');
+      // nothing heavy here (cards recreated on renderAll anyway)
+    });
+  }, 2500);
 
-      /* mark all followed as done */
-      markAllDone.addEventListener("click", () => {
-        if (!followed.length) {
-          alert("No followed materials to mark as done.");
-          return;
-        }
-        if (!confirm("Mark all followed materials as 100% done?")) return;
-        followed.forEach((id) => (progress[id] = 100));
-        if (persistProgress) saveProg();
-        spawnConfetti(36);
-        updateCounts();
-      });
+  // Make renderAll accessible from console for debugging
+  window.renderMaterialsUI = renderAll;
 
-      /* exportFavs is intentionally left disabled per request */
-      exportFavs.addEventListener("click", () => {
-        alert("Export disabled per request.");
-      });
-
-      /* features button */
-      featuresBtn.addEventListener("click", () => {
-        alert("Features area — coming soon.");
-      });
-
-      /* burger toggle for mobile */
-      btnBurger &&
-        btnBurger.addEventListener("click", () =>
-          sidebar.classList.toggle("open")
-        );
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "/") {
-          e.preventDefault();
-          searchBox.focus();
-        }
-      });
-
-      /* helpers: follow, unfollow, update UI wrapper */
-      function followMaterial(id) {
-        if (!followed.includes(id)) {
-          followed.push(id);
-          saveFollow();
-          updateCounts();
-        }
-      }
-      function unfollowMaterial(id) {
-        followed = followed.filter((x) => x !== id);
-        saveFollow();
-        updateCounts();
-      }
-
-      function updateUI() {
-        applyFilters();
-        renderFavorites();
-        renderCategoryProgress();
-        updateCounts();
-        // save progress if persist
-        if (persistProgress) saveProg();
-      }
-
-      /* applyFilters function implemented earlier but ensure renderList is called */
-      function applyFilters() {
-        const q = (searchBox.value || "").trim().toLowerCase();
-        currentList = materials.filter((m) => {
-          const byCat =
-            activeCategory === "All" || m.category === activeCategory;
-          const byQ =
-            !q ||
-            m.title.toLowerCase().includes(q) ||
-            (m.topics || []).join(" ").toLowerCase().includes(q) ||
-            (m.desc || "").toLowerCase().includes(q);
-          return byCat && byQ;
-        });
-        currentList.sort((a, b) =>
-          sortAZ
-            ? a.title.localeCompare(b.title)
-            : b.title.localeCompare(a.title)
-        );
-        renderList(currentList);
-        updateCounts();
-      }
-
-      /* finished initialization */
-      renderTabs();
-      applyFilters();
-      updateCounts();
-
-      /* Expose for debugging if needed */
-      window.__materials_final = {
-        materials,
-        favorites,
-        progress,
-        followed,
-        updateUI,
-        applyFilters,
-      };
-    </script>
-  </body>
+}); // DOMContentLoaded
+</script>
+</body>
 </html>
