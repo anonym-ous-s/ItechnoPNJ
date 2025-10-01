@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>BANBAN Dashboard — Polished</title>
 
-    <!-- Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
@@ -204,6 +203,11 @@
         border: 0;
         box-shadow: 0 6px 20px rgba(12, 44, 80, 0.04);
         cursor: pointer;
+      }
+
+      .icon-btn img{
+        width: 25px;
+        height: 25px;
       }
 
       /* stats row */
@@ -582,12 +586,15 @@
               />
             </div>
 
-            <button class="icon-btn" id="btnNotif" title="Notifications">
-              <svg data-lucide="bell" width="18" height="18"></svg>
+
+            <button
+             class="icon-btn" id="btnNotif" title="Notifications">
+              <img src="notif.png" alt="">
             </button>
             <button class="icon-btn" id="btnTheme" title="Toggle theme">
-              <svg data-lucide="sun" width="18" height="18"></svg>
+              <img src="pesan.png" alt="">
             </button>
+
 
             <div style="display: flex; align-items: center; gap: 12px">
               <div
@@ -597,8 +604,10 @@
                   border-radius: 50%;
                   background: #e6f5ff;
                 "
-              ></div>
-              <div style="font-weight: 700">BanBan</div>
+              >
+                <img src="kumbang.jpg" alt="avatar" style="width: 40px" />
+              </div>
+              <button style="background-color: red; padding: 5px; color: white;">Log Out</button>
             </div>
           </div>
         </div>

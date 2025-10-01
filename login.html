@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BANBAN Login</title>
-    <!-- Link ke file CSS eksternal -->
+    
     <link rel="stylesheet" href="login.css" />
   </head>
   <body>
@@ -39,7 +39,7 @@
             />
           </div>
           <button type="submit" class="btn">
-            <a href="dashboard.html">Sign In</a>
+            <a href="dashboard.html">SIGN IN</a>
           </button>
         </form>
 
@@ -66,29 +66,7 @@
       </div>
     </div>
 
-    <script>
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+    <script src="login.js"></script>
 
-          const email = this.querySelector('input[type="email"]').value;
-          const password = this.querySelector('input[type="password"]').value;
-
-          if (email && password) {
-            alert("Login successful!\nEmail: " + email);
-            this.reset();
-          } else {
-            alert("Please fill in all fields");
-          }
-        });
-
-      // Hilangkan transform langsung via JS — gunakan CSS hover.
-      document.querySelectorAll(".social-btn").forEach((btn) => {
-        btn.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") btn.click();
-        });
-      });
-    </script>
   </body>
 </html>
