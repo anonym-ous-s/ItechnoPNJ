@@ -11,10 +11,23 @@ body {
 
 .container {
   max-width: 1100px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+
+}
+
+.bungkus{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .hero {
   background: var(--hero-blue);
+  min-height: 90vh;
+
 }
 
 .title {
