@@ -6,29 +6,26 @@
     <title>BanBan : Home</title>
   </head>
   <body>
-    <div id="sidebar">
-      <nav>
-        <ul>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-            error explicabo assumenda fugiat illum illo natus itaque tempore
-            magni, veniam nesciunt atque cumque corporis vero, in placeat unde
-            nam odio!
-          </li>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe eos,
-            ut dolore iusto nemo labore expedita eveniet facere tempora vero
-            iure nam autem officiis doloribus molestias perspiciatis omnis
-            dolorem adipisci.
-          </li>
-          <li>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio
-            libero ut excepturi odio molestias cumque, maxime in nisi dolores
-            eius modi nesciunt aliquid, possimus architecto aliquam. Itaque
-            nulla consequatur corporis.
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <div class="rounded-xl shadow-md overflow-hidden transition transform hover:-translate-y-2 hover:shadow-xl bg-green-700">
+        <!-- Gambar -->
+        <div class="relative">
+            <img src="images/gelas.jpg" alt="Gelas" class="w-full h-40 object-cover">
+            <!-- Circle icon -->
+            <div class="absolute -bottom-5 left-4 bg-green-600 w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+            <img src="images/ward.png" alt="icon" class="w-6 h-6">
+            </div>
+        </div>
+        <!-- Text box -->
+            <div class="p-4 bg-green-700 text-white flex flex-col justify-between h-36 rounded-b-xl">
+            <!-- Judul produk -->
+            <h3 class="text-lg font-semibold mt-4">Gelas</h3>
+
+            <!-- Tombol detail -->
+            <a href="detailgelas.html" class="inline-flex items-center text-sm mt-6 group">
+                <span class="group-hover:underline">Lihat Detail</span>
+                <span class="ml-1">→</span>
+            </a>
+        </div>
+        </div>
   </body>
 </html>

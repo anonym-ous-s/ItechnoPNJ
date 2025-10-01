@@ -38,7 +38,7 @@
         class="container mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12"
         id="bungkus"
       >
-        <div class="md:w-6/12">
+        <div class="md:w-6/12" id="atas">
           <h1
             class="title font-extrabold text-4xl md:text-6xl leading-tight mb-4"
           >
@@ -50,7 +50,7 @@
 
           <div class="flex gap-4 flex-wrap">
             <a
-              href="#"
+              href="#isi"
               class="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-gray-100"
               >Pelajari Lebih Lanjut</a
             >
@@ -62,7 +62,7 @@
           </div>
         </div>
 
-        <div class="md:w-5/12 flex justify-center md:justify-end mt-8 md:mt-0">
+        <div class="md:w-5/12 flex justify-center md:justify-end mt-8 md:mt-0" id="gmbr">
           <div class="hero-card relative rounded-2xl shadow-xl overflow-hidden">
             <div class="card-bg"></div>
             <div
@@ -78,7 +78,7 @@
       </div>
     </section>
 
-    <section class="py-16 px-6">
+    <section class="py-16 px-6" id="isi">
       <div class="container mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div
@@ -99,7 +99,11 @@
             </div>
           </div>
 
-          <div class="tiles grid grid-cols-2 gap-6">
+          <div class="tiles grid grid-cols-2 gap-6" id="bungkus2">
+
+            <div id="bungkus3">
+
+            
             <div
               class="tile blue-tile flex flex-col items-center justify-center p-6 rounded-xl shadow-md"
             >
@@ -107,14 +111,16 @@
               <div class="tile-label font-medium">Belajar Berkelompok</div>
             </div>
             <div
-              class="tile blue-tile flex flex-col items-center justify-center p-6 rounded-xl shadow-md text-white"
+              class="tile blue-tile flex flex-col items-center justify-center p-6 rounded-xl shadow-md text-black"
             >
               <div class="tile-icon mb-3 text-3xl">⏱️</div>
-              <div class="tile-label font-medium">Fokus Timer</div>
+              <div class="tile-label font-medium">Focus Timer</div>
             </div>
 
+          </div>
+
             <div
-              class="tile blue-tile flex flex-col items-center justify-center p-6 rounded-xl shadow-md"
+              class="tile blue-tile flex flex-col items-center justify-center p-6 rounded-xl shadow-md align-items items-center"
             >
               <div class="text-center">
                 <div class="tile-icon text-4xl mb-3">🏆</div>
@@ -123,7 +129,7 @@
             </div>
 
             <div
-              class="tile blue-tile flex flex-col items-center justify-center p-6 rounded-xl shadow-md"
+              class="tile blue-tile flex flex-col align-items items-center items-center justify-center p-6 rounded-xl shadow-md"
             >
               <div class="tile-icon mb-3 text-3xl">⭐</div>
               <div class="tile-label font-medium">Peringkat</div>
@@ -139,7 +145,7 @@
       </div>
     </section>
 
-    <section class="py-16 px-6 bg-gray-50">
+    <section class="py-16 px-6 bg-gray-50" id="ulasan">
       <div class="container mx-auto">
         <h2 class="text-3xl font-bold text-center mb-12">
           Get Quality Education
@@ -151,46 +157,15 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="font-bold text-lg mb-4">
-              Slide HelpUp You Are Your Team in the USA
-            </h3>
-            <ul class="space-y-2 text-gray-600">
-              <li>
-                Shield help you see how much money you need to work in reach
-                your financial goal (gain month and year).
-              </li>
-              <li>
-                Start HelpUp You Are Your Team in the USA: you need to work in
-                reach your financial goal (gain month and year).
-              </li>
-              <li>Buyup Help Player</li>
-              <li>Buyup Help Player</li>
-            </ul>
+           <img src="ulasan.png" alt="">
           </div>
 
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="font-bold text-lg mb-4">
-              Slide HelpUp You Are Your Team in the USA
-            </h3>
-            <ul class="space-y-2 text-gray-600">
-              <li>
-                Shield help you see how much money you need to work in reach
-                your financial goal (gain month and year).
-              </li>
-              <li>Buyup Help Player</li>
-              <li>Buyup Help Player</li>
-            </ul>
+           <img src="ulasan.png" alt="">
           </div>
 
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="font-bold text-lg mb-4">NotEqual</h3>
-            <ul class="space-y-2 text-gray-600">
-              <li>C</li>
-              <li>Business Academy</li>
-              <li>User Analysis</li>
-              <li>User Chat</li>
-              <li>Offensive Support</li>
-            </ul>
+            <img src="ulasan.png" alt="">
           </div>
         </div>
       </div>
@@ -202,8 +177,8 @@
           <div>
             <h3 class="font-bold mb-4">Navigate</h3>
             <ul class="space-y-2">
-              <li><a href="#" class="hover:text-blue-300">Home</a></li>
-              <li><a href="#" class="hover:text-blue-300">About</a></li>
+              <li><a href="#" class="hover:text-blue-300">Dashboard</a></li>
+              <li><a href="#" class="hover:text-blue-300">Focus Timer</a></li>
               <li><a href="#" class="hover:text-blue-300">Features</a></li>
               <li><a href="#" class="hover:text-blue-300">Contact</a></li>
             </ul>
@@ -212,18 +187,18 @@
             <h3 class="font-bold mb-4">Features</h3>
             <ul class="space-y-2">
               <li>
-                <a href="#" class="hover:text-blue-300">Belajar Berkelompok</a>
+                <a href="#" class="hover:text-blue-300">Study Groups</a>
               </li>
-              <li><a href="#" class="hover:text-blue-300">Peringkat</a></li>
-              <li><a href="#" class="hover:text-blue-300">Fokus Timer</a></li>
-              <li><a href="#" class="hover:text-blue-300">Prestasi</a></li>
+              <li><a href="#" class="hover:text-blue-300">Achievement</a></li>
+              <li><a href="#" class="hover:text-blue-300">Focus Timer</a></li>
+              <li><a href="#" class="hover:text-blue-300">Leaderboard</a></li>
             </ul>
           </div>
           <div>
             <h3 class="font-bold mb-4">Resources</h3>
             <ul class="space-y-2">
-              <li><a href="#" class="hover:text-blue-300">IDE & Android</a></li>
-              <li><a href="#" class="hover:text-blue-300">WebG & Status</a></li>
+              <li><a href="#" class="hover:text-blue-300">IOS & Android</a></li>
+              <li><a href="#" class="hover:text-blue-300">Watch a Demo</a></li>
               <li><a href="#" class="hover:text-blue-300">Customers</a></li>
               <li><a href="#" class="hover:text-blue-300">API</a></li>
             </ul>

@@ -52,72 +52,83 @@
       }
 
       /* ---------------- SIDEBAR (content preserved) ---------------- */
+      /* Sidebar */
       .sidebar {
         width: var(--sidebar-w);
-        background: var(--nav-blue);
-        color: white;
+        background: var(--blue);
+        color: #fff;
         display: flex;
         flex-direction: column;
-        padding: 22px;
+        padding: 20px;
+        gap: 12px;
         flex-shrink: 0;
-        transition: transform 0.28s ease;
       }
-      .sidebar .logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 12px;
-      }
-      .sidebar .logo img {
+      .logo img {
         width: 120px;
+        display: block;
+        margin: 2px auto;
       }
-      .sidebar .email {
+      .email {
         font-size: 13px;
         text-align: center;
-        margin-bottom: 18px;
         opacity: 0.95;
+        margin-bottom: 6px;
       }
       .menu {
         list-style: none;
         padding: 0;
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         flex-grow: 1;
-      }
-      .menu li {
-        margin: 8px 0;
       }
       .menu a {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         padding: 10px;
         border-radius: 8px;
         text-decoration: none;
         color: white;
         font-size: 15px;
-        transition: background 0.18s;
+        transition: background 0.15s;
       }
       .menu a:hover,
       .menu a.active {
-        background: #167ad9;
+        background: #1e90ff;
       }
-      .features {
-        background: #044b6a;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: center;
-        font-size: 14px;
-        margin-top: 20px;
+      .ico {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
       }
-      .features span {
-        background: #ff4d4f;
-        color: #fff;
-        padding: 4px 6px;
-        border-radius: 6px;
-        margin-left: 8px;
-        font-size: 12px;
+      .features-block {
+        margin-top: auto;
+      }
+      .features-btn {
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #033e68, #046698);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 0;
+        color: white;
+        font-weight: 800;
       }
 
+      .features-btn .new {
+        background: #ff4d4d;
+        padding: 6px 8px;
+        border-radius: 8px;
+        font-size: 12px;
+      }
       /* ---------------- MAIN ---------------- */
       .main {
         flex: 1;
@@ -473,43 +484,50 @@
   </head>
   <body>
     <div class="app">
-      <!-- SIDEBAR (jangan ubah isinya) -->
+      <!-- Sidebar -->
       <aside class="sidebar" id="sidebar">
-        <div class="logo"><img src="logo.png" alt="BANBAN logo" /></div>
-        <p class="email">BanBan@gmail.com</p>
+        <div class="logo">
+          <img
+            src="logo.png"
+            alt="BANBAN logo"
+            onerror="this.style.opacity=.7"
+          />
+        </div>
+        <div class="email">BanBan@gmail.com</div>
         <ul class="menu" role="navigation">
           <li>
-            <a href="dashboard.html"><i data-lucide="home"></i> Dashboard</a>
+            <a href="dashboard.html"><span class="ico">🏠</span> Dashboard</a>
           </li>
           <li>
-            <a class="active" href="Timer.html"
-              ><i data-lucide="clock"></i> Podomoro Timer</a
-            >
+            <a href="Timer.html"><span class="ico">⏱</span> Podomoro Timer</a>
           </li>
           <li>
             <a href="studygroup.html"
-              ><i data-lucide="users"></i> Study Groups</a
+              ><span class="ico">👥</span> Study Groups</a
             >
           </li>
           <li>
-            <a href="materials.html"
-              ><i data-lucide="book-open"></i> Materials</a
+            <a class="active" href="materials.html"
+              ><span class="ico">📚</span> Materials</a
             >
           </li>
           <li>
             <a href="Achivement.html"
-              ><i data-lucide="award"></i> Achievement</a
+              ><span class="ico">🏆</span> Achievement</a
             >
           </li>
           <li>
-            <a href="Prfile.html"
-              ><i data-lucide="settings"></i> Settings and profile</a
+            <a href="Profile.html"
+              ><span class="ico">⚙</span> Settings and profile</a
             >
           </li>
         </ul>
-        <div class="features">Features <span>NEW</span></div>
+        <div class="features-block">
+          <button class="features-btn">
+            <span>Features <span class="new">NEW</span></span>
+          </button>
+        </div>
       </aside>
-
       <!-- MAIN -->
       <main class="main" id="main">
         <div class="topbar">

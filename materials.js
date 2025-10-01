@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "Algebra I — Linear Equations",
       category: "Mathematics",
       topics: ["Equations", "Inequalities"],
-      img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop",
+      img: "https://static.vecteezy.com/system/resources/previews/021/826/876/non_2x/hand-drawn-math-symbols-icon-in-flat-style-mathematics-formula-illustration-on-isolated-background-school-education-sign-business-concept-vector.jpg",
       desc: "Linear equations fundamentals and problem solving.",
     },
     {
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "Geometry — Triangles & Proofs",
       category: "Mathematics",
       topics: ["Triangles", "Proofs"],
-      img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=900&auto=format&fit=crop",
+      img: "https://tse2.mm.bing.net/th/id/OIP.5kbD6mI89dPttVvVKdg_vQHaHa?pid=Api&P=0&h=220",
       desc: "Angles, triangles, and reasoning.",
     },
     {
