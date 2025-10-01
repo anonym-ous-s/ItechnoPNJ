@@ -1,0 +1,174 @@
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background: #fff;
+    }
+
+ 
+    .sidebar {
+      width: 240px;
+      background: #0099ff;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .logo img {
+      width: 120px;
+    }
+
+    .email {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #e2e2e2;
+    }
+
+    .menu {
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .menu li {
+      margin: 8px 0;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: #0a2f5c;
+    }
+
+    .features {
+      background: #16386d;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 15px;
+      margin-top: 20px;
+    }
+
+    .features span {
+      background: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+    }
+
+
+    .content {
+      flex-grow: 1;
+      padding: 30px;
+    }
+
+    .content h1 {
+      color: #0d3b66;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+  
+    .profile-card {
+      background: #a8dbff;
+      padding: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #0d3b66;
+    }
+    .profile-info h2 {
+      color: #0d3b66;
+      font-size: 20px;
+    }
+
+     .profile-info p {
+      font-size: 14px;
+      margin: 4px 0;
+      color: #333;
+    }
+    .edit-btn {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .rank {
+      margin-top: 8px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #0d3b66;
+      text-align: right;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+    }
+    .stat-card {
+      flex: 1;
+      padding: 20px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    .yellow {
+      background: #ffcc00;
+    }
+    .gold {
+      background: #ffe066;
+    }
+    .red {
+      background: hwb(349 18% 2%);
+      color: #fff;
+    }
+    .blue {
+      background: #66ccff;
+    }
+    .stat-card span {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: normal;
+    }
